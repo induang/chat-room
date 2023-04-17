@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./App.css";
+import ChatRoom from "./components/ChatRoom";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  return <div className="w-24 bg-red-300 h-24">hello world</div>;
+  return (
+    <div>
+      <ChatRoom />
+    </div>
+  );
 }
 
 export default App;
