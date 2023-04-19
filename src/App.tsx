@@ -1,14 +1,11 @@
-import { useState } from "react";
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import ChatRoom from "./components/ChatRoom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <div>
-      <ChatRoom />
-    </div>
+    <>
+      <Outlet />
+    </>
   );
 }
 
