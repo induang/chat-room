@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
-import Login from "../components/Login";
-import Registration from "../components/Registration";
+import Login from "../components/Authentication/Login";
+import Registration from "../components/Authentication/Registration";
 
 export default () => {
   const [loginShow, setLoginShow] = useState(true);
