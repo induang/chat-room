@@ -1,18 +1,22 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../../services/auth";
+import noti from "../../utils/noti";
 import PasswordToggle from "../PasswordToggle";
 
-export default ({ show }: { show: boolean }) => {
+export default function Login({ show }: { show: boolean }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLoginClick = async () => {
     login({ email, password }).then((res) => {
       const { name, pic } = res;
       window.localStorage.setItem("name", name);
       window.localStorage.setItem("pic", pic);
-      window.location.href = "/chat";
+      noti({ type: "success", message: "Login successfully." });
+      navigate("/chat");
     });
   };
   return (
@@ -38,4 +42,4 @@ export default ({ show }: { show: boolean }) => {
       </button>
     </div>
   );
-};
+}

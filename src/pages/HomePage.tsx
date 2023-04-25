@@ -3,7 +3,7 @@ import { useState } from "react";
 import Login from "../components/Authentication/Login";
 import Registration from "../components/Authentication/Registration";
 
-export default () => {
+export default function HomePage() {
   const [loginShow, setLoginShow] = useState(true);
   const [registerShow, setRegisterShow] = useState(false);
 
@@ -47,4 +47,4 @@ export default () => {
       </div>
     </div>
   );
-};
+}

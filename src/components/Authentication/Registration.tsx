@@ -14,7 +14,7 @@ export default ({ show }: { show: boolean }) => {
   const handleRegisterClick = () => {
     register({ name, email, password, code: verifyCode }).then((res) => {
       // TODO noti
-      console.log("SUCCESS");
+      // console.log("SUCCESS");
     });
   };
 
