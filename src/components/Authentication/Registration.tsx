@@ -4,7 +4,7 @@ import { register } from "../../services/auth";
 import PasswordToggle from "../PasswordToggle";
 import VerifyCodeSendBTN from "../VerifyCodeSendBTN";
 
-export default ({ show }: { show: boolean }) => {
+export default function Registration({ show }: { show: boolean }) {
   const [email, setEmail] = useState("");
   const [verifyCode, setVerifyCode] = useState("");
   const [name, setName] = useState("");
@@ -70,4 +70,4 @@ export default ({ show }: { show: boolean }) => {
       </button>
     </div>
   );
-};
+}
