@@ -22,3 +22,7 @@ https://www.ujcms.com/documentation/351.html
 [TODO] vite hmr 组件导出的格式：
 https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
 https://github.com/ArnaudBarre/eslint-plugin-react-refresh
+
+[TODO] daisyUI: drawer 不能占据全屏拉出来
+
+[TODO] 请求头属性大小写敏感？

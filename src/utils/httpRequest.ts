@@ -14,7 +14,7 @@ httpRequest.interceptors.request.use(
 	(config) => {
 		const token = window.localStorage.getItem('token') || "";
 		if(config.headers){
-			config.headers.Authorization = token;
+			config.headers.authorization = 'Bearer ' + token;
 		}
 		return config;
 	},
@@ -26,7 +26,7 @@ httpRequest.interceptors.request.use(
 
 httpRequest.interceptors.response.use(
 	(response) => {
-		const token = response.headers.Authorization;
+		const token = response?.headers?.authorization;
 		token && window.localStorage.setItem('token', token);
 		return response.data;
 	},

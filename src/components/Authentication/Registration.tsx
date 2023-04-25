@@ -1,6 +1,8 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { register } from "../../services/auth";
+import noti from "../../utils/noti";
 import PasswordToggle from "../PasswordToggle";
 import VerifyCodeSendBTN from "../VerifyCodeSendBTN";
 
@@ -10,11 +12,12 @@ export default function Registration({ show }: { show: boolean }) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleRegisterClick = () => {
-    register({ name, email, password, code: verifyCode }).then((res) => {
-      // TODO noti
-      // console.log("SUCCESS");
+    register({ name, email, password, code: verifyCode }).then(() => {
+      noti({ type: "success", message: "Register successful" });
+      navigate("/");
     });
   };
 
