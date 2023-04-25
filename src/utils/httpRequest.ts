@@ -1,4 +1,5 @@
 import axios from "axios";
+import noti from "./noti";
 
 
 const httpRequest = axios.create({
@@ -18,7 +19,7 @@ httpRequest.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-		console.log(error)
+		noti({type: "error", message: error.message})
 		Promise.reject(error);
 	}
 )
@@ -30,12 +31,13 @@ httpRequest.interceptors.response.use(
 		return response.data;
 	},
 	(error) => {
-		const message = error.response?.data?.errorMessage || error.message;
+		const message = error.response?.data?.message || error.message;
 		if(error.response?.status === 401){
-			console.log("unauthenrization");
+			noti({type: 'error', message: "Unauthorization."})
 			window.localStorage.removeItem('token');
 			window.location.href = '/'
 		}
+		noti({type: 'error', message})
 		return Promise.reject()
 	}
 )

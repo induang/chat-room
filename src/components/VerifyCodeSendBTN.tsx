@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { verify } from "../services/auth";
 
-export default ({ email }: { email: string }) => {
+export default function VerifyCodeSendBTN({ email }: { email: string }) {
   const [count, setCount] = useState(60);
   const [isSendClick, setIsSendClick] = useState(false);
   const timer = useRef(0);
@@ -37,4 +37,4 @@ export default ({ email }: { email: string }) => {
       {isSendClick ? <div>Wait {count}s</div> : "SEND"}
     </button>
   );
-};
+}

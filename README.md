@@ -18,3 +18,7 @@ https://www.ujcms.com/documentation/351.html
 [TODO] 数据校验
 
 [TODO] react-toastify: 通知在跳转间保留 导入css文件才生效
+
+[TODO] vite hmr 组件导出的格式：
+https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+https://github.com/ArnaudBarre/eslint-plugin-react-refresh
