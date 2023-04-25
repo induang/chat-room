@@ -2,8 +2,18 @@ import { useState } from "react";
 import closeIcon from "../assets/close-eye.png";
 import openIcon from "../assets/eye.png";
 
-export default ({ labelText }: { labelText: string }) => {
+interface IPasswordToggleProps {
+  labelText: string;
+  getPasswordChange: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default ({ labelText, getPasswordChange }: IPasswordToggleProps) => {
   const [masked, setMasked] = useState(true);
+  const [password, setPassword] = useState("");
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    getPasswordChange(e.target.value);
+    setPassword(e.target.value);
+  };
   return (
     <div className="form-control">
       <label className="label">
@@ -22,6 +32,8 @@ export default ({ labelText }: { labelText: string }) => {
       <input
         type={masked ? "password" : "text"}
         className="input input-bordered"
+        value={password}
+        onChange={handlePasswordChange}
       />
     </div>
   );

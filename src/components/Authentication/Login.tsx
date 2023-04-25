@@ -1,17 +1,35 @@
 import clsx from "clsx";
+import { useState } from "react";
+import { login } from "../../services/auth";
 import PasswordToggle from "../PasswordToggle";
 
 export default ({ show }: { show: boolean }) => {
-  const handleLoginClick = () => {};
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLoginClick = async () => {
+    login({ email, password }).then((res) => {
+      const { name, pic } = res;
+      window.localStorage.setItem("name", name);
+      window.localStorage.setItem("pic", pic);
+      window.location.href = "/chat";
+    });
+  };
   return (
     <div className={clsx(show ? "" : "hidden")}>
       <div className="form-control">
         <label className="label">
           <span className="label-text text-xl font-medium">Email:</span>
         </label>
-        <input type="text" className="input input-bordered" />
+        <input
+          tabIndex={0}
+          type="text"
+          className="input input-bordered"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
-      <PasswordToggle labelText="Password" />
+      <PasswordToggle labelText="Password" getPasswordChange={setPassword} />
       <button
         className="btn btn-block btn-primary mt-10"
         onClick={handleLoginClick}

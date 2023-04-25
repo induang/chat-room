@@ -18,7 +18,7 @@ httpRequest.interceptors.request.use(
 		return config;
 	},
 	(error) => {
-		console.log('ying ',error)
+		console.log(error)
 		Promise.reject(error);
 	}
 )
@@ -27,14 +27,14 @@ httpRequest.interceptors.response.use(
 	(response) => {
 		const token = response.headers.Authorization;
 		token && window.localStorage.setItem('token', token);
-		return response;
+		return response.data;
 	},
 	(error) => {
 		const message = error.response?.data?.errorMessage || error.message;
 		if(error.response?.status === 401){
 			console.log("unauthenrization");
 			window.localStorage.removeItem('token');
-			window.location.href = '/.login'
+			window.location.href = '/'
 		}
 		return Promise.reject()
 	}
