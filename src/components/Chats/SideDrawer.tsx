@@ -29,18 +29,29 @@ export default function SideDrawer() {
   };
 
   return (
-    <div className="drawer absolute top-0 left-0">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
+    <div className="drawer absolute">
+      <input
+        id="chat-search-user-drawer"
+        type="checkbox"
+        className="drawer-toggle"
+      />
       <div className="drawer-content">
-        <label htmlFor="my-drawer" className="btn btn-primary drawer-button">
+        <label
+          htmlFor="chat-search-user-drawer"
+          className="btn btn-primary drawer-button"
+        >
           Search User
           <img src={searchIcon} className="w-6 ml-2"></img>
         </label>
       </div>
       <div className="drawer-side">
-        <label htmlFor="my-drawer" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-          <div className="input-group">
+        <label
+          htmlFor="chat-search-user-drawer"
+          className="drawer-overlay"
+        ></label>
+
+        <ul className="menu w-80 p-4 bg-base-100 text-base-content">
+          <div className="search-input input-group">
             <input
               type="text"
               value={keyword}
@@ -76,11 +87,7 @@ export default function SideDrawer() {
                 onClick={(event) => handleFetchChatClick(event, user._id)}
               >
                 <a>
-                  <UserItem
-                    userName={user.name}
-                    pic={user.pic}
-                    userEmail={user.email}
-                  />
+                  <UserItem user={user} />
                 </a>
               </li>
             ))}

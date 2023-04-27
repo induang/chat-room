@@ -9,6 +9,6 @@ export const register = async (user:INewUser): Promise <IRegisterResponse> => {
 	return httpRequest.post('api/user', user)
 }
 // email 需要包在对象中
-export const verify = async (email: {email: string}): Promise <IVerifyResponse> => {
-	return httpRequest.post('api/user/verify', email);
+export const verify = async (email: string ): Promise <IVerifyResponse> => {
+	return httpRequest.post('api/user/verify', {email});
 }

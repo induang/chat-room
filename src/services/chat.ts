@@ -6,5 +6,5 @@ export const getChats = async (): Promise<Array<IChat>> => {
 }
 
 export const getOrCreateChat =async (userId: string): Promise<IChat> => {
-	return httpRequest.post('/api/chat');
+	return httpRequest.post('/api/chat', {userId});
 }

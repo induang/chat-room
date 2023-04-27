@@ -8,7 +8,7 @@ export default function VerifyCodeSendBTN({ email }: { email: string }) {
   const timer = useRef(0);
 
   const handleSendClick = () => {
-    verify({ email }).then(() => {
+    verify(email).then(() => {
       setIsSendClick(true);
       clearInterval(timer.current);
       timer.current = setInterval(
