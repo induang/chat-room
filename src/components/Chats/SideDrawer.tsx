@@ -1,5 +1,6 @@
 import { useState } from "react";
 import searchIcon from "../../assets/magnifier.png";
+import { getOrCreateChat } from "../../services/chat";
 import { getUserList } from "../../services/user";
 import { IUser } from "../../services/user.type";
 import UserItem from "../UserItem";
@@ -7,15 +8,26 @@ import UserItem from "../UserItem";
 export default function SideDrawer() {
   const [keyword, setKeyword] = useState("");
   const [searchResults, setSearchResults] = useState<Array<IUser>>();
+
   const handleSearch = () => {
     setKeyword("");
     getUserList(keyword).then((res) => setSearchResults(res));
   };
+
+  // 注册键盘enter键
   const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       handleSearch();
     }
   };
+
+  const handleFetchChatClick = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    userId: string
+  ) => {
+    getOrCreateChat(userId).then((res) => console.log(res));
+  };
+
   return (
     <div className="drawer absolute top-0 left-0">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -59,13 +71,15 @@ export default function SideDrawer() {
           </div>
           <div className="users-list mt-2">
             {searchResults?.map((user) => (
-              <li key={user._id}>
+              <li
+                key={user._id}
+                onClick={(event) => handleFetchChatClick(event, user._id)}
+              >
                 <a>
                   <UserItem
                     userName={user.name}
                     pic={user.pic}
                     userEmail={user.email}
-                    // handleFunction={() => console.log("Hello")}
                   />
                 </a>
               </li>
