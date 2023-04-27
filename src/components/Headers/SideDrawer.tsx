@@ -3,7 +3,7 @@ import searchIcon from "../../assets/magnifier.png";
 import { getOrCreateChat } from "../../services/chat";
 import { getUserList } from "../../services/user";
 import { IUser } from "../../services/user.type";
-import UserItem from "../UserItem";
+import UserItem from "./UserItem";
 
 export default function SideDrawer() {
   const [keyword, setKeyword] = useState("");

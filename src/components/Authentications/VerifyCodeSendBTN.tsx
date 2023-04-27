@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
-import { verify } from "../services/auth";
+import { verify } from "../../services/auth";
 
 export default function VerifyCodeSendBTN({ email }: { email: string }) {
   const [count, setCount] = useState(60);

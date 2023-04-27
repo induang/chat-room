@@ -1,6 +1,6 @@
 import ChatBox from "../components/Chats/ChatBox";
 import MyChats from "../components/Chats/MyChats";
-import Header from "../components/Chats/Header";
+import Header from "../components/Header";
 
 export default () => {
   return (

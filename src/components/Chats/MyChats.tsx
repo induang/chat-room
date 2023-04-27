@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { getChats } from "../../services/chat";
 import { IChat } from "../../services/chat.type";
-import ChatItem from "../ChatItem";
+import ChatItem from "./ChatItem";
 
 export default function MyChats() {
   const [chats, setChats] = useState<Array<IChat>>([]);

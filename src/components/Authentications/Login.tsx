@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../services/auth";
 import noti from "../../utils/noti";
-import PasswordToggle from "../PasswordToggle";
+import PasswordToggle from "./PasswordToggle";
 
 export default function Login({ show }: { show: boolean }) {
   const [email, setEmail] = useState("");

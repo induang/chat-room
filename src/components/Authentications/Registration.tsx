@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { register } from "../../services/auth";
 import noti from "../../utils/noti";
-import PasswordToggle from "../PasswordToggle";
-import VerifyCodeSendBTN from "../VerifyCodeSendBTN";
+import PasswordToggle from "./PasswordToggle";
+import VerifyCodeSendBTN from "./VerifyCodeSendBTN";
 
 export default function Registration({ show }: { show: boolean }) {
   const [email, setEmail] = useState("");

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import noti from "../../utils/noti";
+import noti from "../utils/noti";
 
 export default function ProfilerMenu() {
   const imgUrl = window.localStorage.getItem("pic") || "";

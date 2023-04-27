@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { IChat } from "../services/chat.type";
+import { IChat } from "../../services/chat.type";
 
 interface IChatItemProps {
   chat: IChat;
