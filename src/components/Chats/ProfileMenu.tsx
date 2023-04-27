@@ -1,5 +1,18 @@
+import { useNavigate } from "react-router-dom";
+import noti from "../../utils/noti";
+
 export default function ProfilerMenu() {
   const imgUrl = window.localStorage.getItem("pic") || "";
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    // [TODO] fetch logout
+    window.localStorage.removeItem("token");
+    window.localStorage.removeItem("pic");
+    window.localStorage.removeItem("user");
+    noti({ type: "success", message: "Logout successful." });
+    navigate("/");
+  };
 
   return (
     <div className="dropdown dropdown-end">
@@ -16,7 +29,7 @@ export default function ProfilerMenu() {
           <a className="justify-between">Profile</a>
         </li>
         <li>
-          <a>Logout</a>
+          <a onClick={handleLogoutClick}>Logout</a>
         </li>
       </ul>
     </div>
