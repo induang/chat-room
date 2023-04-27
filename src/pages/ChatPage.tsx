@@ -8,7 +8,7 @@ export default () => {
       <div className="chat-page-header">
         <Header />
       </div>
-      <div className="chat-page-content flex justify-between m-1">
+      <div className="chat-page-content flex justify-between m-1 gap-x-1">
         <div className="side-panel basis-1">
           <MyChats />
         </div>

@@ -1,3 +1,7 @@
 export default () => {
-  return <>Chat Box</>;
+  return (
+    <div className="bg-white/75">
+      <h5>chat roome</h5>
+    </div>
+  );
 };
