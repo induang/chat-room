@@ -32,7 +32,7 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
           {chat.isGroupChat ? chat.chatName : chat.users[1]?.name}
         </div>
         <div className="chat-lastest-message text-slate-300">
-          {chat.latestMessage}
+          {chat.latestMessage?.content}
         </div>
       </div>
     </div>

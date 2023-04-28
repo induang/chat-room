@@ -1,3 +1,4 @@
+import { IMessage } from "./message.type";
 import { IUser } from "./user.type";
 
 export interface IChat {
@@ -6,5 +7,5 @@ export interface IChat {
 	isGroupChat: boolean;
 	users: Array<IUser>;
 	groupAdmin?: IUser;
-	latestMessage?: string;
+	latestMessage?: IMessage;
 }

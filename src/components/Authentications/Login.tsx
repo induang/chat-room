@@ -12,9 +12,10 @@ export default function Login({ show }: { show: boolean }) {
 
   const handleLoginClick = async () => {
     login({ email, password }).then((res) => {
-      const { name, pic } = res;
+      const { name, pic, _id } = res;
       window.localStorage.setItem("name", name);
       window.localStorage.setItem("pic", pic);
+      window.localStorage.setItem("userId", _id);
       noti({ type: "success", message: "Login successfully." });
       navigate("/chat");
     });

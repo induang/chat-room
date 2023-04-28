@@ -18,6 +18,9 @@ export const addMemberToChat = async (chatId: string, userId: string ): Promise<
 }
 
 export const createGroupChat = async (name: string, users: Array<string>): Promise<IChat> => {
-	console.log({name, users})
 	return httpRequest.post('/api/chat/group', {name, users: JSON.stringify(users)})
+}
+
+export const renameChat = async (chatId:string, chatName: string): Promise<IChat> => {
+	return httpRequest.put('/api/chat/rename', {chatId, chatName})
 }

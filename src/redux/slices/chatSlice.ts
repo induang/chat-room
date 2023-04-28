@@ -1,12 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChat } from "../../services/chat.type";
+import { IUser } from "../../services/user.type";
 
 export interface ChatState {
 	selectedChat: IChat
 }
 
 const initialState: ChatState = {
-	selectedChat: {} as IChat
+	selectedChat: {
+		_id: "",
+		chatName: "",
+		isGroupChat: false,
+		users: []
+}
 }
 export const chatSliceName = 'chat'
 export const chatSlice = createSlice({

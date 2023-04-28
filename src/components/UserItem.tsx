@@ -1,14 +1,12 @@
+import { defaultPicUrl } from "../consts";
 import { IUser } from "../services/user.type";
-
-const defaultPic =
-  "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg";
 
 export default ({ user }: { user: IUser }) => {
   return (
     <div className="user-item flex justify-between items-center">
       <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
         <div className="w-10 rounded-full">
-          <img src={user.pic || defaultPic} />
+          <img src={user.pic || defaultPicUrl} />
         </div>
       </label>
       <div className="ml-4">

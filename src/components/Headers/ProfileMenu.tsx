@@ -10,6 +10,7 @@ export default function ProfilerMenu() {
     window.localStorage.removeItem("token");
     window.localStorage.removeItem("pic");
     window.localStorage.removeItem("user");
+    window.localStorage.removeItem("userId");
     noti({ type: "success", message: "Logout successful." });
     navigate("/");
   };

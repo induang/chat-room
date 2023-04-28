@@ -5,8 +5,10 @@ import UserItem from "../UserItem";
 import closeIcon from "../../assets/close.png";
 import { createGroupChat } from "../../services/chat";
 import noti from "../../utils/noti";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateGroupModal() {
+  const navigate = useNavigate();
   const [chatName, setChatName] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>([]);
@@ -29,12 +31,12 @@ export default function CreateGroupModal() {
       selectedUsers.map((user) => user._id)
     ).then(() => {
       noti({ type: "success", message: `${chatName} create successful.` });
+      navigate(0);
     });
   };
 
-  const handleKeywordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setKeyword(e.target.value);
-    getUserList(e.target.value).then((users) => {
+  const queryUsers = () => {
+    getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
           (user) =>
@@ -45,6 +47,10 @@ export default function CreateGroupModal() {
       );
     });
   };
+
+  useEffect(() => {
+    queryUsers();
+  }, [keyword, selectedUsers]);
 
   return (
     <>
@@ -64,7 +70,7 @@ export default function CreateGroupModal() {
               placeholder="Type user name here..."
               className="input input-bordered w-full"
               value={keyword}
-              onChange={handleKeywordChange}
+              onChange={(e) => setKeyword(e.target.value)}
             />
             <div className="selected-user-badge-list flex flex-wrap gap-1">
               {selectedUsers?.map((user) => (
