@@ -1,18 +1,22 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setSelectedChat } from "../../redux/slices/chatSlice";
 import { getChats } from "../../services/chat";
 import { IChat } from "../../services/chat.type";
 import ChatItem from "./ChatItem";
 
 export default function MyChats() {
+  const dispatch = useDispatch();
   const [chats, setChats] = useState<Array<IChat>>([]);
   const [selectId, setSelectId] = useState("");
 
   const handleSelectClick = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    selectId: string
+    selectedChat: IChat
   ) => {
-    setSelectId(selectId);
+    setSelectId(selectedChat._id);
+    dispatch(setSelectedChat(selectedChat));
   };
 
   useEffect(() => {
@@ -31,7 +35,7 @@ export default function MyChats() {
         </label>
       </div>
       {chats?.map((chat) => (
-        <li key={chat._id} onClick={(e) => handleSelectClick(e, chat._id)}>
+        <li key={chat._id} onClick={(e) => handleSelectClick(e, chat)}>
           <a className={clsx(selectId === chat._id ? "active" : "")}>
             <ChatItem chat={chat} isActive={chat._id === selectId} />
           </a>
