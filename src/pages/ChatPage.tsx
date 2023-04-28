@@ -7,12 +7,12 @@ import { IChat } from "../services/chat.type";
 
 export default () => {
   return (
-    <div className="chat-page">
-      <div className="chat-page-header">
+    <div className="chat-page flex flex-col h-screen">
+      <div className="chat-page-header basis-20">
         <Header />
       </div>
-      <div className="chat-page-content flex justify-between m-1 gap-x-1">
-        <div className="side-panel basis-1">
+      <div className="chat-page-content flex-grow flex justify-between m-1 gap-x-1">
+        <div className="side-panel">
           <MyChats />
         </div>
         <div className="chat-box grow">

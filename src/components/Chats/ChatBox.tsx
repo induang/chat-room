@@ -1,31 +1,53 @@
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { IChat } from "../../services/chat.type";
+import ProfileModal from "../ProfileModal";
+import EmptyChat from "./EmptyChat";
 import UpdateGroupModal from "./UpdateGroupModal";
+import menuIcon from "../../assets/list.png";
 
 export default function ChatBox() {
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
-  console.log("selectedChat: ", selectedChat);
+
+  if (!selectedChat._id) return <EmptyChat />;
+
   return (
-    <div className="bg-white/75 h-screen flex flex-col gap-y-1">
-      <div className="chat-box-header flex p-6 justify-between">
-        <div className="chat-name text-3xl">
-          {selectedChat.chatName || "Please Select a Chat"}
+    <div className="bg-white/75 h-full flex flex-col gap-y-2 rounded">
+      <div className="chat-box-header flex p-6 justify-between basis-4">
+        <div className="chat-name text-3xl text-primary">
+          {selectedChat.isGroupChat
+            ? selectedChat.chatName
+            : selectedChat?.users[1].name || "Please Select a Chat"}
         </div>
         <div className="chat-details">
           <label
-            className="update-group-chat-btn btn btn-primary btn-md"
-            htmlFor="update-group-modal"
+            className="chat-detail-btn"
+            htmlFor={
+              selectedChat.isGroupChat
+                ? "update-group-modal"
+                : "talker-details-modal"
+            }
           >
-            Chat Detail
+            <img src={menuIcon} className="w-8" />
           </label>
         </div>
       </div>
-      <div className="chat-box-messages"></div>
-      <div className="chat-box-message-sender"></div>
-      <UpdateGroupModal chat={{} as IChat} />
+      <div className="chat-box-messages flex-grow shadow-inner rounded m-2"></div>
+      <div className="chat-box-message-sender basis-16 m-2">
+        <div className="form-control">
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Type you message..."
+              className="input input-bordered input-primary w-full bg-transparent"
+            />
+            <button className="btn btn-primary">SEND</button>
+          </div>
+        </div>
+      </div>
+      {selectedChat.isGroupChat && <UpdateGroupModal />}
+      {!selectedChat.isGroupChat && <ProfileModal />}
     </div>
   );
 }
