@@ -28,3 +28,5 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 请求头属性大小写敏感？
 
 [TODO] private router
+
+[TODO] 请求体里的数组的JSON.stringfy
