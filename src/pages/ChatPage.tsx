@@ -1,6 +1,9 @@
 import ChatBox from "../components/Chats/ChatBox";
+import CreateGroupModal from "../components/Chats/CreateGroupModal";
+import UpdateGroupModal from "../components/Chats/UpdateGroupModal";
 import MyChats from "../components/Chats/MyChats";
-import Header from "../components/Header";
+import Header from "../components/Headers/Header";
+import { IChat } from "../services/chat.type";
 
 export default () => {
   return (
@@ -16,6 +19,8 @@ export default () => {
           <ChatBox />
         </div>
       </div>
+      <CreateGroupModal />
+      {/* <UpdateGroupModal chat={{} as IChat} /> */}
     </div>
   );
 };

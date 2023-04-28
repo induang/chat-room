@@ -4,7 +4,7 @@ import SideDrawer from "./SideDrawer";
 export default () => {
   return (
     <>
-      <SideDrawer />
+      {/* <SideDrawer /> */}
       <div className="header-flex-container bg-white/50 rounded p-3 flex justify-between items-center">
         <span></span>
         <span className="text-3xl">Chat room</span>
@@ -12,7 +12,6 @@ export default () => {
           <ProfileMenu />
         </span>
       </div>
-      <div className="drawer"></div>
     </>
   );
 };

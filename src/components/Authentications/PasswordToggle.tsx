@@ -1,6 +1,6 @@
 import { useState } from "react";
-import closeIcon from "../assets/close-eye.png";
-import openIcon from "../assets/eye.png";
+import closeIcon from "../../assets/close-eye.png";
+import openIcon from "../../assets/eye.png";
 
 interface IPasswordToggleProps {
   labelText: string;
