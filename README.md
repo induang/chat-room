@@ -32,3 +32,4 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 请求体里的数组的JSON.stringfy
 
 [TODO] 应用redux进行状态管理正确地更新状态的方式，在组件里另定义状态来承接store里的状态，使代码整洁，想法很美好，但是实现不了
+因为状态初始化只在组件第一次渲染的时候跑一次，不是每次组件渲染就执行一次的

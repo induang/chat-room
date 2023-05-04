@@ -30,8 +30,6 @@ export const userSlice = createSlice({
 	}
 })
 
-const sum = (a, b) => a-b
-
 export const { setSelectedUser } = userSlice.actions;
 
 export default userSlice.reducer;

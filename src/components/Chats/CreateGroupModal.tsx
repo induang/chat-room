@@ -14,6 +14,10 @@ export default function CreateGroupModal() {
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>([]);
   const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
 
+  const IDStringReducer = (users: Array<IUser>) => {
+    return users.reduce((sumString, user) => (sumString += user._id), "");
+  };
+
   const handleSelectUserClick = (user: IUser) => {
     if (!selectedUsers.includes(user))
       setSelectedUsers([...selectedUsers, user]);
@@ -39,10 +43,7 @@ export default function CreateGroupModal() {
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) =>
-            selectedUsers
-              .reduce((sumString, user) => (sumString += user._id), "")
-              .indexOf(user._id) === -1
+          (user) => IDStringReducer(selectedUsers).indexOf(user._id) === -1
         )
       );
     });
@@ -74,12 +75,14 @@ export default function CreateGroupModal() {
             />
             <div className="selected-user-badge-list flex flex-wrap gap-1">
               {selectedUsers?.map((user) => (
-                <span className="badge badge-primary badge-md" key={user._id}>
+                <label
+                  className="badge badge-primary badge-md"
+                  key={user._id}
+                  onClick={() => handleRemoveClick(user)}
+                >
                   {user.name}
-                  <span onClick={() => handleRemoveClick(user)}>
-                    <img src={closeIcon} className="w-2 ml-1" />
-                  </span>
-                </span>
+                  <img src={closeIcon} className="w-2 ml-1" />
+                </label>
               ))}
             </div>
             <div className="searched-user-list">

@@ -21,11 +21,11 @@ export default function MyChats() {
   };
 
   useEffect(() => {
-    getChats().then((res) => setChats(res));
+    getChats().then((chats) => setChats(chats));
   }, []);
 
   return (
-    <ul className="menu bg-base-100/75 w-96 h-full rounded">
+    <ul className="menu bg-base-100/75 w-96 h-full rounded overflow-y-scroll">
       <div className="side-panel-header flex justify-between p-6">
         <div className="title text-3xl">My Chat</div>
         <label
