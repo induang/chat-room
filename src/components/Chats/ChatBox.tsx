@@ -41,15 +41,15 @@ export default function ChatBox() {
   }, [selectedChat._id]);
 
   useEffect(() => {
-    socket.on("message received", (newMessageReceived) => {
-      if (
-        !selectedChatCompare ||
-        !selectedChatCompare._id !== newMessageReceived.chat._id
-      ) {
-      } else {
-        setMessages([...messages, newMessageReceived]);
-      }
-    });
+    // socket.on("message received", (newMessageReceived) => {
+    //   if (
+    //     !selectedChatCompare ||
+    //     !selectedChatCompare._id !== newMessageReceived.chat._id
+    //   ) {
+    //   } else {
+    //     setMessages([...messages, newMessageReceived]);
+    //   }
+    // });
   });
 
   useEffect(() => {

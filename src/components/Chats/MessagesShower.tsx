@@ -17,19 +17,13 @@ export default function MessagesShower({
               <ChatBubble message={message} isFirst={false} isLast={false} />
             );
           } else {
-            return (
-              <ChatBubble message={message} isFirst={false} isLast={true} />
-            );
+            return <ChatBubble message={message} isFirst={false} />;
           }
         } else {
           if (sameSenderAsAfter(i, messages)) {
-            return (
-              <ChatBubble message={message} isFirst={true} isLast={false} />
-            );
+            return <ChatBubble message={message} isLast={false} />;
           } else {
-            return (
-              <ChatBubble message={message} isFirst={true} isLast={true} />
-            );
+            return <ChatBubble message={message} />;
           }
         }
       })}

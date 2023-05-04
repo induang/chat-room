@@ -3,8 +3,8 @@ import { IMessage } from "../../services/message.type";
 
 interface ChatBubbleProps {
   message: IMessage;
-  isFirst: boolean;
-  isLast: boolean;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
 export default function ChatBubble({
@@ -14,6 +14,7 @@ export default function ChatBubble({
 }: ChatBubbleProps) {
   const userId = window.localStorage.getItem("userId");
   const { _id: senderId } = message.sender;
+  // 考虑伪类选择器去掉气泡小尾巴
   return (
     <>
       <div
@@ -33,7 +34,14 @@ export default function ChatBubble({
             <time className="text-xs opacity-50">12:45</time>
           </div>
         )}
-        <div className="chat-bubble">{message.content}</div>
+        <div
+          className={clsx(
+            "chat-bubble",
+            userId === senderId ? "chat-bubble-accent" : ""
+          )}
+        >
+          {message.content}
+        </div>
         {/* <div className="chat-footer opacity-50">Delivered</div> */}
       </div>
     </>
