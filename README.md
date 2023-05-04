@@ -1,9 +1,27 @@
+##### 技术栈
 使用 React的基本特性 做一个聊天室
 
 使用 Vite 作为框架
 
-使用 tailwindCSS+daisyui 作为UI库：
+使用 tailwindCSS+daisyui 作为样式库：
 	tailwindcss配置文件使用commandJS，否则不生效
+
+使用clsx 来计算样式
+
+使用axios进行网络请求
+
+##### 功能点：
+验证邮箱的真实性；
+
+侧边栏可以拉出搜索框，点击搜索结果中的用户即可进行一对一聊天
+
+点击头像查看登录用户的profile和登出
+
+http作为一对一聊天的网络请求方式
+
+socket 作为群聊的网络请求方式
+
+##### 第一次应用或者遇到不熟练或者容易出错的地方
 
 [TODO] React组件子传父: 组件PasswordToggle
 
@@ -13,25 +31,34 @@ https://www.ujcms.com/documentation/351.html
 
 [TODO] 状态函数更新器: 组件VerifyCodeSendBTN
 
-[TODO] daisyUI countdown failed 
-
-[TODO] 数据校验
-
 [TODO] react-toastify: 通知在跳转间保留 导入css文件才生效
 
-[TODO] vite hmr 组件导出的格式：
+[TODO] vite 实现 hmr 组件export的格式要求：
 https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
 https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
-[TODO] daisyUI: drawer 不能占据全屏拉出来
-
-[TODO] 请求头属性大小写敏感？utils/httpRequest.ts
-
-[TODO] private router
+[TODO] 请求头属性大小写敏感 utils/httpRequest.ts
 
 [TODO] 请求体里的数组的JSON.stringfy: chat service createGroupChat
 
 [TODO] 应用redux进行状态管理正确地更新状态的方式，在组件里另定义状态来承接store里的状态，使代码整洁，想法很美好，但是实现不了
 因为状态初始化只在组件第一次渲染的时候跑一次，不是每次组件渲染就执行一次的
 
+
+
+##### 存在的问题
+
+[TODO] daisyUI countdown failed 
+
+[TODO] daisyUI: drawer 不能占据全屏拉出来
+
+[TODO] createChatModal 移除用户 闪退
+##### 待加强的功能
+
+[TODO] 数据校验
+
+[TODO] private router
+
 [TODO] 字体
+
+[TODO] 更加响应式
