@@ -7,6 +7,10 @@ import { getAllMessage, sendMessage } from "../../services/message";
 import { useEffect, useState } from "react";
 import MessagesShower from "./MessagesShower";
 import { IMessage } from "../../services/message.type";
+import io from "socket.io-client";
+
+const ENDPOINT = "http://localhost:5000";
+let socket, selectedChatCompare;
 
 export default function ChatBox() {
   const selectedChat = useSelector(
@@ -31,8 +35,33 @@ export default function ChatBox() {
   useEffect(() => {
     getAllMessage(selectedChat._id).then((messages) => {
       setMessages(messages);
+      socket.emit("join chat", selectedChat._id);
+      selectedChatCompare = selectedChat;
     });
   }, [selectedChat._id]);
+
+  useEffect(() => {
+    socket.on("message received", (newMessageReceived) => {
+      if (
+        !selectedChatCompare ||
+        !selectedChatCompare._id !== newMessageReceived.chat._id
+      ) {
+      } else {
+        setMessages([...messages, newMessageReceived]);
+      }
+    });
+  });
+
+  useEffect(() => {
+    // TODO tmp way
+    const userId = window.localStorage.getItem("userId");
+    socket = io(ENDPOINT);
+    socket.emit("setup", { _id: userId });
+    socket.on("connection", () => {
+      // something to do like set connect state on
+      console.log("Socket connectted");
+    });
+  }, []);
 
   return (
     <div className="bg-white/75 h-full flex flex-col gap-y-2 rounded">

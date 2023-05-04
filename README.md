@@ -44,6 +44,7 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 应用redux进行状态管理正确地更新状态的方式，在组件里另定义状态来承接store里的状态，使代码整洁，想法很美好，但是实现不了
 因为状态初始化只在组件第一次渲染的时候跑一次，不是每次组件渲染就执行一次的
 
+[TODO] 刷新页面 不会导致noti丢失 navigate(0)
 
 
 ##### 存在的问题
@@ -51,6 +52,8 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] daisyUI countdown failed 
 
 [TODO] daisyUI: drawer 不能占据全屏拉出来
+
+[TODO] 聊天框的时间
 
 [TODO] createChatModal 移除用户 闪退
 ##### 待加强的功能
@@ -62,3 +65,5 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 字体
 
 [TODO] 更加响应式
+
+[TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常
