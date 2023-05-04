@@ -19,7 +19,6 @@ export default function UpdateGroupModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>();
-  const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>(chat.users);
   const [chatName, setChatName] = useState<string>(chat.chatName);
   const [keyword, setKeyword] = useState<string>("");
 
@@ -31,21 +30,21 @@ export default function UpdateGroupModal() {
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) => IDStringReducer(selectedUsers).indexOf(user._id) === -1
+          (user) => IDStringReducer(chat.users).indexOf(user._id) === -1
         )
       );
     });
   };
 
   const handleRemoveClick = (userId: string) => {
-    removeMemberFromChat(chat._id, userId).then((res) => {
-      setSelectedUsers(res.users);
+    removeMemberFromChat(chat._id, userId).then((chat) => {
+      dispatch(setSelectedChat(chat));
     });
   };
 
   const handleSelectUserClick = (userId: string) => {
-    addMemberToChat(chat._id, userId).then((res) => {
-      setSelectedUsers(res.users);
+    addMemberToChat(chat._id, userId).then((chat) => {
+      dispatch(setSelectedChat(chat));
     });
   };
 
@@ -63,10 +62,9 @@ export default function UpdateGroupModal() {
         navigate(0);
       });
   };
-
   useEffect(() => {
     queryUsers();
-  }, [keyword, selectedUsers]);
+  }, [keyword, chat.users]);
 
   return (
     <>
@@ -75,13 +73,15 @@ export default function UpdateGroupModal() {
         <label className="modal-box relative" htmlFor="">
           <div className="modal-box-content flex flex-col gap-y-2">
             <div className="selected-user-badge-list flex flex-wrap gap-1">
-              {selectedUsers?.map((user) => (
-                <span className="badge badge-primary badge-md">
+              {chat.users?.map((user) => (
+                <label
+                  key={user._id}
+                  className="badge badge-primary badge-md"
+                  onClick={() => handleRemoveClick(user._id)}
+                >
                   {user.name}
-                  <span onClick={() => handleRemoveClick(user._id)}>
-                    <img src={closeIcon} className="w-2 ml-1" />
-                  </span>
-                </span>
+                  <img src={closeIcon} className="w-2 ml-1" />
+                </label>
               ))}
             </div>
             <div className="input-group">
@@ -109,7 +109,10 @@ export default function UpdateGroupModal() {
             <div className="searched-user-list">
               <ul className="menu w-full">
                 {searchedUsers?.map((user) => (
-                  <li onClick={() => handleSelectUserClick(user._id)}>
+                  <li
+                    key={user._id}
+                    onClick={() => handleSelectUserClick(user._id)}
+                  >
                     <a>
                       <UserItem user={user} />
                     </a>

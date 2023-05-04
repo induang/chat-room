@@ -23,7 +23,10 @@ export const chatSlice = createSlice({
 			const {payload} = action;
 			return {
 				...state,
-				selectedChat: payload
+				selectedChat: {
+					...state.selectedChat,
+					...payload
+				}
 			}
 		}
 	}
