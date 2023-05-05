@@ -5,6 +5,7 @@ module.exports = {
     extend: {},
   },
   plugins: [require('daisyui')],
+  important: true,
 }
 /* 
   还是得使用Command JS 才会生效

@@ -39,6 +39,7 @@ export default function ChatBubble({
         )}
         <div
           className={clsx(
+            !isLast && "before:!left-1/2",
             "chat-bubble",
             userId === senderId ? "chat-bubble-accent" : ""
           )}
