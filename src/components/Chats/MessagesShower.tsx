@@ -7,23 +7,31 @@ export default function MessagesShower({
 }: {
   messages: Array<IMessage>;
 }) {
-  console.log(messages);
   return (
     <>
       {messages?.map((message, i, messages) => {
         if (sameSenderAsPre(i, messages)) {
           if (sameSenderAsAfter(i, messages)) {
             return (
-              <ChatBubble message={message} isFirst={false} isLast={false} />
+              <ChatBubble
+                key={message._id}
+                message={message}
+                isFirst={false}
+                isLast={false}
+              />
             );
           } else {
-            return <ChatBubble message={message} isFirst={false} />;
+            return (
+              <ChatBubble key={message._id} message={message} isFirst={false} />
+            );
           }
         } else {
           if (sameSenderAsAfter(i, messages)) {
-            return <ChatBubble message={message} isLast={false} />;
+            return (
+              <ChatBubble key={message._id} message={message} isLast={false} />
+            );
           } else {
-            return <ChatBubble message={message} />;
+            return <ChatBubble key={message._id} message={message} />;
           }
         }
       })}

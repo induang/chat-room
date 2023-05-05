@@ -25,7 +25,7 @@ export default function MyChats() {
   }, []);
 
   return (
-    <ul className="menu bg-base-100/75 w-96 h-full rounded overflow-y-scroll">
+    <ul className="menu bg-base-100/75 w-96 h-full rounded overflow-y-scroll flex-nowrap">
       <div className="side-panel-header flex justify-between p-6">
         <div className="title text-3xl">My Chat</div>
         <label

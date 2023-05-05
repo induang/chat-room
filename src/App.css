@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300&display=swap');
 .App {
 	padding: 5px;
 	min-height: 100vh;
 	background-color: aquamarine;
+	font-family: "Work Sans";
 }

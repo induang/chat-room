@@ -15,11 +15,11 @@ export default () => {
       <div className="chat-page-header basis-20">
         <Header />
       </div>
-      <div className="chat-page-content flex-grow flex justify-between m-1 gap-x-1">
+      <div className="chat-page-content flex-grow flex justify-between m-1 gap-x-1 overflow-y-scroll">
         <div className="side-panel">
           <MyChats />
         </div>
-        <div className="chat-box grow">
+        <div className="chat-box grow basis-96 shrink-0">
           {chatId ? <ChatBox /> : <EmptyChatBox />}
         </div>
       </div>

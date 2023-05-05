@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { IMessage } from "../../services/message.type";
+import { timeTransform } from "../../utils/timeTransform";
 
 interface ChatBubbleProps {
   message: IMessage;
@@ -31,7 +32,9 @@ export default function ChatBubble({
         {isFirst && (
           <div className="chat-header ml-2">
             {message.sender.name + " "}
-            <time className="text-xs opacity-50">12:45</time>
+            <time className="text-xs opacity-50">
+              {timeTransform(message.createdAt)}
+            </time>
           </div>
         )}
         <div
