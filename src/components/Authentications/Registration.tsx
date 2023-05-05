@@ -25,7 +25,7 @@ export default function Registration({ show }: { show: boolean }) {
   };
 
   return (
-    <div className={clsx(show ? "" : "hidden")}>
+    <div className={clsx("register-tab-page", show ? "" : "hidden")}>
       <div className="form-control">
         <label className="label">
           <span className="label-text text-xl font-medium">Email:</span>
