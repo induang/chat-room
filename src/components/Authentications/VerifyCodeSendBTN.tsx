@@ -8,13 +8,15 @@ export default function VerifyCodeSendBTN({ email }: { email: string }) {
   const timer = useRef(0);
 
   const handleSendClick = () => {
-    verify(email).then(() => {
-      setIsSendClick(true);
+    setIsSendClick(true);
+    clearInterval(timer.current);
+    timer.current = setInterval(
+      () => setCount((preCount) => preCount - 1),
+      1000
+    );
+    verify(email).catch(() => {
+      setIsSendClick(false);
       clearInterval(timer.current);
-      timer.current = setInterval(
-        () => setCount((preCount) => preCount - 1),
-        1000
-      );
     });
   };
 

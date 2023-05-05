@@ -8,14 +8,17 @@ import PasswordToggle from "./PasswordToggle";
 export default function Login({ show }: { show: boolean }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
 
   const handleLoginClick = async () => {
+    setDisabled(true);
     login({ email, password }).then((res) => {
       const { name, pic, _id } = res;
       window.localStorage.setItem("name", name);
       window.localStorage.setItem("pic", pic);
       window.localStorage.setItem("userId", _id);
+      setDisabled(false);
       noti({ type: "success", message: "Login successfully." });
       navigate("/chat");
     });
@@ -36,7 +39,10 @@ export default function Login({ show }: { show: boolean }) {
       </div>
       <PasswordToggle labelText="Password" getPasswordChange={setPassword} />
       <button
-        className="btn btn-block btn-primary mt-10"
+        className={clsx(
+          "btn btn-block btn-primary mt-10",
+          disabled ? "btn-disabled" : ""
+        )}
         onClick={handleLoginClick}
       >
         Login

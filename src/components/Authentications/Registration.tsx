@@ -12,10 +12,13 @@ export default function Registration({ show }: { show: boolean }) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [disabled, setDisabled] = useState(false);
   const navigate = useNavigate();
 
   const handleRegisterClick = () => {
+    setDisabled(true);
     register({ name, email, password, code: verifyCode }).then(() => {
+      setDisabled(false);
       noti({ type: "success", message: "Register successful" });
       navigate("/");
     });
@@ -66,7 +69,10 @@ export default function Registration({ show }: { show: boolean }) {
       />
 
       <button
-        className="btn btn-block btn-primary mt-10"
+        className={clsx(
+          "btn btn-block btn-primary mt-10",
+          disabled ? "btn-disabled" : ""
+        )}
         onClick={handleRegisterClick}
       >
         Sign
