@@ -23,6 +23,7 @@ export default function ChatBox() {
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<IMessage>>([]);
   const [socketConnect, setSocketConnect] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSendClick = () => {
     setNewMessage("");
@@ -37,8 +38,10 @@ export default function ChatBox() {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     getAllMessage(selectedChat._id).then((messages) => {
       setMessages(messages);
+      setIsLoading(false);
       socket.emit("join chat", selectedChat._id);
       selectedChatCompare = selectedChat;
     });
@@ -88,7 +91,11 @@ export default function ChatBox() {
         </div>
       </div>
       <div className="chat-box-messages flex-grow bg-base-100/80 shadow-inner rounded m-2 p-2 overflow-y-scroll">
-        {messages?.length ? <MessagesShower messages={messages} /> : <></>}
+        {!isLoading && messages?.length ? (
+          <MessagesShower messages={messages} />
+        ) : (
+          <></>
+        )}
       </div>
       <div className="chat-box-message-sender basis-16 m-2">
         <div className="form-control">

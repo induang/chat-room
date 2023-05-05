@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setSelectedChat } from "../../redux/slices/chatSlice";
-import { setSelectedUser } from "../../redux/slices/userSlice";
 import { getChats } from "../../services/chat";
 import { IChat } from "../../services/chat.type";
 import ChatItem from "./ChatItem";

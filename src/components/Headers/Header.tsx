@@ -1,3 +1,4 @@
+import { APP_NAME } from "../../consts";
 import DrawerBTN from "./DrawerBTN";
 import ProfileMenu from "./ProfileMenu";
 export default function Header() {
@@ -7,7 +8,7 @@ export default function Header() {
         <span>
           <DrawerBTN />
         </span>
-        <span className="text-3xl">Chat room</span>
+        <span className="text-3xl">{APP_NAME}</span>
         <span>
           <ProfileMenu />
         </span>

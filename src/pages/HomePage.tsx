@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import Login from "../components/Authentications/Login";
 import Registration from "../components/Authentications/Registration";
+import { APP_NAME } from "../consts";
 
 export default function HomePage() {
   const [loginShow, setLoginShow] = useState(true);
@@ -10,7 +11,7 @@ export default function HomePage() {
   return (
     <div className="home-page">
       <div className="app-name sm:w-96 w-full bg-base-100/90 m-auto mt-20 h-20 rounded text-3xl text-center py-5">
-        {"😁 CHA! CHAT"}
+        {APP_NAME}
       </div>
       <div className="auth-operation-card card sm:w-96 w-full bg-base-100 shadow-xl m-auto mt-2">
         <div className="card-body">
