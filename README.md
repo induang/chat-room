@@ -53,8 +53,6 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] daisyUI countdown failed 
 
-[TODO] daisyUI: drawer 不能占据全屏拉出来
-
 [TODO] createChatModal 移除用户 闪退
 
 
@@ -72,3 +70,5 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [COMP][TODO] 字体
 [COMP][TODO] 密码眼睛 tabindex改为-1
 [COMP][TODO] 聊天框的时间
+[COMP][TODO] daisyUI: drawer 不能占据全屏拉出来
+按照官网的结构套好，页面内容在 drawer-content 下
