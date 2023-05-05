@@ -7,9 +7,13 @@ import { getAllMessage, sendMessage } from "../../services/message";
 import { useEffect, useState } from "react";
 import MessagesShower from "./MessagesShower";
 import { IMessage } from "../../services/message.type";
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
+import { DefaultEventsMap } from "@socket.io/component-emitter";
+import { IChat } from "../../services/chat.type";
 
 const ENDPOINT = "http://localhost:5000";
+let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
+  selectedChatCompare: IChat | null;
 
 export default function ChatBox() {
   const selectedChat = useSelector(
@@ -17,13 +21,13 @@ export default function ChatBox() {
   );
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<IMessage>>([]);
+  const [socketConnect, setSocketConnect] = useState(false);
 
   const handleSendClick = () => {
     setNewMessage("");
-    sendMessage(selectedChat._id, newMessage).then(() => {
-      getAllMessage(selectedChat._id).then((messages) => {
-        setMessages(messages);
-      });
+    sendMessage(selectedChat._id, newMessage).then((newMessage) => {
+      socket.emit("new message", newMessage);
+      setMessages([...messages, newMessage]);
     });
   };
 
@@ -34,8 +38,32 @@ export default function ChatBox() {
   useEffect(() => {
     getAllMessage(selectedChat._id).then((messages) => {
       setMessages(messages);
+      socket.emit("join chat", selectedChat._id);
+      selectedChatCompare = selectedChat;
     });
   }, [selectedChat._id]);
+
+  useEffect(() => {
+    socket = io(ENDPOINT);
+    const userId = window.localStorage.getItem("userId");
+    socket.emit("setup", { _id: userId });
+    socket.on("connection", () => {
+      setSocketConnect(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    socket.on("message received", (newMessageReceived) => {
+      if (
+        !selectedChatCompare ||
+        selectedChat._id !== newMessageReceived.chat._id
+      ) {
+        // noti
+      } else {
+        setMessages([...messages, newMessageReceived]);
+      }
+    });
+  });
 
   return (
     <div className="bg-white/75 h-full flex flex-col gap-y-2 rounded">

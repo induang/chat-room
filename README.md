@@ -6,9 +6,11 @@
 使用 tailwindCSS+daisyui 作为样式库：
 	tailwindcss配置文件使用commandJS，否则不生效
 
-使用clsx 来计算样式
+使用 clsx 来计算样式
 
-使用axios进行网络请求
+使用 axios 进行网络请求
+
+使用 socket.io 实现实时聊天网络请求
 
 ##### 功能点：
 验证邮箱的真实性；
@@ -56,6 +58,8 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 聊天框的时间
 
 [TODO] createChatModal 移除用户 闪退
+
+[TODO] 密码眼睛 tabindex改为-1
 ##### 待加强的功能
 
 [TODO] 数据校验

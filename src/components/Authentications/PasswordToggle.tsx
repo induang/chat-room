@@ -7,7 +7,10 @@ interface IPasswordToggleProps {
   getPasswordChange: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default ({ labelText, getPasswordChange }: IPasswordToggleProps) => {
+export default function PasswordToggle({
+  labelText,
+  getPasswordChange,
+}: IPasswordToggleProps) {
   const [masked, setMasked] = useState(true);
   const [password, setPassword] = useState("");
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,7 +22,11 @@ export default ({ labelText, getPasswordChange }: IPasswordToggleProps) => {
       <label className="label">
         <span className="label-text text-xl font-medium">{labelText}:</span>
         <label className="swap">
-          <input type="checkbox" onChange={() => setMasked(!masked)} />
+          <input
+            tabIndex={-1}
+            type="checkbox"
+            onChange={() => setMasked(!masked)}
+          />
           <div className="swap-on w-6">
             <img src={openIcon} />
           </div>
@@ -37,4 +44,4 @@ export default ({ labelText, getPasswordChange }: IPasswordToggleProps) => {
       />
     </div>
   );
-};
+}
