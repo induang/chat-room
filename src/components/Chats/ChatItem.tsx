@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { IChat } from "../../services/chat.type";
+import { exceptMeBetween2 } from "../../utils/exceptMe";
 
 interface IChatItemProps {
   chat: IChat;
@@ -22,17 +23,20 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
           )}
         </label>
       </div>
-      <div className="chat-details ml-3">
+      <div className="chat-details pl-3">
         <div
           className={clsx(
             "chat-identity",
-            isActive ? "text-white" : "text-primary"
+            isActive ? "text-white" : "text-primary",
+            "truncate"
           )}
         >
-          {chat.isGroupChat ? chat.chatName : chat.users[1]?.name}
+          {chat.isGroupChat
+            ? chat.chatName
+            : exceptMeBetween2(chat.users)[0].name}
         </div>
         <div className="chat-lastest-message text-slate-300">
-          {chat.latestMessage?.content || "No new message."}
+          {chat.latestMessage?.content || "No new message"}
         </div>
       </div>
     </div>

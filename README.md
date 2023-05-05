@@ -55,19 +55,20 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] daisyUI: drawer 不能占据全屏拉出来
 
-[COMP][TODO] 聊天框的时间
-
 [TODO] createChatModal 移除用户 闪退
 
-[COMP][TODO] 密码眼睛 tabindex改为-1
+
 ##### 待加强的功能
 
 [TODO] 数据校验
 
 [TODO] private router
 
-[COMP][TODO] 字体
-
 [TODO] 更加响应式
 
 [TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常
+
+##### 完成
+[COMP][TODO] 字体
+[COMP][TODO] 密码眼睛 tabindex改为-1
+[COMP][TODO] 聊天框的时间

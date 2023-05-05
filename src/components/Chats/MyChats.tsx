@@ -25,9 +25,9 @@ export default function MyChats() {
   }, []);
 
   return (
-    <ul className="menu bg-base-100/75 w-96 h-full rounded overflow-y-scroll flex-nowrap">
+    <ul className="menu bg-base-100/75 w-96 h-full rounded overflow-y-scroll overflow-x-hidden flex-nowrap">
       <div className="side-panel-header flex justify-between p-6">
-        <div className="title text-3xl">My Chat</div>
+        <div className="title text-3xl">Chats</div>
         <label
           className="create-group-chat-btn btn btn-primary btn-md"
           htmlFor="create-group-modal"

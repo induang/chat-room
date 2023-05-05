@@ -10,6 +10,7 @@ import { IMessage } from "../../services/message.type";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IChat } from "../../services/chat.type";
+import { exceptMeBetween2 } from "../../utils/exceptMe";
 
 const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
@@ -68,10 +69,10 @@ export default function ChatBox() {
   return (
     <div className="bg-white/75 h-full flex flex-col gap-y-2 rounded">
       <div className="chat-box-header flex p-6 justify-between basis-4">
-        <div className="chat-name text-3xl text-primary">
+        <div className="chat-name text-3xl text-primary truncate basis-80">
           {selectedChat.isGroupChat
             ? selectedChat.chatName
-            : selectedChat.users[1].name}
+            : exceptMeBetween2(selectedChat.users)[0].name}
         </div>
         <div className="chat-details">
           <label
