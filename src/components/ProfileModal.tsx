@@ -1,10 +1,11 @@
 import { useSelector } from "react-redux";
 import { defaultPicUrl } from "../consts";
 import { RootState } from "../redux";
+import { exceptMeBetween2 } from "../utils/exceptMe";
 
 export default function ProfileModal() {
   const { users } = useSelector((state: RootState) => state.chat.selectedChat);
-  const selectedUser = users[1];
+  const selectedUser = exceptMeBetween2(users)[0];
   return (
     <>
       <input
