@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { IChat } from "../../services/chat.type";
 import { exceptMeBetween2 } from "../../utils/exceptMe";
+import GroupChatPreofile from "./GroupChatProfile";
 
 interface IChatItemProps {
   chat: IChat;
@@ -13,9 +14,7 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
       <div className="chat-profile">
         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
           {chat.isGroupChat ? (
-            <div className="w-14 rounded-full bg-secondary text-white text-2xl leading-10 overflow-hidden text-center">
-              {chat.chatName}
-            </div>
+            <GroupChatPreofile name={chat.chatName} />
           ) : (
             <div className="w-14 rounded-full">
               <img src={chat?.users[1].pic} />
@@ -23,7 +22,7 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
           )}
         </label>
       </div>
-      <div className="chat-details pl-3">
+      <div className="chat-details pl-3 grow">
         <div
           className={clsx(
             "chat-identity",

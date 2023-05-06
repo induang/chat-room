@@ -3,6 +3,7 @@ import { getOrCreateChat } from "../../services/chat";
 import { getUserList } from "../../services/user";
 import { IUser } from "../../services/user.type";
 import UserItem from "../UserItem";
+import closeIcon from "../../assets/close-slender.png";
 
 export default function Drawer() {
   const [keyword, setKeyword] = useState("");
@@ -75,22 +76,9 @@ export default function Drawer() {
         </div>
         <label
           htmlFor="chat-search-users-drawer"
-          className="btn btn-primary btn-circle sm:hidden absolute bottom-3 left-1/2"
+          className="btn btn-primary btn-circle sm:hidden fixed bottom-3 left-1/2 -ml-6"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
+          <img src={closeIcon} className="w-4" />
         </label>
       </ul>
     </div>

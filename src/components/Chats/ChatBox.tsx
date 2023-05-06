@@ -1,8 +1,9 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import ProfileModal from "../ProfileModal";
 import UpdateGroupModal from "./UpdateGroupModal";
 import menuIcon from "../../assets/list.png";
+import arrowIcon from "../../assets/left-arrow-primary.png";
 import { getAllMessage, sendMessage } from "../../services/message";
 import { useEffect, useState } from "react";
 import MessagesShower from "./MessagesShower";
@@ -11,6 +12,8 @@ import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IChat } from "../../services/chat.type";
 import { exceptMeBetween2 } from "../../utils/exceptMe";
+import { setSelectedChat } from "../../redux/slices/chatSlice";
+import { useNavigate } from "react-router-dom";
 
 const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
@@ -20,17 +23,24 @@ export default function ChatBox() {
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<IMessage>>([]);
   const [socketConnect, setSocketConnect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSendClick = () => {
+    if (!newMessage) return;
     setNewMessage("");
     sendMessage(selectedChat._id, newMessage).then((newMessage) => {
       socket.emit("new message", newMessage);
       setMessages([...messages, newMessage]);
     });
+  };
+  const handleReturnArrowClick = () => {
+    dispatch(setSelectedChat({} as IChat));
+    navigate(0);
   };
 
   const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -71,8 +81,11 @@ export default function ChatBox() {
 
   return (
     <div className="bg-white/75 h-full flex flex-col gap-y-2 rounded">
-      <div className="chat-box-header flex p-6 justify-between basis-4">
-        <div className="chat-name text-3xl text-primary truncate basis-80">
+      <div className="chat-box-header flex p-6 justify-between basis-4 items-center">
+        <div className="sm:hidden" onClick={handleReturnArrowClick}>
+          <img src={arrowIcon} className="w-8" />
+        </div>
+        <div className="chat-name text-3xl text-primary truncate basis-80 ml-2">
           {selectedChat.isGroupChat
             ? selectedChat.chatName
             : exceptMeBetween2(selectedChat.users)[0].name}

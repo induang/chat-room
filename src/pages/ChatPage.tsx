@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useSelector } from "react-redux";
 import ChatBox from "../components/Chats/ChatBox";
 import CreateGroupModal from "../components/Chats/CreateGroupModal";
@@ -21,10 +22,21 @@ export default function ChatPage() {
             <Header />
           </div>
           <div className="chat-page-content flex-grow flex justify-between m-1 gap-x-1 overflow-y-scroll">
-            <div className="side-panel">
+            <div
+              className={clsx(
+                "side-panel w-screen sm:basis-96 sm:shrink-0",
+                chatId ? "hidden sm:block" : ""
+              )}
+            >
               <MyChats />
             </div>
-            <div className="chat-box grow basis-96 shrink-0">
+            <div
+              className={clsx(
+                "chat-box grow",
+                chatId ? "" : "hidden sm:block",
+                "sm:basis-96 sm:shrink-0"
+              )}
+            >
               {chatId ? <ChatBox /> : <EmptyChatBox />}
             </div>
           </div>

@@ -13,6 +13,7 @@ import { RootState } from "../../redux";
 import { setSelectedChat } from "../../redux/slices/chatSlice";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
+import clsx from "clsx";
 
 export default function UpdateGroupModal() {
   const chat = useSelector((state: RootState) => state.chat.selectedChat);
@@ -21,6 +22,8 @@ export default function UpdateGroupModal() {
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>();
   const [chatName, setChatName] = useState<string>(chat.chatName);
   const [keyword, setKeyword] = useState<string>("");
+  const [updateNameDisabled, setUpdateNameDisabled] = useState(false);
+  const [leaveDisabled, setLeaveDisabled] = useState(false);
 
   const IDStringReducer = (users: Array<IUser>) => {
     return users.reduce((sumString, user) => (sumString += user._id), "");
@@ -49,15 +52,24 @@ export default function UpdateGroupModal() {
   };
 
   const handleUpdateChatNameClick = () => {
+    setUpdateNameDisabled(true);
     renameChat(chat._id, chatName).then((res) => {
       dispatch(setSelectedChat(res));
+      noti({ type: "success", message: "Update name successful." });
+      navigate(0);
     });
   };
 
   const handleLeaveChatClick = () => {
+    setLeaveDisabled(true);
     const loggerId = window.localStorage.getItem("userId");
+    if (!loggerId) {
+      noti({ type: "error", message: "User id missed." });
+      navigate("/");
+    }
     loggerId &&
       removeMemberFromChat(chat._id, loggerId).then(() => {
+        // setLeaveDisabled(false);
         noti({ type: "success", message: "Leave successful." });
         navigate(0);
       });
@@ -93,7 +105,10 @@ export default function UpdateGroupModal() {
                 onChange={(e) => setChatName(e.target.value)}
               />
               <button
-                className="btn btn-primary"
+                className={clsx(
+                  "btn btn-primary",
+                  updateNameDisabled ? "btn-disabled" : ""
+                )}
                 onClick={handleUpdateChatNameClick}
               >
                 Update
@@ -122,7 +137,10 @@ export default function UpdateGroupModal() {
             </div>
             <div className="leave-from-chat">
               <div
-                className="btn btn-error float-right"
+                className={clsx(
+                  "btn btn-error float-right",
+                  leaveDisabled ? "btn-disabled" : ""
+                )}
                 onClick={handleLeaveChatClick}
               >
                 LEAVE
