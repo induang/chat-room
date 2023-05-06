@@ -81,7 +81,7 @@ export default function ChatBox() {
 
   return (
     <div className="bg-white/75 h-full flex flex-col gap-y-1 rounded">
-      <div className="chat-box-header flex p-4 sm:p-6 basis-4 items-center sm:justify-between">
+      <div className="chat-box-header flex p-4 sm:p-6 basis-4 items-center justify-between">
         {/* 返回按钮 */}
         <span className="sm:hidden" onClick={handleReturnArrowClick}>
           <img src={arrowIcon} className="w-8" />
