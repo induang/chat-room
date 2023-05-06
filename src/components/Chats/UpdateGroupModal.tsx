@@ -14,6 +14,7 @@ import { setSelectedChat } from "../../redux/slices/chatSlice";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
+import { IDStringReducer } from "../../utils/tools";
 
 export default function UpdateGroupModal() {
   const chat = useSelector((state: RootState) => state.chat.selectedChat);
@@ -24,11 +25,7 @@ export default function UpdateGroupModal() {
   const [keyword, setKeyword] = useState<string>("");
   const [updateNameDisabled, setUpdateNameDisabled] = useState(false);
   const [leaveDisabled, setLeaveDisabled] = useState(false);
-  // 防抖
-
-  const IDStringReducer = (users: Array<IUser>) => {
-    return users.reduce((sumString, user) => (sumString += user._id), "");
-  };
+  // TODO 实现 防抖
 
   const queryUsers = () => {
     getUserList(keyword).then((users) => {

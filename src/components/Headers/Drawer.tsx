@@ -90,7 +90,7 @@ export default function Drawer() {
         </div>
         <label
           htmlFor="chat-search-users-drawer"
-          className="btn btn-primary btn-circle sm:hidden fixed bottom-3 left-1/2 -ml-6"
+          className="btn btn-primary btn-circle sm:hidden fixed bottom-10 left-1/2 -ml-6 z-50"
         >
           <img src={closeIcon} className="w-4" />
         </label>

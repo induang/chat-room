@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { IMessage } from "../../services/message.type";
-import { timeTransform } from "../../utils/timeTransform";
+import { timeTransform } from "../../utils/tools";
 
 interface ChatBubbleProps {
   message: IMessage;

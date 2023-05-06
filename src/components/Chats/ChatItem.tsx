@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { IChat } from "../../services/chat.type";
-import { exceptMeBetween2 } from "../../utils/exceptMe";
+import { exceptMeBetween2 } from "../../utils/tools";
 import GroupChatPreofile from "./GroupChatProfile";
 
 interface IChatItemProps {

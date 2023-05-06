@@ -11,7 +11,7 @@ import { IMessage } from "../../services/message.type";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IChat } from "../../services/chat.type";
-import { exceptMeBetween2 } from "../../utils/exceptMe";
+import { exceptMeBetween2 } from "../../utils/tools";
 import { setSelectedChat } from "../../redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
 

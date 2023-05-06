@@ -6,6 +6,7 @@ import closeIcon from "../../assets/close.png";
 import { createGroupChat } from "../../services/chat";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
+import { IDStringReducer } from "../../utils/tools";
 
 export default function CreateGroupModal() {
   const navigate = useNavigate();
@@ -13,10 +14,6 @@ export default function CreateGroupModal() {
   const [keyword, setKeyword] = useState<string>("");
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>([]);
   const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
-
-  const IDStringReducer = (users: Array<IUser>) => {
-    return users.reduce((sumString, user) => (sumString += user._id), "");
-  };
 
   const handleSelectUserClick = (user: IUser) => {
     if (!selectedUsers.includes(user))
