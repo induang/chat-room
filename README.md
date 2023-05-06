@@ -23,6 +23,8 @@ http作为一对一聊天的网络请求方式
 
 socket 作为群聊的网络请求方式
 
+适配手机移动端
+
 ##### 第一次应用或者遇到不熟练或者容易出错的地方
 
 [TODO] React组件子传父: 组件PasswordToggle
@@ -55,20 +57,29 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] createChatModal 移除用户 闪退
 
+[TODO] 移动端 聊天框回退不应该是刷新式的
+
+[TODO] 发新消息 my chats不及时更新
 
 ##### 待加强的功能
 
 [TODO] 数据校验
 
+[TODO] 聊天框默认滚动到最底部
+
 [TODO] private router
 
 [TODO] 更加响应式
 
-[TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常
+[TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常， 尤其是群聊修改框
+
+[TODO] 消息提醒
+
+[TODO] 聪明的错误提醒
 
 ##### 完成
 [COMP][TODO] 字体
 [COMP][TODO] 密码眼睛 tabindex改为-1
 [COMP][TODO] 聊天框的时间
 [COMP][TODO] daisyUI: drawer 不能占据全屏拉出来
-按照官网的结构套好，页面内容在 drawer-content 下
+						 按照官网的结构套好，页面内容在 drawer-content 下

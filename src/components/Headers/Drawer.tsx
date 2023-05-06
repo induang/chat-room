@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { getOrCreateChat } from "../../services/chat";
 import { getUserList } from "../../services/user";
 import { IUser } from "../../services/user.type";
 import UserItem from "../UserItem";
 import closeIcon from "../../assets/close-slender.png";
+import clsx from "clsx";
+import { useDispatch } from "react-redux";
+import { setSelectedChat } from "../../redux/slices/chatSlice";
 
 export default function Drawer() {
+  const dispatch = useDispatch();
   const [keyword, setKeyword] = useState("");
   const [searchResults, setSearchResults] = useState<Array<IUser>>();
+  const [userItemDisable, setUserItemDisabled] = useState(false);
+  const toggleLabelEle = useRef<HTMLLabelElement>(null);
 
   const handleSearch = () => {
     setKeyword("");
@@ -25,11 +31,18 @@ export default function Drawer() {
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
     userId: string
   ) => {
-    // getOrCreateChat(userId).then((res) => console.log(res));
+    if (userItemDisable) return;
+    setUserItemDisabled(true);
+    getOrCreateChat(userId).then((chat) => {
+      dispatch(setSelectedChat(chat));
+      setUserItemDisabled(false);
+      toggleLabelEle.current?.click();
+    });
   };
   return (
     <div className="drawer-side">
       <label
+        ref={toggleLabelEle}
         htmlFor="chat-search-users-drawer"
         className="drawer-overlay"
       ></label>
@@ -67,6 +80,7 @@ export default function Drawer() {
             <li
               key={user._id}
               onClick={(event) => handleFetchChatClick(event, user._id)}
+              className={clsx(userItemDisable ? "disabled" : "")}
             >
               <a>
                 <UserItem user={user} />

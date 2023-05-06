@@ -17,7 +17,7 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
             <GroupChatPreofile name={chat.chatName} />
           ) : (
             <div className="w-14 rounded-full">
-              <img src={chat?.users[1].pic} />
+              <img src={exceptMeBetween2(chat.users)[0].pic} />
             </div>
           )}
         </label>
