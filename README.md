@@ -61,6 +61,8 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] 发新消息 my chats不及时更新
 
+[TODO] socket.io 文档 优化chatbox
+
 ##### 待加强的功能
 
 [TODO] 数据校验
@@ -76,6 +78,8 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 消息提醒
 
 [TODO] 聪明的错误提醒
+
+[TODO] 选择用户防抖
 
 ##### 完成
 [COMP][TODO] 字体

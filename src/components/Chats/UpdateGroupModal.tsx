@@ -24,6 +24,7 @@ export default function UpdateGroupModal() {
   const [keyword, setKeyword] = useState<string>("");
   const [updateNameDisabled, setUpdateNameDisabled] = useState(false);
   const [leaveDisabled, setLeaveDisabled] = useState(false);
+  // 防抖
 
   const IDStringReducer = (users: Array<IUser>) => {
     return users.reduce((sumString, user) => (sumString += user._id), "");

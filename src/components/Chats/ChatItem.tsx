@@ -34,7 +34,10 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
             ? chat.chatName
             : exceptMeBetween2(chat.users)[0].name}
         </div>
-        <div className="chat-lastest-message text-slate-300">
+        <div className="chat-lastest-message text-slate-300 block w-64 truncate">
+          <span className="text-gray-500 ">
+            {chat.latestMessage?.sender.name + ":  "}
+          </span>
           {chat.latestMessage?.content || "No new message"}
         </div>
       </div>

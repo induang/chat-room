@@ -80,17 +80,20 @@ export default function ChatBox() {
   });
 
   return (
-    <div className="bg-white/75 h-full flex flex-col gap-y-2 rounded">
-      <div className="chat-box-header flex p-6 justify-between basis-4 items-center">
-        <div className="sm:hidden" onClick={handleReturnArrowClick}>
+    <div className="bg-white/75 h-full flex flex-col gap-y-1 rounded">
+      <div className="chat-box-header flex p-4 sm:p-6 basis-4 items-center sm:justify-between">
+        {/* 返回按钮 */}
+        <span className="sm:hidden" onClick={handleReturnArrowClick}>
           <img src={arrowIcon} className="w-8" />
-        </div>
-        <div className="chat-name text-3xl text-primary truncate basis-80 ml-2">
+        </span>
+        {/* 名字 */}
+        <div className="chat-name text-xl sm:text-3xl text-primary truncate ml-2">
           {selectedChat.isGroupChat
             ? selectedChat.chatName
             : exceptMeBetween2(selectedChat.users)[0].name}
         </div>
-        <div className="chat-details">
+        {/* 菜单按钮 */}
+        <div className="chat-details ml-4">
           <label
             className="chat-detail-btn"
             htmlFor={
