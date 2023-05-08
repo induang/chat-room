@@ -1,0 +1,9 @@
+#messages-shower-board *{
+	overflow-anchor: none;
+}
+
+#anchor{
+	overflow-anchor: auto;
+	width: 100px;
+  height: 10px;
+}

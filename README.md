@@ -50,32 +50,29 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] 刷新页面 不会导致noti丢失 navigate(0)
 
+[TODO] 聊天框默认滚动到最底部 且css属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
+https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
+
 
 ##### 存在的问题
 
-[TODO] daisyUI countdown failed 
+[TODO] 可能是模式问题： 群聊修改modal框总是预先加载被搜索的用户，按想法应该是不加载的
 
 [TODO] createChatModal 移除用户 闪退
-
-[TODO] 移动端 聊天框回退不应该是刷新式的
-
-[TODO] 发新消息 my chats不及时更新
 
 [TODO] socket.io 文档 优化chatbox
 
 [TODO] 渲染逻辑有问题，发一条消息会有多个提醒
 
+[TODO] drawer里的关闭不是相对于屏幕固定的
+
 ##### 待加强的功能
+
+[TODO] 关键词搜索出来的用户为空应该有提醒
 
 [TODO] 数据校验
 
-[TODO] 聊天框默认滚动到最底部
-
 [TODO] private router
-
-
-
-
 
 [TODO] 消息提醒
 
@@ -96,3 +93,12 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [COMP][TODO] 更加响应式,适配了移动端
 
 [COMP][TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常， 尤其是群聊修改框  
+
+[COMP][TODO] 聊天框默认滚动到最底部 且css属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
+https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
+
+[COMP][TODO] 发新消息 my chats不及时更新 把chats放进状态管理了
+
+[COMP][TODO] 移动端 聊天框回退不应该是刷新式的
+
+[UNCOMP][TODO] daisyUI countdown failed 不管这个了，用不到

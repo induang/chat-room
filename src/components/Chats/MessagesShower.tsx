@@ -1,6 +1,7 @@
 import { IMessage } from "../../services/message.type";
 import { sameSenderAsAfter, sameSenderAsPre } from "../../utils/chatLogic";
 import ChatBubble from "./ChatBubble";
+import "./messagesShower.css";
 
 export default function MessagesShower({
   messages,
@@ -8,7 +9,7 @@ export default function MessagesShower({
   messages: Array<IMessage>;
 }) {
   return (
-    <>
+    <div id="messages-shower-board">
       {messages?.map((message, i, messages) => {
         if (sameSenderAsPre(i, messages)) {
           if (sameSenderAsAfter(i, messages)) {
@@ -35,6 +36,7 @@ export default function MessagesShower({
           }
         }
       })}
-    </>
+      <div id="anchor"></div>
+    </div>
   );
 }

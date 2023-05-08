@@ -32,7 +32,7 @@ httpRequest.interceptors.response.use(
 	},
 	(error) => {
 		const message = error.response?.data?.message || error.message;
-		if(error.response?.status === 401 || error.response.status === 403){
+		if(error.response?.status === 401){
 			noti({type: 'error', message: "Unauthorization."})
 			window.localStorage.removeItem('token');
 			window.location.href = '/'

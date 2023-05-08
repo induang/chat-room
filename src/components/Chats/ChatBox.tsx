@@ -5,7 +5,7 @@ import UpdateGroupModal from "./UpdateGroupModal";
 import menuIcon from "../../assets/list.png";
 import arrowIcon from "../../assets/left-arrow-primary.png";
 import { getAllMessage, sendMessage } from "../../services/message";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MessagesShower from "./MessagesShower";
 import { IMessage } from "../../services/message.type";
 import io, { Socket } from "socket.io-client";
@@ -32,6 +32,7 @@ export default function ChatBox() {
   const [messages, setMessages] = useState<Array<IMessage>>([]);
   const [socketConnect, setSocketConnect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const scrollAnchor = useRef<HTMLDivElement>(null);
 
   const handleSendClick = () => {
     if (!newMessage) return;
@@ -51,9 +52,11 @@ export default function ChatBox() {
   };
 
   const handleReturnArrowClick = () => {
-    dispatch(setSelectedChat({} as IChat));
-    // TODO 改良返回逻辑
-    navigate(0);
+    dispatch(
+      setSelectedChat({
+        _id: "",
+      } as IChat)
+    );
   };
 
   const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -68,6 +71,7 @@ export default function ChatBox() {
       setIsLoading(false);
       socket.emit("join chat", selectedChat._id);
       selectedChatCompare = selectedChat;
+      scrollAnchor.current?.scrollIntoView();
     });
     return () => {
       setNewMessage("");
@@ -94,11 +98,12 @@ export default function ChatBox() {
       );
       if (
         !selectedChatCompare ||
-        selectedChatCompare !== newMessageReceived.chat._id
+        selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
         // noti
-        dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
+        // dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
       } else {
+        console.log("set newMsaages");
         setMessages([...messages, newMessageReceived]);
       }
     });
@@ -137,6 +142,7 @@ export default function ChatBox() {
         ) : (
           <></>
         )}
+        <div id="scroll-anchor" ref={scrollAnchor}></div>
       </div>
       <div className="chat-box-message-sender basis-16 m-2">
         <div className="form-control">

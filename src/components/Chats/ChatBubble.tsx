@@ -1,4 +1,6 @@
 import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
 import { IMessage } from "../../services/message.type";
 import { timeTransform } from "../../utils/tools";
 
@@ -46,7 +48,6 @@ export default function ChatBubble({
         >
           {message.content}
         </div>
-        {/* <div className="chat-footer opacity-50">Delivered</div> */}
       </div>
     </>
   );

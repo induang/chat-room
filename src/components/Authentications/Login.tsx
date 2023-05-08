@@ -13,15 +13,16 @@ export default function Login({ show }: { show: boolean }) {
 
   const handleLoginClick = async () => {
     setDisabled(true);
-    login({ email, password }).then((res) => {
-      const { name, pic, _id } = res;
-      window.localStorage.setItem("name", name);
-      window.localStorage.setItem("pic", pic);
-      window.localStorage.setItem("userId", _id);
-      setDisabled(false);
-      noti({ type: "success", message: "Login successfully." });
-      navigate("/chat");
-    });
+    login({ email, password })
+      .then((res) => {
+        const { name, pic, _id } = res;
+        window.localStorage.setItem("name", name);
+        window.localStorage.setItem("pic", pic);
+        window.localStorage.setItem("userId", _id);
+        noti({ type: "success", message: "Login successfully." });
+        navigate("/chat");
+      })
+      .finally(() => setDisabled(false));
   };
   return (
     <div className={clsx("login-tab-page", show ? "" : "hidden")}>
