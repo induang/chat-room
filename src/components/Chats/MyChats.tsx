@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { setSelectedChat } from "../../redux/slices/chatSlice";
+import { setChats, setSelectedChat } from "../../redux/slices/chatSlice";
 import { getChats } from "../../services/chat";
 import { IChat } from "../../services/chat.type";
 import ChatItem from "./ChatItem";
@@ -12,7 +12,8 @@ export default function MyChats() {
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
-  const [chats, setChats] = useState<Array<IChat>>([]);
+  // const [chats, setChats] = useState<Array<IChat>>([]);
+  const chats = useSelector((state: RootState) => state.chat.chats);
   const [selectId, setSelectId] = useState("");
 
   const handleSelectClick = (
@@ -28,7 +29,7 @@ export default function MyChats() {
   }, [selectedChat]);
 
   useEffect(() => {
-    getChats().then((chats) => setChats(chats));
+    getChats().then((chats) => dispatch(setChats(chats)));
   }, []);
 
   return (

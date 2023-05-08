@@ -63,6 +63,8 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] socket.io 文档 优化chatbox
 
+[TODO] 渲染逻辑有问题，发一条消息会有多个提醒
+
 ##### 待加强的功能
 
 [TODO] 数据校验

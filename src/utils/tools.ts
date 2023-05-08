@@ -5,6 +5,11 @@ export function exceptMeBetween2(users: Array<IUser>): Array<IUser>{
 	return users.filter((user) => user._id !== meId);
 }
 
+export function pickMeBetween2(users: Array<IUser>): Array<IUser>{
+	const meId = window.localStorage.getItem('userId');
+	return users.filter((user) => user._id === meId);
+}
+
 const HALF_DAY = 60*60*12*1000;
 export function timeTransform(timeISO8601: Date): string{
 	const timestamp = new Date(timeISO8601).getTime();

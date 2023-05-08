@@ -1,9 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IChat } from "../../services/chat.type";
-import { IUser } from "../../services/user.type";
+import { IMessage } from "../../services/message.type";
 
 export interface ChatState {
-	selectedChat: IChat
+	selectedChat: IChat;
+	chats: Array<IChat>;
+	receivedNewMessagesChats: Array<IChat>;
 }
 
 const initialState: ChatState = {
@@ -12,7 +14,9 @@ const initialState: ChatState = {
 		chatName: "",
 		isGroupChat: false,
 		users: []
-}
+	},
+	chats: [],
+	receivedNewMessagesChats: []
 }
 export const chatSliceName = 'chat'
 export const chatSlice = createSlice({
@@ -20,18 +24,58 @@ export const chatSlice = createSlice({
 	initialState,
 	reducers: {
 		setSelectedChat: (state, action: PayloadAction<IChat>) => {
-			const {payload} = action;
+			const {payload: selectedChat} = action;
 			return {
 				...state,
 				selectedChat: {
 					...state.selectedChat,
-					...payload
+					...selectedChat
 				}
+			}
+		},
+		setChats:(state, action: PayloadAction<Array<IChat>>) => {
+			const {payload: chats} = action;
+			return {
+				...state,
+				chats
+			}
+		},
+		updateLastestMessage: (state, action: PayloadAction<{id: string, newLastestMessage: IMessage}>) => {
+			const {id, newLastestMessage} = action.payload;
+			const updatedChat: IChat = {
+				...state.chats.find((chat) => chat._id === id),
+				latestMessage: newLastestMessage
+			};
+			return {
+				...state,
+				chats: [
+					updatedChat,
+					...state.chats.filter((chat) => chat._id !== id),
+				]
+			}
+		},
+		addReceivedNewMessagesChats: (state, action: PayloadAction<IChat>) => {
+			const { payload: chat} = action;
+			return {
+				...state,
+				receivedNewMessagesChats: [
+					...state.receivedNewMessagesChats,
+					chat
+				]
+			}
+		},
+		removeReceivedNewMessagesChats: (state, action: PayloadAction<IChat>) => {
+			const{ payload: removedchat} = action;
+			return {
+				...state,
+				receivedNewMessagesChats: [
+					...state.receivedNewMessagesChats.filter((chat) => chat._id !== removedchat._id)
+				]
 			}
 		}
 	}
 })
 
-export const { setSelectedChat } = chatSlice.actions;
+export const { setSelectedChat, setChats, updateLastestMessage, addReceivedNewMessagesChats, removeReceivedNewMessagesChats } = chatSlice.actions;
 
 export default chatSlice.reducer;

@@ -12,13 +12,16 @@ import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IChat } from "../../services/chat.type";
 import { exceptMeBetween2 } from "../../utils/tools";
-import { setSelectedChat } from "../../redux/slices/chatSlice";
+import {
+  addReceivedNewMessagesChats,
+  setSelectedChat,
+  updateLastestMessage,
+} from "../../redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
 
 const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
   selectedChatCompare: IChat | null;
-
 export default function ChatBox() {
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
@@ -33,13 +36,23 @@ export default function ChatBox() {
   const handleSendClick = () => {
     if (!newMessage) return;
     setNewMessage("");
+    console.log("selectedChat._id", selectedChat._id);
     sendMessage(selectedChat._id, newMessage).then((newMessage) => {
+      // 新消息发出
       socket.emit("new message", newMessage);
       setMessages([...messages, newMessage]);
+      dispatch(
+        updateLastestMessage({
+          id: selectedChat._id,
+          newLastestMessage: newMessage,
+        })
+      );
     });
   };
+
   const handleReturnArrowClick = () => {
     dispatch(setSelectedChat({} as IChat));
+    // TODO 改良返回逻辑
     navigate(0);
   };
 
@@ -47,6 +60,7 @@ export default function ChatBox() {
     e.key === "Enter" && handleSendClick();
   };
 
+  // 同步聊天室改变
   useEffect(() => {
     setIsLoading(true);
     getAllMessage(selectedChat._id).then((messages) => {
@@ -55,8 +69,12 @@ export default function ChatBox() {
       socket.emit("join chat", selectedChat._id);
       selectedChatCompare = selectedChat;
     });
+    return () => {
+      setNewMessage("");
+    };
   }, [selectedChat._id]);
 
+  //
   useEffect(() => {
     socket = io(ENDPOINT);
     const userId = window.localStorage.getItem("userId");
@@ -68,11 +86,18 @@ export default function ChatBox() {
 
   useEffect(() => {
     socket.on("message received", (newMessageReceived) => {
+      dispatch(
+        updateLastestMessage({
+          id: newMessageReceived.chat._id,
+          newLastestMessage: newMessageReceived,
+        })
+      );
       if (
         !selectedChatCompare ||
-        selectedChat._id !== newMessageReceived.chat._id
+        selectedChatCompare !== newMessageReceived.chat._id
       ) {
         // noti
+        dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
       } else {
         setMessages([...messages, newMessageReceived]);
       }
@@ -131,7 +156,9 @@ export default function ChatBox() {
         </div>
       </div>
       {selectedChat.isGroupChat && <UpdateGroupModal />}
-      {!selectedChat.isGroupChat && <ProfileModal />}
+      {!selectedChat.isGroupChat && (
+        <ProfileModal selectedUser={exceptMeBetween2(selectedChat.users)[0]} />
+      )}
     </div>
   );
 }

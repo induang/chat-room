@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
 import { defaultPicUrl } from "../consts";
-import { RootState } from "../redux";
-import { exceptMeBetween2 } from "../utils/tools";
+import { IUser } from "../services/user.type";
 
-export default function ProfileModal() {
-  const { users } = useSelector((state: RootState) => state.chat.selectedChat);
-  const selectedUser = exceptMeBetween2(users)[0];
+export default function ProfileModal({
+  selectedUser,
+}: {
+  selectedUser: IUser;
+}) {
   return (
     <>
       <input
@@ -19,7 +19,7 @@ export default function ProfileModal() {
           htmlFor=""
         >
           <div className="profile-pic w-48 m-auto mt-8">
-            <img src={selectedUser.pic || defaultPicUrl} className="rounded" />
+            <img src={selectedUser?.pic || defaultPicUrl} className="rounded" />
           </div>
           <div className="profile-details text-3xl text-center">
             <div className="name text-primary">{selectedUser.name}</div>
