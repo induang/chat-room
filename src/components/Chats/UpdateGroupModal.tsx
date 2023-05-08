@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { IUser } from "../../services/user.type";
 import UserItem from "../UserItem";
 import closeIcon from "../../assets/close.png";
@@ -72,7 +72,13 @@ export default function UpdateGroupModal() {
         navigate(0);
       });
   };
-  useEffect(() => {
+  // useEffect(() => {
+  //   console.log("effect run.");
+  //   queryUsers();
+  // }, [keyword, chat.users]);
+
+  useLayoutEffect(() => {
+    console.log("effect run.");
     queryUsers();
   }, [keyword, chat.users]);
 

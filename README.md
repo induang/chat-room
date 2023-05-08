@@ -71,9 +71,9 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] private router
 
-[TODO] 更加响应式
 
-[TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常， 尤其是群聊修改框
+
+
 
 [TODO] 消息提醒
 
@@ -82,8 +82,15 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 [TODO] 选择用户防抖
 
 ##### 完成
-[COMP][TODO] 字体
-[COMP][TODO] 密码眼睛 tabindex改为-1
-[COMP][TODO] 聊天框的时间
+[COMP][TODO] 字体 work sans
+
+[COMP][TODO] 密码眼睛 tabindex改为-1,方便用户使用tab
+
+[COMP][TODO] 聊天框的时间 与当前时间超过一天则显示日期+时间，超过五分钟重新打时间标签
+
 [COMP][TODO] daisyUI: drawer 不能占据全屏拉出来
 						 按照官网的结构套好，页面内容在 drawer-content 下
+
+[COMP][TODO] 更加响应式,适配了移动端
+
+[COMP][TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常， 尤其是群聊修改框  

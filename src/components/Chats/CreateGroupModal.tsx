@@ -14,6 +14,7 @@ export default function CreateGroupModal() {
   const [keyword, setKeyword] = useState<string>("");
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>([]);
   const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSelectUserClick = (user: IUser) => {
     if (!selectedUsers.includes(user))
@@ -25,6 +26,10 @@ export default function CreateGroupModal() {
       selectedUsers.filter((user) => user._id !== removeduser._id)
     );
   };
+
+  // useEffect(() => {
+  //   console.log("redner");
+  // }, []);
 
   const handleCreateChatClick = () => {
     createGroupChat(
@@ -52,7 +57,16 @@ export default function CreateGroupModal() {
 
   return (
     <>
-      <input type="checkbox" id="create-group-modal" className="modal-toggle" />
+      <input
+        type="checkbox"
+        id="create-group-modal"
+        className="modal-toggle"
+        onClick={() => {
+          console.log("clicked!");
+          setIsOpen(!isOpen);
+        }}
+        checked={isOpen}
+      />
       <label htmlFor="create-group-modal" className="modal cursor-pointer">
         <label className="modal-box relative" htmlFor="">
           <div className="modal-box-content flex flex-col gap-y-2">
@@ -72,14 +86,14 @@ export default function CreateGroupModal() {
             />
             <div className="selected-user-badge-list flex flex-wrap gap-1">
               {selectedUsers?.map((user) => (
-                <label
-                  className="badge badge-primary badge-md"
+                <div
                   key={user._id}
+                  className="badge badge-primary badge-md"
                   onClick={() => handleRemoveClick(user)}
                 >
                   {user.name}
                   <img src={closeIcon} className="w-2 ml-1" />
-                </label>
+                </div>
               ))}
             </div>
             <div className="searched-user-list">
