@@ -21,7 +21,7 @@ export default function UpdateGroupModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>();
-  const [chatName, setChatName] = useState<string>(chat.chatName);
+  const [chatName, setChatName] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
   const [updateNameDisabled, setUpdateNameDisabled] = useState(false);
   const [leaveDisabled, setLeaveDisabled] = useState(false);
@@ -72,14 +72,19 @@ export default function UpdateGroupModal() {
         navigate(0);
       });
   };
-  // useEffect(() => {
-  //   console.log("effect run.");
-  //   queryUsers();
-  // }, [keyword, chat.users]);
 
   useLayoutEffect(() => {
     queryUsers();
   }, [keyword, chat.users]);
+
+  useEffect(() => {
+    // 初始化所有状态 模态框的逻辑一般是关闭就
+    setChatName(chat.chatName);
+    setKeyword("");
+    setSearchedUsers([]);
+    setUpdateNameDisabled(false);
+    setLeaveDisabled(false);
+  }, [chat._id]);
 
   return (
     <>
