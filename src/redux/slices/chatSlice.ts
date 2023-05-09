@@ -58,13 +58,15 @@ export const chatSlice = createSlice({
 		},
 		addReceivedNewMessagesChats: (state, action: PayloadAction<IChat>) => {
 			const { payload: chat} = action;
-			return {
-				...state,
-				receivedNewMessagesChats: [
-					...state.receivedNewMessagesChats,
-					chat
-				]
-			}
+			const isFound = state.receivedNewMessagesChats.findIndex((item) => item._id === chat._id);
+			if(isFound === -1)
+				return {
+					...state,
+					receivedNewMessagesChats: [
+						...state.receivedNewMessagesChats,
+						chat
+					]
+				}
 		},
 		removeReceivedNewMessagesChats: (state, action: PayloadAction<IChat>) => {
 			const{ payload: removedchat} = action;

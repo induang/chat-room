@@ -23,7 +23,6 @@ const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
   selectedChatCompare: IChat | null;
 export default function ChatBox() {
-  console.log("component run");
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
@@ -33,7 +32,6 @@ export default function ChatBox() {
   const [messages, setMessages] = useState<Array<IMessage>>([]);
   const [socketConnect, setSocketConnect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const scrollAnchor = useRef<HTMLDivElement>(null);
 
   const handleSendClick = () => {
     if (!newMessage) return;
@@ -65,36 +63,36 @@ export default function ChatBox() {
 
   // 同步聊天室改变
   useEffect(() => {
-    console.log("SYNC effect run");
     setIsLoading(true);
     getAllMessage(selectedChat._id).then((messages) => {
       setMessages(messages);
       setIsLoading(false);
       socket.emit("join chat", selectedChat._id);
       selectedChatCompare = selectedChat;
-      scrollAnchor.current?.scrollIntoView();
     });
     return () => {
       setNewMessage("");
       socket.emit("leave chat", selectedChat._id);
-      socket.off("message received");
     };
   }, [selectedChat._id]);
 
   useEffect(() => {
-    console.log("INITIAL effect run");
     socket = io(ENDPOINT);
     const userId = window.localStorage.getItem("userId");
     socket.emit("setup", { _id: userId });
     socket.on("connected", () => {
       setSocketConnect(true);
     });
+    return () => {
+      socket.emit("leave chat", selectedChat._id);
+      socket.off("message received");
+      socket.off("connected");
+      socket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
-    console.log("NEW MESSAGE effect run ...");
     socket.on("message received", (newMessageReceived) => {
-      console.log("listener run...");
       dispatch(
         updateLastestMessage({
           id: newMessageReceived.chat._id,
@@ -105,14 +103,14 @@ export default function ChatBox() {
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
-        console.log("noti logic run");
-        // noti
-        // dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
+        dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
       } else {
-        console.log("set newMsaages");
         setMessages([...messages, newMessageReceived]);
       }
     });
+    return () => {
+      socket.off("message received");
+    };
   });
 
   return (
@@ -148,7 +146,6 @@ export default function ChatBox() {
         ) : (
           <></>
         )}
-        <div id="scroll-anchor" ref={scrollAnchor}></div>
       </div>
       <div className="chat-box-message-sender basis-16 m-2">
         <div className="form-control">
