@@ -5,19 +5,20 @@ import { IMessage } from "../../services/message.type";
 import { timeTransform } from "../../utils/tools";
 
 interface ChatBubbleProps {
+  userId: string;
   message: IMessage;
   isFirst?: boolean;
   isLast?: boolean;
 }
 
 export default function ChatBubble({
+  userId,
   message,
   isFirst = true,
   isLast = true,
 }: ChatBubbleProps) {
-  const userId = window.localStorage.getItem("userId");
   const { _id: senderId } = message.sender;
-  // 考虑伪类选择器去掉气泡小尾巴
+
   return (
     <>
       <div

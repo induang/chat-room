@@ -23,6 +23,7 @@ const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
   selectedChatCompare: IChat | null;
 export default function ChatBox() {
+  const userId = window.localStorage.getItem("userId") || "";
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
@@ -78,7 +79,7 @@ export default function ChatBox() {
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    const userId = window.localStorage.getItem("userId");
+
     socket.emit("setup", { _id: userId });
     socket.on("connected", () => {
       setSocketConnect(true);
@@ -142,7 +143,7 @@ export default function ChatBox() {
       </div>
       <div className="chat-box-messages flex-grow bg-base-100/80 shadow-inner rounded m-2 p-2 overflow-y-scroll">
         {!isLoading && messages?.length ? (
-          <MessagesShower messages={messages} />
+          <MessagesShower userId={userId} messages={messages} />
         ) : (
           <></>
         )}

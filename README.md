@@ -57,6 +57,7 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 
 
 
+
 ##### 存在的问题
 
 [TODO] 可能是模式问题： 群聊修改modal框总是预先加载被搜索的用户，按想法应该是不加载的
@@ -64,10 +65,6 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 [TODO] createChatModal 移除用户 闪退
 
 [TODO] socket.io 文档 优化chatbox
-
-[TODO] 渲染逻辑有问题，发一条消息会有多个提醒
-
-[TODO] drawer里的关闭不是相对于屏幕固定的
 
 ##### 待加强的功能
 
@@ -77,11 +74,11 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 
 [TODO] private router
 
-[TODO] 消息提醒
-
 [TODO] 聪明的错误提醒
 
 [TODO] 选择用户防抖
+
+[TODO] 接受消息的逻辑提取到全局上
 
 ##### 完成
 [COMP][TODO] 字体 work sans
@@ -103,5 +100,11 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 [COMP][TODO] 发新消息 my chats不及时更新 把chats放进状态管理了
 
 [COMP][TODO] 移动端 聊天框回退不应该是刷新式的
+
+[COMP][TODO] 渲染逻辑有问题，发一条消息会有多个提醒 及时注销message received的监听，避免重复注册 但是应该提取出来称为全局的，事件就不会因为组件的重新渲染而重新反复注册 且群聊的消息接受和个人的消息接受应该分开 namespace
+
+[COMP][TODO] 消息提醒
+
+[COMP][TODO] drawer里的关闭不是相对于屏幕固定的 样式库的问题，最终的解决办法是把关闭按钮放到搜索框左侧
 
 [UNCOMP][TODO] daisyUI countdown failed 不管这个了，用不到

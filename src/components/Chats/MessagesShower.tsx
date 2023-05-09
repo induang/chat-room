@@ -1,12 +1,15 @@
+import React from "react";
 import { useEffect, useRef } from "react";
 import { IMessage } from "../../services/message.type";
 import { sameSenderAsAfter, sameSenderAsPre } from "../../utils/chatLogic";
 import ChatBubble from "./ChatBubble";
 import "./messagesShower.css";
 
-export default function MessagesShower({
+export default React.memo(function MessagesShower({
+  userId,
   messages,
 }: {
+  userId: string;
   messages: Array<IMessage>;
 }) {
   const scrollAnchor = useRef<HTMLDivElement>(null);
@@ -20,6 +23,7 @@ export default function MessagesShower({
           if (sameSenderAsAfter(i, messages)) {
             return (
               <ChatBubble
+                userId={userId}
                 key={message._id}
                 message={message}
                 isFirst={false}
@@ -28,16 +32,28 @@ export default function MessagesShower({
             );
           } else {
             return (
-              <ChatBubble key={message._id} message={message} isFirst={false} />
+              <ChatBubble
+                userId={userId}
+                key={message._id}
+                message={message}
+                isFirst={false}
+              />
             );
           }
         } else {
           if (sameSenderAsAfter(i, messages)) {
             return (
-              <ChatBubble key={message._id} message={message} isLast={false} />
+              <ChatBubble
+                userId={userId}
+                key={message._id}
+                message={message}
+                isLast={false}
+              />
             );
           } else {
-            return <ChatBubble key={message._id} message={message} />;
+            return (
+              <ChatBubble userId={userId} key={message._id} message={message} />
+            );
           }
         }
       })}
@@ -45,4 +61,4 @@ export default function MessagesShower({
       <div id="scroll-anchor" ref={scrollAnchor}></div>
     </div>
   );
-}
+});
