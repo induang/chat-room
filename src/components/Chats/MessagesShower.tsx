@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { IMessage } from "../../services/message.type";
 import { sameSenderAsAfter, sameSenderAsPre } from "../../utils/chatLogic";
 import ChatBubble from "./ChatBubble";
@@ -8,6 +9,10 @@ export default function MessagesShower({
 }: {
   messages: Array<IMessage>;
 }) {
+  const scrollAnchor = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    scrollAnchor.current?.scrollIntoView();
+  }, []);
   return (
     <div id="messages-shower-board">
       {messages?.map((message, i, messages) => {
@@ -37,6 +42,7 @@ export default function MessagesShower({
         }
       })}
       <div id="anchor"></div>
+      <div id="scroll-anchor" ref={scrollAnchor}></div>
     </div>
   );
 }
