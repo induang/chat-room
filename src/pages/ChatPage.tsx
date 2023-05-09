@@ -3,15 +3,19 @@ import { useSelector } from "react-redux";
 import ChatBox from "../components/Chats/ChatBox";
 import EmptyChatBox from "../components/Chats/EmptyChatBox";
 import MyChats from "../components/Chats/MyChats";
+import UpdateGroupModal from "../components/Chats/UpdateGroupModal";
 import Drawer from "../components/Headers/Drawer";
 import DrawerToggle from "../components/Headers/DrawerToggle";
 import Header from "../components/Headers/Header";
+import ProfileModal from "../components/ProfileModal";
 import { RootState } from "../redux";
+import { exceptMeBetween2 } from "../utils/tools";
 
 export default function ChatPage() {
-  const { _id: chatId } = useSelector(
+  const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
+  const { _id: chatId } = selectedChat;
   return (
     <div className="drawer">
       <DrawerToggle />
@@ -42,6 +46,10 @@ export default function ChatPage() {
         </div>
       </div>
       <Drawer />
+      {selectedChat._id && selectedChat.isGroupChat && <UpdateGroupModal />}
+      {selectedChat._id && !selectedChat.isGroupChat && (
+        <ProfileModal selectedUser={exceptMeBetween2(selectedChat.users)[0]} />
+      )}
     </div>
   );
 }

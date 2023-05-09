@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import ProfileModal from "../ProfileModal";
-import UpdateGroupModal from "./UpdateGroupModal";
 import menuIcon from "../../assets/list.png";
 import arrowIcon from "../../assets/left-arrow-primary.png";
 import { getAllMessage, sendMessage } from "../../services/message";
@@ -18,6 +16,8 @@ import {
   updateLastestMessage,
 } from "../../redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
+import clsx from "clsx";
+import { useSocket } from "../../hooks/useSocket";
 
 const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
@@ -65,12 +65,15 @@ export default function ChatBox() {
   // 同步聊天室改变
   useEffect(() => {
     setIsLoading(true);
-    getAllMessage(selectedChat._id).then((messages) => {
-      setMessages(messages);
-      setIsLoading(false);
-      socket.emit("join chat", selectedChat._id);
-      selectedChatCompare = selectedChat;
-    });
+    getAllMessage(selectedChat._id)
+      .then((messages) => {
+        setMessages(messages);
+        socket.emit("join chat", selectedChat._id);
+        selectedChatCompare = selectedChat;
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
     return () => {
       setNewMessage("");
       socket.emit("leave chat", selectedChat._id);
@@ -83,6 +86,10 @@ export default function ChatBox() {
     socket.emit("setup", { _id: userId });
     socket.on("connected", () => {
       setSocketConnect(true);
+    });
+    socket.on("disconnect", () => {
+      console.log("disconnect");
+      setSocketConnect(false);
     });
     return () => {
       socket.emit("leave chat", selectedChat._id);
@@ -122,7 +129,12 @@ export default function ChatBox() {
           <img src={arrowIcon} className="w-8" />
         </span>
         {/* 名字 */}
-        <div className="chat-name text-xl sm:text-3xl text-primary truncate ml-2">
+        <div
+          className={clsx(
+            "chat-name text-xl sm:text-3xl truncate ml-2",
+            socketConnect ? "text-primary" : "text-slate-500"
+          )}
+        >
           {selectedChat.isGroupChat
             ? selectedChat.chatName
             : exceptMeBetween2(selectedChat.users)[0].name}
@@ -165,10 +177,6 @@ export default function ChatBox() {
           </div>
         </div>
       </div>
-      {selectedChat.isGroupChat && <UpdateGroupModal />}
-      {!selectedChat.isGroupChat && (
-        <ProfileModal selectedUser={exceptMeBetween2(selectedChat.users)[0]} />
-      )}
     </div>
   );
 }

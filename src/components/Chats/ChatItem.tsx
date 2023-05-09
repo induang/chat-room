@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import React from "react";
 import { IChat } from "../../services/chat.type";
 import { exceptMeBetween2 } from "../../utils/tools";
 import GroupChatPreofile from "./GroupChatProfile";
@@ -8,7 +9,10 @@ interface IChatItemProps {
   isActive: boolean;
 }
 
-export default function ChatItem({ chat, isActive }: IChatItemProps) {
+export default React.memo(function ChatItem({
+  chat,
+  isActive,
+}: IChatItemProps) {
   return (
     <div className="chat-item flex">
       <div className="chat-profile">
@@ -48,4 +52,4 @@ export default function ChatItem({ chat, isActive }: IChatItemProps) {
       </div>
     </div>
   );
-}
+});
