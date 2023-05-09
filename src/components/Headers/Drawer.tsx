@@ -33,11 +33,13 @@ export default function Drawer() {
   ) => {
     if (userItemDisable) return;
     setUserItemDisabled(true);
-    getOrCreateChat(userId).then((chat) => {
-      dispatch(setSelectedChat(chat));
-      setUserItemDisabled(false);
-      toggleLabelEle.current?.click();
-    });
+    getOrCreateChat(userId)
+      .then((chat) => {
+        dispatch(setSelectedChat(chat));
+        setUserItemDisabled(false);
+        toggleLabelEle.current?.click();
+      })
+      .finally(() => setUserItemDisabled(false));
   };
   return (
     <div className="drawer-side">
@@ -46,9 +48,14 @@ export default function Drawer() {
         htmlFor="chat-search-users-drawer"
         className="drawer-overlay"
       ></label>
-
       <ul className="menu w-full sm:w-96 p-4 bg-base-100 text-base-content">
         <div className="search-input input-group">
+          <label
+            htmlFor="chat-search-users-drawer"
+            className={clsx("btn btn-primary sm:hidden")}
+          >
+            <img src={closeIcon} className="w-4" />
+          </label>
           <input
             type="text"
             value={keyword}
@@ -76,24 +83,24 @@ export default function Drawer() {
         </div>
 
         <div className="users-list mt-2">
-          {searchResults?.map((user) => (
-            <li
-              key={user._id}
-              onClick={(event) => handleFetchChatClick(event, user._id)}
-              className={clsx(userItemDisable ? "disabled" : "")}
-            >
-              <a>
-                <UserItem user={user} />
-              </a>
-            </li>
-          ))}
+          {searchResults?.length ? (
+            searchResults?.map((user) => (
+              <li
+                key={user._id}
+                onClick={(event) => handleFetchChatClick(event, user._id)}
+                className={clsx(userItemDisable ? "disabled" : "")}
+              >
+                <a>
+                  <UserItem user={user} />
+                </a>
+              </li>
+            ))
+          ) : (
+            <div className="text-center text-slate-300 text-xl sm:hidden">
+              Click X quit search
+            </div>
+          )}
         </div>
-        <label
-          htmlFor="chat-search-users-drawer"
-          className="btn btn-primary btn-circle sm:hidden fixed bottom-10 left-1/2 -ml-6 z-50"
-        >
-          <img src={closeIcon} className="w-4" />
-        </label>
       </ul>
     </div>
   );

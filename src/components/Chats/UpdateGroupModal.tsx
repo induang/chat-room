@@ -78,7 +78,6 @@ export default function UpdateGroupModal() {
   // }, [keyword, chat.users]);
 
   useLayoutEffect(() => {
-    console.log("effect run.");
     queryUsers();
   }, [keyword, chat.users]);
 

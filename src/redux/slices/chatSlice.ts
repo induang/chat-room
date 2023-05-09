@@ -42,8 +42,10 @@ export const chatSlice = createSlice({
 		},
 		updateLastestMessage: (state, action: PayloadAction<{id: string, newLastestMessage: IMessage}>) => {
 			const {id, newLastestMessage} = action.payload;
+			const foundChat = state.chats.find((chat) => chat._id === id);
+			if(!foundChat?._id) return state;
 			const updatedChat: IChat = {
-				...state.chats.find((chat) => chat._id === id),
+				...foundChat,
 				latestMessage: newLastestMessage
 			};
 			return {

@@ -1,7 +1,6 @@
 import clsx from "clsx";
 import { useSelector } from "react-redux";
 import ChatBox from "../components/Chats/ChatBox";
-import CreateGroupModal from "../components/Chats/CreateGroupModal";
 import EmptyChatBox from "../components/Chats/EmptyChatBox";
 import MyChats from "../components/Chats/MyChats";
 import Drawer from "../components/Headers/Drawer";
@@ -40,7 +39,6 @@ export default function ChatPage() {
               {chatId ? <ChatBox /> : <EmptyChatBox />}
             </div>
           </div>
-          <CreateGroupModal />
         </div>
       </div>
       <Drawer />

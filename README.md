@@ -50,8 +50,11 @@ https://github.com/ArnaudBarre/eslint-plugin-react-refresh
 
 [TODO] 刷新页面 不会导致noti丢失 navigate(0)
 
-[TODO] 聊天框默认滚动到最底部 且css属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
+[TODO] 聊天框默认滚动到最底部 
+https://bobbyhadz.com/blog/react-scroll-to-bottom
+且css属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
 https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
+
 
 
 ##### 存在的问题

@@ -23,6 +23,7 @@ const ENDPOINT = "http://localhost:5000";
 let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
   selectedChatCompare: IChat | null;
 export default function ChatBox() {
+  console.log("component run");
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
@@ -37,7 +38,6 @@ export default function ChatBox() {
   const handleSendClick = () => {
     if (!newMessage) return;
     setNewMessage("");
-    console.log("selectedChat._id", selectedChat._id);
     sendMessage(selectedChat._id, newMessage).then((newMessage) => {
       // 新消息发出
       socket.emit("new message", newMessage);
@@ -65,6 +65,7 @@ export default function ChatBox() {
 
   // 同步聊天室改变
   useEffect(() => {
+    console.log("SYNC effect run");
     setIsLoading(true);
     getAllMessage(selectedChat._id).then((messages) => {
       setMessages(messages);
@@ -75,21 +76,25 @@ export default function ChatBox() {
     });
     return () => {
       setNewMessage("");
+      socket.emit("leave chat", selectedChat._id);
+      socket.off("message received");
     };
   }, [selectedChat._id]);
 
-  //
   useEffect(() => {
+    console.log("INITIAL effect run");
     socket = io(ENDPOINT);
     const userId = window.localStorage.getItem("userId");
     socket.emit("setup", { _id: userId });
-    socket.on("connection", () => {
+    socket.on("connected", () => {
       setSocketConnect(true);
     });
   }, []);
 
   useEffect(() => {
+    console.log("NEW MESSAGE effect run ...");
     socket.on("message received", (newMessageReceived) => {
+      console.log("listener run...");
       dispatch(
         updateLastestMessage({
           id: newMessageReceived.chat._id,
@@ -100,6 +105,7 @@ export default function ChatBox() {
         !selectedChatCompare ||
         selectedChatCompare._id !== newMessageReceived.chat._id
       ) {
+        console.log("noti logic run");
         // noti
         // dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
       } else {
