@@ -25,6 +25,8 @@ socket 作为群聊的网络请求方式
 
 适配手机移动端
 
+socket 单例模式
+
 ##### 第一次应用或者遇到不熟练或者容易出错的地方
 
 [TODO] React组件子传父: 组件PasswordToggle
@@ -55,6 +57,8 @@ https://bobbyhadz.com/blog/react-scroll-to-bottom
 且css属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
 https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 
+[TODO] JS 单例模式
+https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-express-js-5ebb
 
 
 

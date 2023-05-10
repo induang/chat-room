@@ -17,11 +17,10 @@ import {
 } from "../../redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import { useSocket } from "../../hooks/useSocket";
+import SocketConnect from "../../services/socket";
 
 const ENDPOINT = "http://localhost:5000";
-let socket: Socket<DefaultEventsMap, DefaultEventsMap>,
-  selectedChatCompare: IChat | null;
+let selectedChatCompare: IChat | null;
 export default function ChatBox() {
   const userId = window.localStorage.getItem("userId") || "";
   const selectedChat = useSelector(
@@ -33,13 +32,13 @@ export default function ChatBox() {
   const [messages, setMessages] = useState<Array<IMessage>>([]);
   const [socketConnect, setSocketConnect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const socket = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
 
   const handleSendClick = () => {
     if (!newMessage) return;
     setNewMessage("");
     sendMessage(selectedChat._id, newMessage).then((newMessage) => {
-      // 新消息发出
-      socket.emit("new message", newMessage);
+      SocketConnect.emitter("new message", newMessage);
       setMessages([...messages, newMessage]);
       dispatch(
         updateLastestMessage({
@@ -68,7 +67,7 @@ export default function ChatBox() {
     getAllMessage(selectedChat._id)
       .then((messages) => {
         setMessages(messages);
-        socket.emit("join chat", selectedChat._id);
+        SocketConnect.connectToChat(selectedChat._id);
         selectedChatCompare = selectedChat;
       })
       .finally(() => {
@@ -76,34 +75,24 @@ export default function ChatBox() {
       });
     return () => {
       setNewMessage("");
-      socket.emit("leave chat", selectedChat._id);
+      SocketConnect.disconnectToChat(selectedChat._id);
     };
   }, [selectedChat._id]);
 
-  useEffect(() => {
-    socket = io(ENDPOINT);
-
-    socket.emit("setup", { _id: userId });
-    socket.on("connected", () => {
-      setSocketConnect(true);
-    });
-    socket.on("disconnect", () => {
-      console.log("disconnect");
-      setSocketConnect(false);
-    });
-    return () => {
-      socket.emit("leave chat", selectedChat._id);
-      socket.off("message received");
-      socket.off("connected");
-      socket.disconnect();
-    };
-  }, []);
+  // useEffect(() => {
+  //   socket.current = SocketConnect.getInstance(ENDPOINT);
+  //   SocketConnect.connectToService(userId);
+  //   SocketConnect.ListenOnConnectStatus();
+  //   return () => {
+  //     SocketConnect.clearListenerOfConnectStatus();
+  //   };
+  // }, []);
 
   useEffect(() => {
-    socket.on("message received", (newMessageReceived) => {
+    SocketConnect.ListenOnMessages((newMessageReceived: IMessage) => {
       dispatch(
         updateLastestMessage({
-          id: newMessageReceived.chat._id,
+          id: newMessageReceived?.chat._id,
           newLastestMessage: newMessageReceived,
         })
       );
@@ -117,7 +106,7 @@ export default function ChatBox() {
       }
     });
     return () => {
-      socket.off("message received");
+      SocketConnect.clearListenerOfMessages;
     };
   });
 
@@ -129,12 +118,7 @@ export default function ChatBox() {
           <img src={arrowIcon} className="w-8" />
         </span>
         {/* 名字 */}
-        <div
-          className={clsx(
-            "chat-name text-xl sm:text-3xl truncate ml-2",
-            socketConnect ? "text-primary" : "text-slate-500"
-          )}
-        >
+        <div className="chat-name text-xl sm:text-3xl truncate ml-2 text-primary">
           {selectedChat.isGroupChat
             ? selectedChat.chatName
             : exceptMeBetween2(selectedChat.users)[0].name}
