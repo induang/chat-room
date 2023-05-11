@@ -12,7 +12,6 @@ export default function MyChats() {
   const selectedChat = useSelector(
     (state: RootState) => state.chat.selectedChat
   );
-  // const [chats, setChats] = useState<Array<IChat>>([]);
   const chats = useSelector((state: RootState) => state.chat.chats);
   const [selectId, setSelectId] = useState("");
 

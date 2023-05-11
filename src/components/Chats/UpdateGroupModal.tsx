@@ -66,11 +66,12 @@ export default function UpdateGroupModal() {
       navigate("/");
     }
     loggerId &&
-      removeMemberFromChat(chat._id, loggerId).then(() => {
-        // setLeaveDisabled(false);
-        noti({ type: "success", message: "Leave successful." });
-        navigate(0);
-      });
+      removeMemberFromChat(chat._id, loggerId)
+        .then(() => {
+          noti({ type: "success", message: "Leave successful." });
+          navigate(0);
+        })
+        .finally(() => setLeaveDisabled(false));
   };
 
   useLayoutEffect(() => {
@@ -78,7 +79,7 @@ export default function UpdateGroupModal() {
   }, [keyword, chat.users]);
 
   useEffect(() => {
-    // 初始化所有状态 模态框的逻辑一般是关闭就
+    // 初始化所有状态 模态框的逻辑一般是关闭就卸载的，这个样式库的modal不是
     setChatName(chat.chatName);
     setKeyword("");
     setSearchedUsers([]);

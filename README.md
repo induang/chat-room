@@ -12,6 +12,8 @@
 
 使用 socket.io 实现实时聊天网络请求
 
+使用 yup进行数据校验
+
 ##### 功能点：
 验证邮箱的真实性；
 
@@ -19,9 +21,7 @@
 
 点击头像查看登录用户的profile和登出
 
-http作为一对一聊天的网络请求方式
-
-socket 作为群聊的网络请求方式
+http + socket 作为聊天的网络请求方式
 
 适配手机移动端
 
@@ -61,8 +61,7 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-express-js-5ebb
 
 [TODO] Cannot read properties of undefined (reading 'getFieldProps')
-
-
+导入错了，应该导入使用formik包围的组件
 
 ##### 存在的问题
 
@@ -86,9 +85,7 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 [TODO] 选择用户防抖
 
-[TODO] MessagesShower 防抖渲染
-
-[TODO] 样式分开 scss
+[TODO] MessagesShower 防抖渲染 HOC 防抖 限制消息条数
 
 [TODO] 接受消息的逻辑提取到全局上
 

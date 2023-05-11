@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { FieldHookConfig, useField } from "formik";
-import VerifyCodeSendBTN from "../Authentications/VerifyCodeSendBTN";
+import VerifyCodeSendBTN from "./VerifyCodeSendBTN";
 
 interface IInputFieldProps {
   label: string;

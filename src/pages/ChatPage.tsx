@@ -19,6 +19,7 @@ import {
   addReceivedNewMessagesChats,
   updateLastestMessage,
 } from "../redux/slices/chatSlice";
+import CreateGroupModal from "../components/Chats/CreateGroupModal";
 
 const ENDPOINT = "http://localhost:5000";
 export default function ChatPage() {
@@ -50,7 +51,7 @@ export default function ChatPage() {
       dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
     });
     return () => {
-      SocketConnect.clearListenerOfMessages;
+      SocketConnect.clearListenerOfMessages();
     };
   });
 
@@ -84,6 +85,7 @@ export default function ChatPage() {
         </div>
       </div>
       <Drawer />
+      <CreateGroupModal />
       {selectedChat._id && selectedChat.isGroupChat && <UpdateGroupModal />}
       {selectedChat._id && !selectedChat.isGroupChat && (
         <ProfileModal selectedUser={exceptMeBetween2(selectedChat.users)[0]} />
