@@ -60,6 +60,8 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 [TODO] JS 单例模式
 https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-express-js-5ebb
 
+[TODO] Cannot read properties of undefined (reading 'getFieldProps')
+
 
 
 ##### 存在的问题
@@ -84,7 +86,13 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 [TODO] 选择用户防抖
 
+[TODO] MessagesShower 防抖渲染
+
+[TODO] 样式分开 scss
+
 [TODO] 接受消息的逻辑提取到全局上
+
+
 
 ##### 完成
 [COMP][TODO] 字体 work sans

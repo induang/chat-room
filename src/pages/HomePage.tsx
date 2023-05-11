@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
-import Login from "../components/Authentications/Login";
-import Registration from "../components/Authentications/Registration";
+import LoginForm from "../components/Authentications/Login";
+import RegistrationForm from "../components/Authentications/Registration";
 import { APP_NAME } from "../consts";
 
 export default function HomePage() {
@@ -44,8 +44,8 @@ export default function HomePage() {
             </a>
           </div>
           <div className="tabs-panel">
-            <Login show={loginShow} />
-            <Registration show={registerShow} />
+            <LoginForm show={loginShow} />
+            <RegistrationForm show={registerShow} />
           </div>
         </div>
       </div>

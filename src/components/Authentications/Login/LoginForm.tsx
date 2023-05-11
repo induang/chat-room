@@ -1,18 +1,26 @@
 import clsx from "clsx";
+import { FormikFormProps, FormikValues } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../services/auth";
-import noti from "../../utils/noti";
-import PasswordToggle from "./PasswordToggle";
+import { login } from "../../../services/auth";
+import noti from "../../../utils/noti";
+import InputField from "../../common/InputField";
+import PasswordField from "../../common/PasswordField";
 
-export default function Login({ show }: { show: boolean }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [disabled, setDisabled] = useState(false);
+export interface ILoginFormProps {
+  show: Boolean;
+}
+
+export default function LoginForm(
+  props: FormikFormProps & FormikValues & ILoginFormProps
+) {
+  const { show, values } = props;
   const navigate = useNavigate();
+  const [disabled, setDisabled] = useState(false);
 
   const handleLoginClick = async () => {
     setDisabled(true);
+    const { email, password } = values;
     login({ email, password })
       .then((res) => {
         const { name, pic, _id } = res;
@@ -24,25 +32,20 @@ export default function Login({ show }: { show: boolean }) {
       })
       .finally(() => setDisabled(false));
   };
+
   return (
-    <div className={clsx("login-tab-page", show ? "" : "hidden")}>
+    <div className={clsx("login-tab-page", show || "hidden")}>
       <div className="form-control">
-        <label className="label">
-          <span className="label-text text-xl font-medium">Email:</span>
-        </label>
-        <input
-          tabIndex={0}
-          type="text"
-          className="input input-bordered"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <InputField name="email" label="Email" />
       </div>
-      <PasswordToggle labelText="Password" getPasswordChange={setPassword} />
+      <div className="form-control">
+        <PasswordField name="password" label="Password" />
+      </div>
+
       <button
         className={clsx(
           "btn btn-block btn-primary mt-10",
-          disabled ? "btn-disabled" : ""
+          !disabled || "btn-disabled"
         )}
         onClick={handleLoginClick}
       >

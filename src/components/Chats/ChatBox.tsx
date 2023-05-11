@@ -79,15 +79,6 @@ export default function ChatBox() {
     };
   }, [selectedChat._id]);
 
-  // useEffect(() => {
-  //   socket.current = SocketConnect.getInstance(ENDPOINT);
-  //   SocketConnect.connectToService(userId);
-  //   SocketConnect.ListenOnConnectStatus();
-  //   return () => {
-  //     SocketConnect.clearListenerOfConnectStatus();
-  //   };
-  // }, []);
-
   useEffect(() => {
     SocketConnect.ListenOnMessages((newMessageReceived: IMessage) => {
       dispatch(
@@ -106,7 +97,7 @@ export default function ChatBox() {
       }
     });
     return () => {
-      SocketConnect.clearListenerOfMessages;
+      SocketConnect.clearListenerOfMessages();
     };
   });
 
