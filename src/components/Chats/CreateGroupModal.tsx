@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../services/user.type";
 import closeIcon from "../../assets/close.png";
@@ -8,31 +8,42 @@ import { getUserList } from "../../services/user";
 import { IDStringReducer } from "../../utils/tools";
 import { createGroupChat } from "../../services/chat";
 import noti from "../../utils/noti";
+import { RootState } from "../../redux";
+import {
+  addNewGroupChatUsers,
+  removeNewGroupChatUsers,
+} from "../../redux/slices/chatSlice";
 
 export default function CreateGroupModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>([]);
-  const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
+  const newChat = useSelector((state: RootState) => state.chat.newGroupChat);
+  // const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
   const [chatName, setChatName] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
 
   const handleSelectUserClick = (user: IUser) => {
-    setSelectedUsers([...selectedUsers, user]);
+    // setSelectedUsers([...selectedUsers, user]);
+    dispatch(addNewGroupChatUsers(user));
   };
 
   const handleRemoveClick = (user: IUser) => {
-    console.log("click + ", user.name);
+    // console.log("click + ", user.name);
     // const filteredUsers = selectedUsers.filter((item) => item._id !== user._id);
-    // setSelectedUsers(filteredUsers);
+    // setSelectedUsers([...filteredUsers]);
+    dispatch(removeNewGroupChatUsers(user));
   };
 
   const handleCreateChatClick = () => {
     createGroupChat(
       chatName,
-      selectedUsers.map((user) => user._id)
+      newChat.users.map((user) => user._id)
     ).then(() => {
-      noti({ type: "success", message: `${chatName} create successful.` });
+      noti({
+        type: "success",
+        message: `${chatName} create successful.`,
+      });
       navigate(0);
     });
   };
@@ -41,7 +52,7 @@ export default function CreateGroupModal() {
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) => IDStringReducer(selectedUsers).indexOf(user._id) === -1
+          (user) => IDStringReducer(newChat.users).indexOf(user._id) === -1
         )
       );
     });
@@ -49,7 +60,7 @@ export default function CreateGroupModal() {
 
   useLayoutEffect(() => {
     queryUsers();
-  }, [keyword, selectedUsers]);
+  }, [keyword, newChat.users]);
 
   return (
     <>
@@ -64,17 +75,16 @@ export default function CreateGroupModal() {
               value={chatName}
               onChange={(e) => setChatName(e.target.value)}
             />
-
             <div className="selected-user-badge-list flex flex-wrap gap-1">
-              {selectedUsers?.map((user) => (
-                <label
+              {newChat.users?.map((user) => (
+                <div
                   key={user._id}
                   className="badge badge-primary badge-md"
                   onClick={() => handleRemoveClick(user)}
                 >
                   {user.name}
                   <img src={closeIcon} className="w-2 ml-1" />
-                </label>
+                </div>
               ))}
             </div>
           </div>

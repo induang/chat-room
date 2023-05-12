@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IChat } from "../../services/chat.type";
+import { IChat, INewChat } from "../../services/chat.type";
 import { IMessage } from "../../services/message.type";
+import { IUser } from "../../services/user.type";
 
 export interface ChatState {
 	selectedChat: IChat;
 	chats: Array<IChat>;
 	receivedNewMessagesChats: Array<IChat>;
+	newGroupChat: INewChat;
 }
 
 const initialState: ChatState = {
@@ -16,7 +18,11 @@ const initialState: ChatState = {
 		users: []
 	},
 	chats: [],
-	receivedNewMessagesChats: []
+	receivedNewMessagesChats: [],
+	newGroupChat: {
+		chatName: "",
+		users: []
+	}
 }
 export const chatSliceName = 'chat'
 export const chatSlice = createSlice({
@@ -76,10 +82,35 @@ export const chatSlice = createSlice({
 					...state.receivedNewMessagesChats.filter((chat) => chat._id !== removedchat._id)
 				]
 			}
-		}
+		},
+		addNewGroupChatUsers: (state, action: PayloadAction<IUser>) => {
+			const { payload: newUser} = action;
+			return {
+				...state,
+				newGroupChat: {
+					...state.newGroupChat,
+					users: [
+						...state.newGroupChat.users,
+						newUser
+					]
+				}
+			}
+		},
+		removeNewGroupChatUsers: (state, action: PayloadAction<IUser>) => {
+			const { payload: removedUser } = action;
+			return {
+				...state,
+				newGroupChat: {
+					...state.newGroupChat,
+					users: [
+						...state.newGroupChat.users.filter(user => user._id !== removedUser._id)
+					]
+				}
+			}
+		},
 	}
 })
 
-export const { setSelectedChat, setChats, updateLastestMessage, addReceivedNewMessagesChats, removeReceivedNewMessagesChats } = chatSlice.actions;
+export const { setSelectedChat, setChats, updateLastestMessage, addReceivedNewMessagesChats, removeReceivedNewMessagesChats, addNewGroupChatUsers, removeNewGroupChatUsers } = chatSlice.actions;
 
 export default chatSlice.reducer;

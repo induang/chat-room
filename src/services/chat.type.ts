@@ -9,3 +9,8 @@ export interface IChat {
 	groupAdmin?: IUser;
 	latestMessage?: IMessage;
 }
+
+export interface INewChat {
+	chatName: string;
+	users: Array<IUser>;
+}

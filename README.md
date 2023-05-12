@@ -73,7 +73,7 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 ##### 待加强的功能
 
-[TODO] 关键词搜索出来的用户为空应该有提醒
+
 
 [TODO] updateModal 最好只在需要的需要挂载
 
@@ -83,13 +83,9 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 [TODO] 聪明的错误提醒
 
-[TODO] 选择用户防抖
-
 [TODO] MessagesShower 防抖渲染 HOC 防抖 限制消息条数
 
 [TODO] 接受消息的逻辑提取到全局上
-
-
 
 ##### 完成
 [COMP][TODO] 字体 work sans
@@ -118,4 +114,8 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 
 [COMP][TODO] drawer里的关闭不是相对于屏幕固定的 样式库的问题，最终的解决办法是把关闭按钮放到搜索框左侧
 
+[COMP][TODO] 关键词搜索出来的用户为空应该有提醒
+
 [UNCOMP][TODO] daisyUI countdown failed 不管这个了，用不到
+
+[UNCOMP][TODO] 选择用户防抖 还是应该服务端来控制，前端防抖节流里遇到网络慢还是异常

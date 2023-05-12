@@ -14,7 +14,7 @@ import { setSelectedChat } from "../../redux/slices/chatSlice";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import { IDStringReducer } from "../../utils/tools";
+import { debounce, IDStringReducer, trottled } from "../../utils/tools";
 
 export default function UpdateGroupModal() {
   const chat = useSelector((state: RootState) => state.chat.selectedChat);
@@ -25,6 +25,7 @@ export default function UpdateGroupModal() {
   const [keyword, setKeyword] = useState<string>("");
   const [updateNameDisabled, setUpdateNameDisabled] = useState(false);
   const [leaveDisabled, setLeaveDisabled] = useState(false);
+  const [menuDisabled, setMenuDisabled] = useState(false);
   // TODO 实现 防抖
 
   const queryUsers = () => {
@@ -44,9 +45,15 @@ export default function UpdateGroupModal() {
   };
 
   const handleSelectUserClick = (userId: string) => {
-    addMemberToChat(chat._id, userId).then((chat) => {
-      dispatch(setSelectedChat(chat));
-    });
+    console.log("run...");
+    setMenuDisabled(true);
+    addMemberToChat(chat._id, userId)
+      .then((chat) => {
+        dispatch(setSelectedChat(chat));
+      })
+      .finally(() => {
+        setMenuDisabled(false);
+      });
   };
 
   const handleUpdateChatNameClick = () => {
@@ -134,8 +141,12 @@ export default function UpdateGroupModal() {
               <ul className="menu w-full">
                 {searchedUsers?.map((user) => (
                   <li
+                    className={clsx(!menuDisabled || "disabled")}
                     key={user._id}
-                    onClick={() => handleSelectUserClick(user._id)}
+                    onClick={trottled(
+                      () => handleSelectUserClick(user._id),
+                      1500
+                    )}
                   >
                     <a>
                       <UserItem user={user} />
