@@ -14,10 +14,18 @@ export default function Drawer() {
   const [searchResults, setSearchResults] = useState<Array<IUser>>();
   const [userItemDisable, setUserItemDisabled] = useState(false);
   const toggleLabelEle = useRef<HTMLLabelElement>(null);
+  const [userNoExistHint, setUserNoExistHint] = useState(false);
 
   const handleSearch = () => {
     setKeyword("");
-    getUserList(keyword).then((res) => setSearchResults(res));
+    getUserList(keyword).then((users) => {
+      if (users.length === 0) {
+        setUserNoExistHint(true);
+      } else {
+        setUserNoExistHint(false);
+      }
+      setSearchResults(users);
+    });
   };
 
   // 注册键盘enter键
@@ -96,9 +104,17 @@ export default function Drawer() {
               </li>
             ))
           ) : (
-            <div className="text-center text-slate-300 text-xl sm:hidden">
-              Click X quit search
-            </div>
+            <>
+              {!userNoExistHint ? (
+                <div className="text-center text-slate-300 text-xl sm:hidden">
+                  Click X quit search
+                </div>
+              ) : (
+                <div className="text-center text-slate-300 text-xl">
+                  No such users
+                </div>
+              )}
+            </>
           )}
         </div>
       </ul>
