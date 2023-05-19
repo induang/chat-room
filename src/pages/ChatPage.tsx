@@ -85,7 +85,6 @@ export default function ChatPage() {
         </div>
       </div>
       <Drawer />
-      <CreateGroupModal />
       {selectedChat._id && selectedChat.isGroupChat && <UpdateGroupModal />}
       {selectedChat._id && !selectedChat.isGroupChat && (
         <ProfileModal selectedUser={exceptMeBetween2(selectedChat.users)[0]} />

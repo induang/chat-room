@@ -8,37 +8,34 @@ import { getUserList } from "../../services/user";
 import { IDStringReducer } from "../../utils/tools";
 import { createGroupChat } from "../../services/chat";
 import noti from "../../utils/noti";
-import { RootState } from "../../redux";
-import {
-  addNewGroupChatUsers,
-  removeNewGroupChatUsers,
-} from "../../redux/slices/chatSlice";
+import clsx from "clsx";
 
-export default function CreateGroupModal() {
+export default function CreateGroupModal({
+  isShow,
+  setIsShow,
+}: {
+  isShow: boolean;
+  setIsShow: any;
+}) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchedUsers, setSearchedUsers] = useState<Array<IUser>>([]);
-  const newChat = useSelector((state: RootState) => state.chat.newGroupChat);
-  // const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
+  const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
   const [chatName, setChatName] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
-
   const handleSelectUserClick = (user: IUser) => {
-    // setSelectedUsers([...selectedUsers, user]);
-    dispatch(addNewGroupChatUsers(user));
+    setSelectedUsers([...selectedUsers, user]);
   };
 
   const handleRemoveClick = (user: IUser) => {
-    // console.log("click + ", user.name);
-    // const filteredUsers = selectedUsers.filter((item) => item._id !== user._id);
-    // setSelectedUsers([...filteredUsers]);
-    dispatch(removeNewGroupChatUsers(user));
+    const filteredUsers = selectedUsers.filter((item) => item._id !== user._id);
+    setSelectedUsers([...filteredUsers]);
   };
 
   const handleCreateChatClick = () => {
     createGroupChat(
       chatName,
-      newChat.users.map((user) => user._id)
+      selectedUsers.map((user) => user._id)
     ).then(() => {
       noti({
         type: "success",
@@ -48,11 +45,15 @@ export default function CreateGroupModal() {
     });
   };
 
+  const handleModalClose = () => {
+    setIsShow(false);
+  };
+
   const queryUsers = () => {
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) => IDStringReducer(newChat.users).indexOf(user._id) === -1
+          (user) => IDStringReducer(selectedUsers).indexOf(user._id) === -1
         )
       );
     });
@@ -60,12 +61,15 @@ export default function CreateGroupModal() {
 
   useLayoutEffect(() => {
     queryUsers();
-  }, [keyword, newChat.users]);
+  }, [keyword, selectedUsers]);
 
   return (
     <>
       <input type="checkbox" id="create-group-modal" className="modal-toggle" />
-      <label htmlFor="create-group-modal" className="modal cursor-pointer">
+      <label
+        htmlFor="create-group-modal"
+        className={clsx("modal cursor-pointer", !isShow || "modal-open")}
+      >
         <label className="modal-box relative" htmlFor="">
           <div className="modal-box-content flex flex-col gap-y-2">
             <input
@@ -76,7 +80,7 @@ export default function CreateGroupModal() {
               onChange={(e) => setChatName(e.target.value)}
             />
             <div className="selected-user-badge-list flex flex-wrap gap-1">
-              {newChat.users?.map((user) => (
+              {selectedUsers?.map((user) => (
                 <div
                   key={user._id}
                   className="badge badge-primary badge-md"
@@ -92,7 +96,11 @@ export default function CreateGroupModal() {
             <button className="btn btn-primary" onClick={handleCreateChatClick}>
               Create
             </button>
-            <label htmlFor="create-group-modal" className="btn">
+            <label
+              htmlFor="create-group-modal"
+              className="btn"
+              onClick={handleModalClose}
+            >
               Cancel
             </label>
           </div>
