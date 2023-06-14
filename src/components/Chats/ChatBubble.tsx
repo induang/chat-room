@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { IMessage } from "../../services/message.type";
 import { timeTransform } from "../../utils/tools";
+import "./chatBubble.css";
 
 interface ChatBubbleProps {
   userId: string;
@@ -19,7 +20,10 @@ export default function ChatBubble({
 
   return (
     <div
-      className={clsx("chat", userId === senderId ? "chat-end" : "chat-start")}
+      className={clsx(
+        "chat overflow-hidden",
+        userId === senderId ? "chat-end" : "chat-start"
+      )}
     >
       {/* 用户头像 */}
       <div className={clsx("chat-image avatar", isLast ? "" : "invisible")}>
@@ -41,6 +45,7 @@ export default function ChatBubble({
         className={clsx(
           !isLast && "before:!left-1/2",
           "chat-bubble",
+          "multiline-ellipsis",
           userId === senderId ? "chat-bubble-accent" : ""
         )}
       >

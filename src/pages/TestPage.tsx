@@ -1,5 +1,6 @@
 // 节流：固定时间内的多次触发，只有最后一个触发被执行；
 // 防抖：固定时间间隔，每个触发只有占据了没被占据的时间间隔才会被执行
+import { hello } from "../assets/test.json";
 
 export default function TestPage() {
   /* 这个写法在每一个时间间隔的开头执行, 最后一次点击若不在下一个时间间隔的就不执行了，相当于可能丢了用户的最后一次操作，因此不推荐 */
@@ -119,6 +120,7 @@ export default function TestPage() {
       >
         Debounce Click
       </button>
+      <div>{hello}</div>
     </>
   );
 }

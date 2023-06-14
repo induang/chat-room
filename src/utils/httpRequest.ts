@@ -1,6 +1,9 @@
 import axios from "axios";
 import noti from "./noti";
 
+/* 
+	闭包: 内部维护一个请求栈, 记录过往的操作请求, 
+*/
 
 const httpRequest = axios.create({
 	baseURL: 'http://localhost:5000',
