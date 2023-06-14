@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { IUser } from "../../services/user.type";
-import UserItem from "../UserItem";
+import UserItem from "../common/UserItem";
 import closeIcon from "../../assets/close.png";
 import {
   addMemberToChat,

@@ -2,24 +2,23 @@ import clsx from "clsx";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Socket } from "socket.io-client";
-import ChatBox from "../components/Chats/ChatBox";
-import EmptyChatBox from "../components/Chats/EmptyChatBox";
-import MyChats from "../components/Chats/MyChats";
-import UpdateGroupModal from "../components/Chats/UpdateGroupModal";
-import Drawer from "../components/Headers/Drawer";
-import DrawerToggle from "../components/Headers/DrawerToggle";
-import Header from "../components/Headers/Header";
-import ProfileModal from "../components/ProfileModal";
-import { RootState } from "../redux";
-import { exceptMeBetween2 } from "../utils/tools";
+import ChatBox from "./components/ChatBox";
+import EmptyChatBox from "./components/EmptyChatBox";
+import MyChats from "./components/MyChats";
+import UpdateGroupModal from "@/components/modals/UpdateGroupModal";
+import Drawer from "@/components/headers/Drawer";
+import DrawerToggle from "@/components/headers/DrawerToggle";
+import Header from "@/components/headers/Header";
+import ProfileModal from "@/components/modals/ProfileModal";
+import { RootState } from "@/redux";
+import { exceptMeBetween2 } from "@/utils/tools";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import SocketConnect from "../services/socket";
-import { IMessage } from "../services/message.type";
+import SocketConnect from "@/services/socket";
+import { IMessage } from "@/services/message.type";
 import {
   addReceivedNewMessagesChats,
   updateLastestMessage,
-} from "../redux/slices/chatSlice";
-import CreateGroupModal from "../components/Chats/CreateGroupModal";
+} from "@/redux/slices/chatSlice";
 
 const ENDPOINT = "http://localhost:5000";
 export default function ChatPage() {

@@ -2,7 +2,7 @@ import clsx from "clsx";
 import React from "react";
 import { IChat } from "../../services/chat.type";
 import { exceptMeBetween2 } from "../../utils/tools";
-import GroupChatPreofile from "./GroupChatProfile";
+import GroupChatPreofile from "../modals/GroupChatProfile";
 
 interface IChatItemProps {
   chat: IChat;

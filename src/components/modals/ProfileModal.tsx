@@ -1,5 +1,5 @@
-import { defaultPicUrl } from "../consts";
-import { IUser } from "../services/user.type";
+import { defaultPicUrl } from "../../consts";
+import { IUser } from "../../services/user.type";
 
 export default function ProfileModal({
   selectedUser,

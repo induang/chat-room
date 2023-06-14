@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../services/user.type";
 import closeIcon from "../../assets/close.png";
-import UserItem from "../UserItem";
+import UserItem from "../common/UserItem";
 import { getUserList } from "../../services/user";
 import { IDStringReducer } from "../../utils/tools";
 import { createGroupChat } from "../../services/chat";

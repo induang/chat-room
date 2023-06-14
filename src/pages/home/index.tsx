@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { useState } from "react";
-import LoginForm from "../components/Authentications/Login";
-import RegistrationForm from "../components/Authentications/Registration";
-import { APP_NAME } from "../consts";
+import LoginForm from "./components/Login";
+import RegistrationForm from "./components/Registration";
+import { APP_NAME } from "../../consts";
 
 export default function HomePage() {
   const [loginShow, setLoginShow] = useState(true);

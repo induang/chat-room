@@ -1,23 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux";
-import menuIcon from "../../assets/list.png";
-import arrowIcon from "../../assets/left-arrow-primary.png";
-import { getAllMessage, sendMessage } from "../../services/message";
+import { RootState } from "@/redux";
+import menuIcon from "@/assets/list.png";
+import arrowIcon from "@/assets/left-arrow-primary.png";
+import { getAllMessage, sendMessage } from "../../../services/message";
 import { useEffect, useRef, useState } from "react";
-import MessagesShower from "./MessagesShower";
-import { IMessage } from "../../services/message.type";
+import MessagesShower from "@/components/chats/MessagesShower";
+import { IMessage } from "@/services/message.type";
 import io, { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
-import { IChat } from "../../services/chat.type";
-import { exceptMeBetween2 } from "../../utils/tools";
+import { IChat } from "@/services/chat.type";
+import { exceptMeBetween2 } from "@/utils/tools";
 import {
   addReceivedNewMessagesChats,
   setSelectedChat,
   updateLastestMessage,
-} from "../../redux/slices/chatSlice";
+} from "@/redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import SocketConnect from "../../services/socket";
+import SocketConnect from "@/services/socket";
 
 const ENDPOINT = "http://localhost:5000";
 let selectedChatCompare: IChat | null;

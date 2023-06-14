@@ -2,12 +2,12 @@ import clsx from "clsx";
 import { FormikFormProps, FormikValues } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { register } from "../../../services/auth";
-import noti from "../../../utils/noti";
-import CodeField from "../../common/CodeField";
-import InputField from "../../common/InputField";
-import InputFieldWithBTN from "../../common/InputFieldWithBTN";
-import PasswordField from "../../common/PasswordField";
+import { register } from "@/services/auth";
+import noti from "@/utils/noti";
+import CodeField from "@/components/common/CodeField";
+import InputField from "@/components/common/InputField";
+import InputFieldWithBTN from "@/components/common/InputFieldWithBTN";
+import PasswordField from "@/components/common/PasswordField";
 
 export interface IRegistrationFormProps {
   show: boolean;
