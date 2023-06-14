@@ -2,10 +2,10 @@ import clsx from "clsx";
 import { FormikFormProps, FormikValues } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../../services/auth";
-import noti from "../../../utils/noti";
-import InputField from "../../common/InputField";
-import PasswordField from "../../common/PasswordField";
+import { login } from "@/services/auth";
+import noti from "@/utils/noti";
+import InputField from "@/components/common/InputField";
+import PasswordField from "@/components/common/PasswordField";
 
 export interface ILoginFormProps {
   show: Boolean;

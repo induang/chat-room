@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
-import ChatPage from "../pages/ChatPage";
-import HomePage from "../pages/HomePage";
-import TestPage from "../pages/TestPage";
+import ChatPage from "../pages/chat";
+import HomePage from "../pages/home";
 
 const router = createBrowserRouter([
   {
@@ -16,10 +15,6 @@ const router = createBrowserRouter([
       {
         path: "chat",
         element: <ChatPage />,
-      },
-      {
-        path: "test",
-        element: <TestPage />,
       },
     ],
   },

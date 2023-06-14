@@ -1,12 +1,12 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux";
-import { setChats, setSelectedChat } from "../../redux/slices/chatSlice";
-import { getChats } from "../../services/chat";
-import { IChat } from "../../services/chat.type";
-import ChatItem from "./ChatItem";
-import CreateGroupModal from "./CreateGroupModal";
+import { RootState } from "../../../redux";
+import { setChats, setSelectedChat } from "../../../redux/slices/chatSlice";
+import { getChats } from "../../../services/chat";
+import { IChat } from "../../../services/chat.type";
+import ChatItem from "../../../components/chats/ChatItem";
+import CreateGroupModal from "../../../components/modals/CreateGroupModal";
 
 export default function MyChats() {
   const dispatch = useDispatch();
