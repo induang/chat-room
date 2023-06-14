@@ -2,15 +2,15 @@
 
 https://induang.github.io/chat-room/
 
-后端部在glitch上, 要用VPN
+后端部在 glitch 上, 要用 VPN
 
 #### 技术栈:
 
-使用 React的基本特性 做一个聊天室
+使用 React 的基本特性 做一个聊天室
 
 使用 Vite 作为框架
 
-样式方案: tailwindCSS daisyUI样式库 clsx 计算样式
+样式方案: tailwindCSS daisyUI 样式库 clsx 计算样式
 
 使用 axios 进行网络请求
 
@@ -18,21 +18,20 @@ https://induang.github.io/chat-room/
 
 #### 一点面试备注:
 
-如果你是面试官, 想要体验这个小demo, 需要联系我开后台服务器;
+如果你是面试官, 想要体验这个小 demo, 需要联系我开后台服务器;
 否则只能看到登录界面;
 
 另外后端代码在: https://github.com/induang/chat-room-service/
 
 #### 比较有意思的功能点：
 
-适配了web端和移动端
+适配了 web 端和移动端
 
 加盐密文传输数据
 
 #### 最终效果:
 
-
-web端:
+web 端:
 
 ![image](https://github.com/induang/chat-room/assets/50736248/00047492-5bee-4298-98ac-99cd42bc7375)
 ![image](https://github.com/induang/chat-room/assets/50736248/edfc866a-08fd-47d6-908a-bcc8dfcc967e)
@@ -44,7 +43,3 @@ web端:
 <img src="https://github.com/induang/chat-room/assets/50736248/11ef9eb7-d69b-4f36-9fd5-1ce8ad7666ef" width="300">  
 <img src="https://github.com/induang/chat-room/assets/50736248/40c6f3b1-4502-4411-8bc5-7101079d02df" width="300">
 <img src="https://github.com/induang/chat-room/assets/50736248/f78cc6ea-f98b-49df-abe9-32327fd51933" width="300">
-
-
-
-
