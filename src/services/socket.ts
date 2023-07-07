@@ -46,7 +46,7 @@ export default class SocketConnect {
 		this._socket.emit("leave chat", chatId);
 	}
 
-	static ListenOnMessages(handler: Function){
+	static ListenOnMessages(handler: any){
 		this._socket.on("message received", handler);
 	}
 	static clearListenerOfMessages(){

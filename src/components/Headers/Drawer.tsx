@@ -3,7 +3,7 @@ import { getOrCreateChat } from "../../services/chat";
 import { getUserList } from "../../services/user";
 import { IUser } from "../../services/user.type";
 import UserItem from "../common/UserItem";
-import closeIcon from "../../assets/close-slender.png";
+import closeIcon from "@/assets/close-slender.png";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
 import { setSelectedChat } from "../../redux/slices/chatSlice";

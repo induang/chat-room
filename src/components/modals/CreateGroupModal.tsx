@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../services/user.type";
-import closeIcon from "../../assets/close.png";
+import closeIcon from "@/assets/close.png";
 import UserItem from "../common/UserItem";
 import { getUserList } from "../../services/user";
 import { IDStringReducer } from "../../utils/tools";

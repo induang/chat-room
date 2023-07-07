@@ -1,7 +1,7 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { IUser } from "../../services/user.type";
 import UserItem from "../common/UserItem";
-import closeIcon from "../../assets/close.png";
+import closeIcon from "@/assets/close.png";
 import {
   addMemberToChat,
   removeMemberFromChat,
@@ -14,7 +14,7 @@ import { setSelectedChat } from "../../redux/slices/chatSlice";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import { debounce, IDStringReducer, trottled } from "../../utils/tools";
+import { IDStringReducer } from "../../utils/tools";
 
 export default function UpdateGroupModal() {
   const chat = useSelector((state: RootState) => state.chat.selectedChat);
@@ -143,10 +143,7 @@ export default function UpdateGroupModal() {
                   <li
                     className={clsx(!menuDisabled || "disabled")}
                     key={user._id}
-                    onClick={trottled(
-                      () => handleSelectUserClick(user._id),
-                      1500
-                    )}
+                    onClick={() => handleSelectUserClick(user._id)}
                   >
                     <a>
                       <UserItem user={user} />

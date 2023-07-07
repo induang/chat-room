@@ -1,6 +1,6 @@
 import clsx from "clsx";
-import closeIcon from "../../assets/close-eye.png";
-import openIcon from "../../assets/eye.png";
+import closeIcon from "@/assets/close-eye.png";
+import openIcon from "@/assets/eye.png";
 import { FieldHookConfig, useField } from "formik";
 import { useState } from "react";
 

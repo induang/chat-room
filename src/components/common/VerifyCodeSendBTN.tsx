@@ -5,7 +5,7 @@ import { verify } from "../../services/auth";
 export default function VerifyCodeSendBTN({ email }: { email: string }) {
   const [count, setCount] = useState(60);
   const [isSendClick, setIsSendClick] = useState(false);
-  const timer = useRef(0);
+  const timer = useRef<NodeJS.Timeout>();
 
   const handleSendClick = () => {
     setIsSendClick(true);
