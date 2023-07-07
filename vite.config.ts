@@ -10,7 +10,7 @@ export default defineConfig({
       { find: '@', replacement: path.resolve(__dirname, 'src')}
     ]
   },
-  base: '/docs',
+  base: '/chat-room/docs',
   build: {
     outDir: "docs",
   }
