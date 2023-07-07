@@ -16,7 +16,7 @@ export default function PasswordField(
   return (
     <>
       <label className="label">
-        <span className="label-text text-xl font-medium">{props.label}:</span>
+        <span className="label-text text-xl">{props.label}:</span>
         <label className="swap">
           <input
             tabIndex={-1}
