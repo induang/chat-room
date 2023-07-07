@@ -12,7 +12,7 @@ export default function CodeField(
   return (
     <>
       <label className="label">
-        <span className="label-text text-xl font-medium">{props.label}:</span>
+        <span className="label-text text-xl">{props.label}:</span>
         <input
           name={props.name}
           type="text"

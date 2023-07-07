@@ -19,7 +19,7 @@ export default function HomePage() {
             <a
               className={clsx(
                 "login-tab-btn",
-                "tab w-1/2 text-xl font-medium",
+                "tab w-1/2 text-xl",
                 loginShow ? "tab-active" : ""
               )}
               onClick={() => {
@@ -32,7 +32,7 @@ export default function HomePage() {
             <a
               className={clsx(
                 "register-tab-btn",
-                "tab w-1/2 text-xl font-medium",
+                "tab w-1/2 text-xl",
                 registerShow ? "tab-active" : ""
               )}
               onClick={() => {
