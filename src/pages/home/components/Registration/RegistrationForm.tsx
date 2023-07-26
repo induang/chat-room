@@ -8,24 +8,32 @@ import CodeField from "@/components/common/CodeField";
 import InputField from "@/components/common/InputField";
 import InputFieldWithBTN from "@/components/common/InputFieldWithBTN";
 import PasswordField from "@/components/common/PasswordField";
+import { saltPassowrd } from "@/utils/tools";
 
 export interface IRegistrationFormProps {
   show: boolean;
 }
 
 export default function RegistrationForm(
-  props: FormikFormProps & FormikValues & IRegistrationFormProps
+  props: FormikFormProps & FormikValues & IRegistrationFormProps,
 ) {
-  const { show, values } = props;
+  const { show, values, isValid } = props;
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
 
   const handleRegisterClick = () => {
+    if (!isValid) {
+      noti({ type: "error", message: "Invalid data." });
+      return;
+    }
     setDisabled(true);
-    const { name, email, password, code } = values;
+    let { name, email, password, code } = values;
+    password = saltPassowrd(password);
     register({ name, email, password, code })
       .then(() => {
         noti({ type: "success", message: "Register successful" });
+        setDisabled(false);
+        navigate("/");
       })
       .finally(() => {
         navigate("/");
@@ -52,7 +60,7 @@ export default function RegistrationForm(
       <button
         className={clsx(
           "btn btn-block btn-primary mt-10",
-          !disabled || "btn-disabled"
+          !disabled || "btn-disabled",
         )}
         onClick={handleRegisterClick}
       >
