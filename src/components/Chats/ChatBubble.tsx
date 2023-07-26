@@ -22,7 +22,7 @@ export default function ChatBubble({
     <div
       className={clsx(
         "chat overflow-hidden",
-        userId === senderId ? "chat-end" : "chat-start"
+        userId === senderId ? "chat-end" : "chat-start",
       )}
     >
       {/* 用户头像 */}
@@ -46,7 +46,7 @@ export default function ChatBubble({
           !isLast && "before:!left-1/2",
           "chat-bubble",
           "multiline-ellipsis",
-          userId === senderId ? "chat-bubble-accent" : ""
+          userId === senderId ? "chat-bubble-primary" : "",
         )}
       >
         {message.content}

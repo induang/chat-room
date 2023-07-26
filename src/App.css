@@ -1,7 +1,11 @@
 .App {
 	padding: 5px;
 	min-height: 100vh;
-	background-color: aquamarine;
+	background-color: #570DF8;
 	font-family: "Work Sans";
 	font-weight: 200;
+}
+
+::-webkit-scrollbar { 
+	display: none;  /* Safari and Chrome */
 }

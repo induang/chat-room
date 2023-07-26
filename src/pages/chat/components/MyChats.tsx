@@ -11,7 +11,7 @@ import CreateGroupModal from "../../../components/modals/CreateGroupModal";
 export default function MyChats() {
   const dispatch = useDispatch();
   const selectedChat = useSelector(
-    (state: RootState) => state.chat.selectedChat
+    (state: RootState) => state.chat.selectedChat,
   );
   const chats = useSelector((state: RootState) => state.chat.chats);
   const [selectId, setSelectId] = useState("");
@@ -19,7 +19,7 @@ export default function MyChats() {
 
   const handleSelectClick = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    selectedChat: IChat
+    selectedChat: IChat,
   ) => {
     setSelectId(selectedChat._id);
     dispatch(setSelectedChat(selectedChat));
@@ -36,16 +36,9 @@ export default function MyChats() {
   return (
     <>
       <CreateGroupModal isShow={isModalOpen} setIsShow={setIsModalOpen} />
-      <ul className="menu bg-base-100/75 h-full rounded overflow-y-scroll flex-nowrap">
-        <div className="side-panel-header flex justify-between p-6">
-          <div className="title text-3xl">Chats</div>
-          <label
-            className="create-group-chat-btn btn btn-primary btn-md"
-            htmlFor="create-group-modal"
-            onClick={() => setIsModalOpen(true)}
-          >
-            + Group Chat
-          </label>
+      <ul className="menu h-full rounded overflow-y-scroll flex-nowrap px-2">
+        <div className="side-panel-header flex justify-between p-3">
+          <div className="title text-3xl">Messages</div>
         </div>
         {chats?.map((chat) => (
           <li key={chat._id} onClick={(e) => handleSelectClick(e, chat)}>

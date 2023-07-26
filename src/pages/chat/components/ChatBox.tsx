@@ -1,12 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux";
-import menuIcon from "@/assets/list.png";
-import arrowIcon from "@/assets/left-arrow-primary.png";
+import arrowIcon from "@/assets/arrow.png";
 import { getAllMessage, sendMessage } from "../../../services/message";
 import { useEffect, useRef, useState } from "react";
 import MessagesShower from "@/components/chats/MessagesShower";
 import { IMessage } from "@/services/message.type";
-import io, { Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IChat } from "@/services/chat.type";
 import { exceptMeBetween2 } from "@/utils/tools";
@@ -16,7 +15,6 @@ import {
   updateLastestMessage,
 } from "@/redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
-import clsx from "clsx";
 import SocketConnect from "@/services/socket";
 
 const ENDPOINT = "http://localhost:5000";
@@ -24,7 +22,7 @@ let selectedChatCompare: IChat | null;
 export default function ChatBox() {
   const userId = window.localStorage.getItem("userId") || "";
   const selectedChat = useSelector(
-    (state: RootState) => state.chat.selectedChat
+    (state: RootState) => state.chat.selectedChat,
   );
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,7 +42,7 @@ export default function ChatBox() {
         updateLastestMessage({
           id: selectedChat._id,
           newLastestMessage: newMessage,
-        })
+        }),
       );
     });
   };
@@ -53,7 +51,7 @@ export default function ChatBox() {
     dispatch(
       setSelectedChat({
         _id: "",
-      } as IChat)
+      } as IChat),
     );
   };
 
@@ -85,7 +83,7 @@ export default function ChatBox() {
         updateLastestMessage({
           id: newMessageReceived?.chat._id,
           newLastestMessage: newMessageReceived,
-        })
+        }),
       );
       if (
         !selectedChatCompare ||
@@ -102,20 +100,21 @@ export default function ChatBox() {
   });
 
   return (
-    <div className="bg-white/75 h-full flex flex-col gap-y-1 rounded">
-      <div className="chat-box-header flex p-4 sm:p-6 basis-4 items-center justify-between">
+    <div className="h-full flex flex-col  rounded">
+      <div className="chat-box-headerp-4 basis-4">
         {/* 返回按钮 */}
-        <span className="sm:hidden" onClick={handleReturnArrowClick}>
-          <img src={arrowIcon} className="w-8" />
-        </span>
+
         {/* 名字 */}
-        <div className="chat-name text-xl sm:text-3xl truncate ml-2 text-primary">
+        <div className="chat-name text-xl sm:text-3xl py-2 truncate ml-2 text-primary font-light block text-center">
+          <span className="sm:hidden" onClick={handleReturnArrowClick}>
+            <img src={arrowIcon} className="w-6 inline float-left" />
+          </span>
           {selectedChat.isGroupChat
             ? selectedChat.chatName
             : exceptMeBetween2(selectedChat.users)[0].name}
         </div>
         {/* 菜单按钮 */}
-        <div className="chat-details ml-4">
+        {/* <div className="chat-details ml-4">
           <label
             className="chat-detail-btn"
             htmlFor={
@@ -126,30 +125,41 @@ export default function ChatBox() {
           >
             <img src={menuIcon} className="w-8" />
           </label>
-        </div>
+        </div> */}
       </div>
-      <div className="chat-box-messages flex-grow bg-base-100/80 shadow-inner rounded m-2 p-2 overflow-y-scroll">
+      <div className="chat-box-messages bg-slate-100 flex-grow bg-base-100/80 rounded p-2 overflow-y-scroll">
         {!isLoading && messages?.length ? (
           <MessagesShower userId={userId} messages={messages} />
         ) : (
           <></>
         )}
       </div>
-      <div className="chat-box-message-sender basis-16 m-2">
-        <div className="form-control">
-          <div className="input-group">
-            <input
-              type="text"
-              placeholder="Type you message..."
-              className="input input-bordered input-primary w-full bg-transparent"
-              value={newMessage}
-              onChange={(e) => setNewMessage(e.target.value)}
-              onKeyDown={handleEnterDown}
-            />
-            <button className="btn btn-primary" onClick={handleSendClick}>
-              SEND
-            </button>
-          </div>
+      <div className="chat-box-message-sender bg-slate-100 p-2">
+        {/* <div className="join">
+          <input
+            
+            className="input input-bordered input-primary w-fit bg-transparent join-item"
+            
+          />
+          <button
+            className="btn btn-primary rounded-r-full join-item"
+            onClick={handleSendClick}
+          >
+            SEND
+          </button>
+        </div> */}
+        <div className="join">
+          <input
+            type="text"
+            placeholder="Type you message..."
+            className="w-4/5 input input-bordered join-item rounded-l-full shadow-md"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            onKeyDown={handleEnterDown}
+          />
+          <button className="w-1/5 btn btn-primary join-item rounded-r-full shadow-md">
+            Send
+          </button>
         </div>
       </div>
     </div>
