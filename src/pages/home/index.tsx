@@ -20,7 +20,7 @@ export default function HomePage() {
               className={clsx(
                 "login-tab-btn",
                 "tab w-1/2 text-xl",
-                loginShow ? "tab-active" : ""
+                loginShow ? "tab-active" : "",
               )}
               onClick={() => {
                 setRegisterShow(false);
@@ -33,7 +33,7 @@ export default function HomePage() {
               className={clsx(
                 "register-tab-btn",
                 "tab w-1/2 text-xl",
-                registerShow ? "tab-active" : ""
+                registerShow ? "tab-active" : "",
               )}
               onClick={() => {
                 setLoginShow(false);
