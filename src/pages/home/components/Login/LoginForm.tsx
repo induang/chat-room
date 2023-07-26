@@ -6,21 +6,28 @@ import { login } from "@/services/auth";
 import noti from "@/utils/noti";
 import InputField from "@/components/common/InputField";
 import PasswordField from "@/components/common/PasswordField";
+import { saltPassowrd } from "@/utils/tools";
 
 export interface ILoginFormProps {
-  show: Boolean;
+  show: boolean;
 }
 
 export default function LoginForm(
-  props: FormikFormProps & FormikValues & ILoginFormProps
+  props: FormikFormProps & FormikValues & ILoginFormProps,
 ) {
-  const { show, values } = props;
+  const { show, values, isValid } = props;
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
 
   const handleLoginClick = async () => {
+    if (!isValid) {
+      noti({ type: "error", message: "Invalid data." });
+      return;
+    }
+    let { email, password } = values;
+    password = saltPassowrd(password);
+    console.log(password);
     setDisabled(true);
-    const { email, password } = values;
     login({ email, password })
       .then((res) => {
         const { name, pic, _id } = res;
@@ -45,8 +52,9 @@ export default function LoginForm(
       <button
         className={clsx(
           "btn btn-block btn-primary mt-10",
-          !disabled || "btn-disabled"
+          !disabled || "btn-disabled",
         )}
+        type="submit"
         onClick={handleLoginClick}
       >
         Login

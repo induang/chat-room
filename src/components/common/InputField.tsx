@@ -6,7 +6,7 @@ interface IInputFieldProps {
 }
 
 export default function InputField(
-  props: IInputFieldProps & FieldHookConfig<string>
+  props: IInputFieldProps & FieldHookConfig<string>,
 ) {
   const [field, meta] = useField(props);
   return (
@@ -19,13 +19,13 @@ export default function InputField(
         type="text"
         className={clsx(
           "input input-bordered",
-          !Boolean(meta.touched && meta.error) || "input-error"
+          !(meta.touched && meta.error) || "input-error",
         )}
         value={field.value || ""}
         onChange={field.onChange}
         onBlur={field.onBlur}
       />
-      {!Boolean(meta.touched && meta.error) || (
+      {!(meta.touched && meta.error) || (
         <label className="label">
           <span className="label-text-alt text-error">{meta.error}</span>
         </label>
