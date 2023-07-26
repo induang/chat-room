@@ -14,7 +14,7 @@ import { setSelectedChat } from "../../redux/slices/chatSlice";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import { debounce, IDStringReducer, trottled } from "../../utils/tools";
+import { IDStringReducer } from "../../utils/tools";
 
 export default function UpdateGroupModal() {
   const chat = useSelector((state: RootState) => state.chat.selectedChat);
@@ -32,8 +32,8 @@ export default function UpdateGroupModal() {
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) => IDStringReducer(chat.users).indexOf(user._id) === -1
-        )
+          (user) => IDStringReducer(chat.users).indexOf(user._id) === -1,
+        ),
       );
     });
   };
@@ -123,7 +123,7 @@ export default function UpdateGroupModal() {
               <button
                 className={clsx(
                   "btn btn-primary",
-                  updateNameDisabled ? "btn-disabled" : ""
+                  updateNameDisabled ? "btn-disabled" : "",
                 )}
                 onClick={handleUpdateChatNameClick}
               >
@@ -143,10 +143,7 @@ export default function UpdateGroupModal() {
                   <li
                     className={clsx(!menuDisabled || "disabled")}
                     key={user._id}
-                    onClick={trottled(
-                      () => handleSelectUserClick(user._id),
-                      1500
-                    )}
+                    onClick={() => handleSelectUserClick(user._id)}
                   >
                     <a>
                       <UserItem user={user} />
@@ -159,7 +156,7 @@ export default function UpdateGroupModal() {
               <div
                 className={clsx(
                   "btn btn-error float-right",
-                  leaveDisabled ? "btn-disabled" : ""
+                  leaveDisabled ? "btn-disabled" : "",
                 )}
                 onClick={handleLeaveChatClick}
               >

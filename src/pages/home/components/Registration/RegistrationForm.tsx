@@ -36,6 +36,7 @@ export default function RegistrationForm(
         navigate("/");
       })
       .finally(() => {
+        setDisabled(false);
         navigate("/");
       });
   };

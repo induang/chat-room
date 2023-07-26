@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import searchIcon from "../../assets/loupe.png";
 export default function DrawerBTN() {
   return (
