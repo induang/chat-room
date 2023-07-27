@@ -148,7 +148,7 @@ export default function ChatBox() {
             SEND
           </button>
         </div> */}
-        <div className="join">
+        <div className="join w-full">
           <input
             type="text"
             placeholder="Type you message..."

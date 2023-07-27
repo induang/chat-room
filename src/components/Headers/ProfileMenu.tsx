@@ -39,7 +39,7 @@ export default function ProfileMenu() {
       <div className="dropdown dropdown-end  flex items-center gap-x-4 ">
         <div className="w-24 truncate">
           <div className="text-xl">{userName || "empty"}</div>
-          <div className="text-slate-200">do not look there</div>
+          <div className="text-slate-300">do not look there</div>
         </div>
         <label
           tabIndex={0}

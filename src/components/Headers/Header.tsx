@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <div
       className={clsx(
-        "header-flex-container bg-white/50 rounded p-3 flex justify-between items-center",
+        "header-flex-container bg-white rounded p-3 flex justify-between items-center",
       )}
     >
       <span>
