@@ -20,7 +20,7 @@ import {
   updateLastestMessage,
 } from "@/redux/slices/chatSlice";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = import.meta.env.VITE_WS_CONN_URL;
 export default function ChatPage() {
   const userId = window.localStorage.getItem("userId") ?? "";
   const dispatch = useDispatch();

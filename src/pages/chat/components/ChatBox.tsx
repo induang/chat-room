@@ -17,7 +17,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import SocketConnect from "@/services/socket";
 
-const ENDPOINT = "http://localhost:5000";
+const ENDPOINT = import.meta.env.VITE_WS_CONN_URL;
 let selectedChatCompare: IChat | null;
 export default function ChatBox() {
   const userId = window.localStorage.getItem("userId") || "";
