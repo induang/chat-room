@@ -35,7 +35,7 @@ export default function CreateGroupModal({
   const handleCreateChatClick = () => {
     createGroupChat(
       chatName,
-      selectedUsers.map((user) => user._id)
+      selectedUsers.map((user) => user._id),
     ).then(() => {
       noti({
         type: "success",
@@ -53,8 +53,8 @@ export default function CreateGroupModal({
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) => IDStringReducer(selectedUsers).indexOf(user._id) === -1
-        )
+          (user) => IDStringReducer(selectedUsers).indexOf(user._id) === -1,
+        ),
       );
     });
   };
@@ -70,7 +70,7 @@ export default function CreateGroupModal({
         htmlFor="create-group-modal"
         className={clsx("modal cursor-pointer", !isShow || "modal-open")}
       >
-        <label className="modal-box relative" htmlFor="">
+        <label className="modal-box relative rounded" htmlFor="">
           <div className="modal-box-content flex flex-col gap-y-2">
             <input
               type="text"

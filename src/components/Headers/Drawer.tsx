@@ -17,6 +17,7 @@ export default function Drawer() {
   const [userNoExistHint, setUserNoExistHint] = useState(false);
 
   const handleSearch = () => {
+    if (keyword === "") return;
     setKeyword("");
     getUserList(keyword).then((users) => {
       if (users.length === 0) {
@@ -60,7 +61,7 @@ export default function Drawer() {
         <div className="search-input input-group">
           <label
             htmlFor="chat-search-users-drawer"
-            className={clsx("btn btn-primary sm:hidden")}
+            className={clsx("btn btn-primary sm:hidden rounded-l-full")}
           >
             <img src={closeIcon} className="w-4" />
           </label>

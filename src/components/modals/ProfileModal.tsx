@@ -15,7 +15,7 @@ export default function ProfileModal({
       />
       <label htmlFor="talker-details-modal" className="modal cursor-pointer">
         <label
-          className="modal-box relative flex flex-col gap-8 justify-items-center"
+          className="modal-box relative flex flex-col gap-8 justify-items-center  rounded"
           htmlFor=""
         >
           <div className="profile-pic w-48 m-auto mt-8">
