@@ -6,10 +6,12 @@ import UserItem from "../common/UserItem";
 import closeIcon from "../../assets/close-slender.png";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
-import { setSelectedChat } from "../../redux/slices/chatSlice";
+import { addNewChat, setSelectedChat } from "../../redux/slices/chatSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Drawer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const [searchResults, setSearchResults] = useState<Array<IUser>>();
   const [userItemDisable, setUserItemDisabled] = useState(false);
@@ -44,7 +46,7 @@ export default function Drawer() {
     setUserItemDisabled(true);
     getOrCreateChat(userId)
       .then((chat) => {
-        dispatch(setSelectedChat(chat));
+        dispatch(addNewChat(chat));
         setUserItemDisabled(false);
         toggleLabelEle.current?.click();
       })

@@ -17,7 +17,7 @@ export interface IRegistrationFormProps {
 export default function RegistrationForm(
   props: FormikFormProps & FormikValues & IRegistrationFormProps,
 ) {
-  const { show, values, isValid } = props;
+  const { show, values, resetForm, isValid } = props;
   const navigate = useNavigate();
   const [disabled, setDisabled] = useState(false);
 
@@ -37,12 +37,10 @@ export default function RegistrationForm(
     register({ name, email, password, code })
       .then(() => {
         noti({ type: "success", message: "Register successful" });
-        setDisabled(false);
-        navigate("/");
       })
       .finally(() => {
+        resetForm();
         setDisabled(false);
-        navigate("/");
       });
   };
 

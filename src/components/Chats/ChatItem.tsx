@@ -45,7 +45,7 @@ export default React.memo(function ChatItem({
               !chat.isGroupChat || !chat.latestMessage ? "hidden" : "",
             )}
           >
-            {chat.latestMessage?.sender.name + ":  "}
+            {chat.latestMessage?.sender?.name + ":  "}
           </span>
           {chat.latestMessage?.content ?? "No new message"}
         </div>

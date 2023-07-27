@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../services/user.type";
@@ -9,6 +9,7 @@ import { IDStringReducer } from "../../utils/tools";
 import { createGroupChat } from "../../services/chat";
 import noti from "../../utils/noti";
 import clsx from "clsx";
+import { addNewChat } from "@/redux/slices/chatSlice";
 
 export default function CreateGroupModal({
   isShow,
@@ -23,6 +24,8 @@ export default function CreateGroupModal({
   const [selectedUsers, setSelectedUsers] = useState<Array<IUser>>([]);
   const [chatName, setChatName] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
+  const toggleLabelEle = useRef<HTMLLabelElement>(null);
+
   const handleSelectUserClick = (user: IUser) => {
     setSelectedUsers([...selectedUsers, user]);
   };
@@ -36,12 +39,13 @@ export default function CreateGroupModal({
     createGroupChat(
       chatName,
       selectedUsers.map((user) => user._id),
-    ).then(() => {
+    ).then((chat) => {
+      dispatch(addNewChat(chat));
       noti({
         type: "success",
         message: `${chatName} create successful.`,
       });
-      navigate(0);
+      toggleLabelEle.current?.click();
     });
   };
 
@@ -67,6 +71,7 @@ export default function CreateGroupModal({
     <>
       <input type="checkbox" id="create-group-modal" className="modal-toggle" />
       <label
+        ref={toggleLabelEle}
         htmlFor="create-group-modal"
         className={clsx("modal cursor-pointer", !isShow || "modal-open")}
       >

@@ -74,7 +74,7 @@ export default function ChatPage() {
             className={clsx(
               "chat-box grow",
               chatId ? "" : "hidden sm:block",
-              "sm:basis-96 sm:shrink-0",
+              "sm:basis-96 shrink-0",
             )}
           >
             {chatId ? <ChatBox /> : <EmptyChatBox />}
