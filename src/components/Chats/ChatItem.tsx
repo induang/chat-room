@@ -21,7 +21,7 @@ export default React.memo(function ChatItem({
             <GroupChatPreofile name={chat.chatName} />
           ) : (
             <div className="w-14 rounded-full">
-              <img src={exceptMeBetween2(chat.users)[0].pic} />
+              <img src={exceptMeBetween2(chat.users)[0]?.pic} />
             </div>
           )}
         </label>
@@ -31,23 +31,23 @@ export default React.memo(function ChatItem({
           className={clsx(
             "chat-identity",
             isActive ? "text-white" : "text-primary",
-            "truncate"
+            "truncate",
           )}
         >
           {chat.isGroupChat
             ? chat.chatName
             : exceptMeBetween2(chat.users)[0].name}
         </div>
-        <div className="chat-lastest-message text-slate-300 block w-64 truncate">
+        <div className="chat-lastest-message text-slate-300 block w-56 truncate">
           <span
             className={clsx(
               "text-gray-500",
-              !chat.isGroupChat || !chat.latestMessage ? "hidden" : ""
+              !chat.isGroupChat || !chat.latestMessage ? "hidden" : "",
             )}
           >
             {chat.latestMessage?.sender.name + ":  "}
           </span>
-          {chat.latestMessage?.content || "No new message"}
+          {chat.latestMessage?.content ?? "No new message"}
         </div>
       </div>
     </div>

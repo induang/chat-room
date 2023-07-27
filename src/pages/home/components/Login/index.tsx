@@ -11,6 +11,6 @@ interface ILoginFormDetails {
 export default withFormik<ILoginFormProps, ILoginFormDetails>({
   enableReinitialize: true,
   validationSchema: validator,
-  handleSubmit: async (values) => {},
+  handleSubmit: () => {},
   displayName: "LoginForm",
 })(LoginForm);

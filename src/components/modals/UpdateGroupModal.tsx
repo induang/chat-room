@@ -32,8 +32,8 @@ export default function UpdateGroupModal() {
     getUserList(keyword).then((users) => {
       setSearchedUsers(
         users.filter(
-          (user) => IDStringReducer(chat.users).indexOf(user._id) === -1
-        )
+          (user) => IDStringReducer(chat.users).indexOf(user._id) === -1,
+        ),
       );
     });
   };
@@ -123,7 +123,7 @@ export default function UpdateGroupModal() {
               <button
                 className={clsx(
                   "btn btn-primary",
-                  updateNameDisabled ? "btn-disabled" : ""
+                  updateNameDisabled ? "btn-disabled" : "",
                 )}
                 onClick={handleUpdateChatNameClick}
               >
@@ -156,7 +156,7 @@ export default function UpdateGroupModal() {
               <div
                 className={clsx(
                   "btn btn-error float-right",
-                  leaveDisabled ? "btn-disabled" : ""
+                  leaveDisabled ? "btn-disabled" : "",
                 )}
                 onClick={handleLeaveChatClick}
               >

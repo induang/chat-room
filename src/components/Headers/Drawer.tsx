@@ -37,7 +37,7 @@ export default function Drawer() {
 
   const handleFetchChatClick = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    userId: string
+    userId: string,
   ) => {
     if (userItemDisable) return;
     setUserItemDisabled(true);
@@ -68,11 +68,14 @@ export default function Drawer() {
             type="text"
             value={keyword}
             placeholder="Type here to Search Users"
-            className="input input-bordered input-primary w-full max-w-xs"
+            className="input input-bordered input-primary w-full max-w-xs sm:rounded-l-full"
             onChange={(e) => setKeyword(e.target.value)}
             onKeyDown={handleEnterDown}
           />
-          <button className="btn btn-square btn-primary" onClick={handleSearch}>
+          <button
+            className="btn btn-square btn-primary rounded-r-full"
+            onClick={handleSearch}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"

@@ -12,7 +12,7 @@ export default function VerifyCodeSendBTN({ email }: { email: string }) {
     clearInterval(timer.current);
     timer.current = setInterval(
       () => setCount((preCount) => preCount - 1),
-      1000
+      1000,
     );
     verify(email).catch(() => {
       setIsSendClick(false);

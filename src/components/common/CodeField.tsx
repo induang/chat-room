@@ -6,7 +6,7 @@ interface ICodeFieldProps {
 }
 
 export default function CodeField(
-  props: ICodeFieldProps & FieldHookConfig<string>
+  props: ICodeFieldProps & FieldHookConfig<string>,
 ) {
   const [field, meta] = useField(props);
   return (
@@ -18,14 +18,14 @@ export default function CodeField(
           type="text"
           className={clsx(
             "input input-bordered",
-            !Boolean(meta.touched && meta.error) || "input-error"
+            !(meta.touched && meta.error) || "input-error",
           )}
           value={field.value || ""}
           onChange={field.onChange}
           onBlur={field.onBlur}
         />
       </label>
-      {!Boolean(meta.touched && meta.error) || (
+      {!(meta.touched && meta.error) || (
         <label className="label">
           <span className="label-text-alt text-error"></span>
           <span className="label-text-alt text-error">{meta.error}</span>
