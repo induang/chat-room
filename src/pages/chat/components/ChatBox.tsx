@@ -113,40 +113,25 @@ export default function ChatBox() {
             className="sm:hidden w-6 inline float-left"
             onClick={handleReturnArrowClick}
           />
-          <label
-            htmlFor={
-              selectedChat.isGroupChat
-                ? "update-group-modal"
-                : "talker-details-modal"
-            }
-          >
-            {selectedChat.isGroupChat
-              ? selectedChat.chatName
-              : exceptMeBetween2(selectedChat.users)[0].name}
+          <label htmlFor="update-group-modal">
+            <span className="cursor-pointer">
+              {selectedChat.isGroupChat
+                ? selectedChat.chatName
+                : exceptMeBetween2(selectedChat.users)[0].name}
+            </span>
           </label>
+
+          {/* 菜单按钮 */}
           <label htmlFor="update-group-modal">
             <img
               src={groupChatMenuIcon}
               className={clsx(
                 !selectedChat.isGroupChat && "hidden",
-                "w-5 h-5 inline",
+                "w-5 h-5 inline cursor-pointer",
               )}
             ></img>
           </label>
         </div>
-        {/* 菜单按钮 */}
-        {/* <div className="chat-details ml-4">
-          <label
-            className="chat-detail-btn"
-            htmlFor={
-              selectedChat.isGroupChat
-                ? "update-group-modal"
-                : "talker-details-modal"
-            }
-          >
-            <img src={menuIcon} className="w-8" />
-          </label>
-        </div> */}
       </div>
       <div className="chat-box-messages bg-slate-100 flex-grow bg-base-100/80 rounded p-2 overflow-y-scroll">
         {!isLoading && messages?.length ? (

@@ -44,7 +44,7 @@ export default function MyChats() {
             <label tabIndex={0} className="m-1">
               <img
                 src={addChatIcon}
-                className="w-8 h-8 mr-2"
+                className="w-8 h-8 mr-2 cursor-pointer"
                 alt="add group chat"
               ></img>
             </label>
