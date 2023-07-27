@@ -25,8 +25,11 @@ export default function LoginForm(
       return;
     }
     let { email, password } = values;
+    if (!email || !password) {
+      noti({ type: "error", message: "Invalid data." });
+      return;
+    }
     password = saltPassowrd(password);
-    console.log(password);
     setDisabled(true);
     login({ email, password })
       .then((res) => {

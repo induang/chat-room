@@ -26,9 +26,14 @@ export default function RegistrationForm(
       noti({ type: "error", message: "Invalid data." });
       return;
     }
-    setDisabled(true);
+
     let { name, email, password, code } = values;
+    if (!name || !email || !password || !code) {
+      noti({ type: "error", message: "Invalid data." });
+      return;
+    }
     password = saltPassowrd(password);
+    setDisabled(true);
     register({ name, email, password, code })
       .then(() => {
         noti({ type: "success", message: "Register successful" });
