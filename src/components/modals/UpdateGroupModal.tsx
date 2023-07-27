@@ -98,7 +98,7 @@ export default function UpdateGroupModal() {
     <>
       <input type="checkbox" id="update-group-modal" className="modal-toggle" />
       <label htmlFor="update-group-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
+        <label className="modal-box relative  rounded" htmlFor="">
           <div className="modal-box-content flex flex-col gap-y-2">
             <div className="selected-user-badge-list flex flex-wrap gap-1">
               {chat.users?.map((user) => (

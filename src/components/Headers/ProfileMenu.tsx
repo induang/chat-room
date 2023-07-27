@@ -70,7 +70,7 @@ export default function ProfileMenu() {
                 <></>
               )}
             </span>
-            <ul className=" !right-full !left-auto bg-base-100">
+            <ul className=" !right-full !left-auto bg-base-100 absolute truncate">
               {unreadChats?.map((chat) => (
                 <li key={chat._id} onClick={() => handleUnReadClick(chat)}>
                   <a>
