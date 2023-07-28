@@ -1,3 +1,7 @@
+#### 查看效果:
+
+https://induang.github.io/chat-room/
+
 #### 技术栈:
 
 使用 React的基本特性 做一个聊天室
@@ -34,7 +38,7 @@ web端:
 
 移动端:
 
-<div style="overflow:scroll">
+<div style="overflow-x: scroll">
   <img src="https://github.com/induang/chat-room/assets/50736248/39366edd-1dc6-4932-a58b-87818193ee10" width="300">
 <img src="https://github.com/induang/chat-room/assets/50736248/18aa0ba1-4623-4c7f-91fc-0f5280e841ab" width="300">
 <img src="https://github.com/induang/chat-room/assets/50736248/40c6f3b1-4502-4411-8bc5-7101079d02df" width="300">
