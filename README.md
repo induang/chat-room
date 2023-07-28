@@ -2,7 +2,7 @@
 
 https://induang.github.io/chat-room/
 
-后端布在glitch上, 要用VPN
+后端部在glitch上, 要用VPN
 
 #### 技术栈:
 
