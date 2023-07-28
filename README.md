@@ -73,7 +73,11 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 ##### 待加强的功能
 
+
+
 [TODO] updateModal 最好只在需要的需要挂载
+
+[TODO] 数据校验
 
 [TODO] private router
 
@@ -81,13 +85,7 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 [TODO] MessagesShower 防抖渲染 HOC 防抖 限制消息条数
 
-[TODO] 聊天可以发表情包
-
-[TODO] 打包部署上线
-
-[TODO] 操作撤销--对于后台管理应用
-
-[TODO] 太长的信息进行折叠
+[TODO] 接受消息的逻辑提取到全局上
 
 ##### 完成
 [COMP][TODO] 字体 work sans
@@ -117,10 +115,6 @@ https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 [COMP][TODO] drawer里的关闭不是相对于屏幕固定的 样式库的问题，最终的解决办法是把关闭按钮放到搜索框左侧
 
 [COMP][TODO] 关键词搜索出来的用户为空应该有提醒
-
-[COMP][TODO] 接受消息的逻辑提取到全局上
-
-[COMP][TODO] 数据校验
 
 [UNCOMP][TODO] daisyUI countdown failed 不管这个了，用不到
 
