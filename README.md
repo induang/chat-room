@@ -2,6 +2,8 @@
 
 https://induang.github.io/chat-room/
 
+要用VPN
+
 #### 技术栈:
 
 使用 React的基本特性 做一个聊天室
