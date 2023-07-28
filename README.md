@@ -1,3 +1,7 @@
+#### 查看效果:
+
+https://induang.github.io/chat-room/
+
 #### 技术栈:
 
 使用 React 的基本特性 做一个聊天室
