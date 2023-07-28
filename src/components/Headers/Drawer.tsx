@@ -6,10 +6,12 @@ import UserItem from "../common/UserItem";
 import closeIcon from "@/assets/close-slender.png";
 import clsx from "clsx";
 import { useDispatch } from "react-redux";
-import { setSelectedChat } from "../../redux/slices/chatSlice";
+import { addNewChat, setSelectedChat } from "../../redux/slices/chatSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Drawer() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
   const [searchResults, setSearchResults] = useState<Array<IUser>>();
   const [userItemDisable, setUserItemDisabled] = useState(false);
@@ -17,6 +19,7 @@ export default function Drawer() {
   const [userNoExistHint, setUserNoExistHint] = useState(false);
 
   const handleSearch = () => {
+    if (keyword === "") return;
     setKeyword("");
     getUserList(keyword).then((users) => {
       if (users.length === 0) {
@@ -43,7 +46,7 @@ export default function Drawer() {
     setUserItemDisabled(true);
     getOrCreateChat(userId)
       .then((chat) => {
-        dispatch(setSelectedChat(chat));
+        dispatch(addNewChat(chat));
         setUserItemDisabled(false);
         toggleLabelEle.current?.click();
       })
@@ -60,7 +63,7 @@ export default function Drawer() {
         <div className="search-input input-group">
           <label
             htmlFor="chat-search-users-drawer"
-            className={clsx("btn btn-primary sm:hidden")}
+            className={clsx("btn btn-primary sm:hidden rounded-l-full")}
           >
             <img src={closeIcon} className="w-4" />
           </label>

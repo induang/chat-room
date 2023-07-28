@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { IMessage } from "../../services/message.type";
 import { sameSenderAsAfter, sameSenderAsPre } from "../../utils/chatLogic";
 import ChatBubble from "./ChatBubble";

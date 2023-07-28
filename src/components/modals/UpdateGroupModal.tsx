@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { IUser } from "../../services/user.type";
 import UserItem from "../common/UserItem";
 import closeIcon from "@/assets/close.png";
@@ -10,7 +10,7 @@ import {
 import { getUserList } from "../../services/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { setSelectedChat } from "../../redux/slices/chatSlice";
+import { setSelectedChat, updateTheChat } from "../../redux/slices/chatSlice";
 import noti from "../../utils/noti";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
@@ -26,6 +26,7 @@ export default function UpdateGroupModal() {
   const [updateNameDisabled, setUpdateNameDisabled] = useState(false);
   const [leaveDisabled, setLeaveDisabled] = useState(false);
   const [menuDisabled, setMenuDisabled] = useState(false);
+  const toggleLabelEle = useRef<HTMLLabelElement>(null);
   // TODO 实现 防抖
 
   const queryUsers = () => {
@@ -45,7 +46,6 @@ export default function UpdateGroupModal() {
   };
 
   const handleSelectUserClick = (userId: string) => {
-    console.log("run...");
     setMenuDisabled(true);
     addMemberToChat(chat._id, userId)
       .then((chat) => {
@@ -58,11 +58,13 @@ export default function UpdateGroupModal() {
 
   const handleUpdateChatNameClick = () => {
     setUpdateNameDisabled(true);
-    renameChat(chat._id, chatName).then((res) => {
-      dispatch(setSelectedChat(res));
+    renameChat(chat._id, chatName).then((chat) => {
+      console.log(chat);
+      dispatch(setSelectedChat(chat));
+      dispatch(updateTheChat(chat));
       noti({ type: "success", message: "Update name successful." });
-      navigate(0);
     });
+    toggleLabelEle.current?.click();
   };
 
   const handleLeaveChatClick = () => {
@@ -97,8 +99,12 @@ export default function UpdateGroupModal() {
   return (
     <>
       <input type="checkbox" id="update-group-modal" className="modal-toggle" />
-      <label htmlFor="update-group-modal" className="modal cursor-pointer">
-        <label className="modal-box relative" htmlFor="">
+      <label
+        ref={toggleLabelEle}
+        htmlFor="update-group-modal"
+        className="modal cursor-pointer"
+      >
+        <label className="modal-box relative  rounded" htmlFor="">
           <div className="modal-box-content flex flex-col gap-y-2">
             <div className="selected-user-badge-list flex flex-wrap gap-1">
               {chat.users?.map((user) => (

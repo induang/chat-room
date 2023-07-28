@@ -42,6 +42,20 @@ export const chatSlice = createSlice({
         isExistedChatSelected: true,
       };
     },
+    addNewChat: (state, action: PayloadAction<IChat>) => {
+      const { payload: newChat } = action;
+      return {
+        ...state,
+        selectedChat: {
+          ...state.selectedChat,
+          ...newChat,
+        },
+        chats: [
+          newChat,
+          ...state.chats.filter((chat) => chat._id !== newChat._id),
+        ],
+      };
+    },
     setChats: (state, action: PayloadAction<Array<IChat>>) => {
       const { payload: chats } = action;
       return {
@@ -111,6 +125,19 @@ export const chatSlice = createSlice({
         },
       };
     },
+    updateTheChat: (state, action: PayloadAction<IChat>) => {
+      const { payload: theChat } = action;
+      return {
+        ...state,
+        chats: [
+          {
+            ...state.chats.find((chat) => chat._id === theChat._id),
+            ...theChat,
+          },
+          ...state.chats.filter((chat) => chat._id !== theChat._id),
+        ],
+      };
+    },
   },
 });
 
@@ -122,6 +149,8 @@ export const {
   removeReceivedNewMessagesChats,
   addNewGroupChatUsers,
   removeNewGroupChatUsers,
+  updateTheChat,
+  addNewChat,
 } = chatSlice.actions;
 
 export default chatSlice.reducer;

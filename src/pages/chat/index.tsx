@@ -55,13 +55,13 @@ export default function ChatPage() {
   });
 
   return (
-    <div className="chat-page max-w-screen-md m-auto h-screen">
+    <div className="chat-page  h-screen">
       <DrawerToggle />
-      <div className="chat-page-container flex flex-col bg-white rounded shadow-xl h-full sm:h-5/6 sm:my-16">
+      <div className="chat-page-container flex flex-col bg-white rounded shadow-xl h-full sm:h-5/6 max-w-screen-md m-auto">
         <div className="chat-page-header basis-16">
           <Header />
         </div>
-        <div className="chat-page-content flex-grow flex justify-between m-1 overflow-y-scroll ">
+        <div className="chat-page-content flex-grow flex justify-between m-1 overflow-y-scroll">
           <div
             className={clsx(
               "side-panel w-screen sm:basis-32 sm:shrink-0",
@@ -74,7 +74,7 @@ export default function ChatPage() {
             className={clsx(
               "chat-box grow",
               chatId ? "" : "hidden sm:block",
-              "sm:basis-96 sm:shrink-0",
+              "sm:basis-96 shrink-0",
             )}
           >
             {chatId ? <ChatBox /> : <EmptyChatBox />}

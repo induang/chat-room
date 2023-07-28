@@ -35,11 +35,11 @@ export default function ProfileMenu() {
   };
 
   return (
-    <div className="profile-block border-2 border-gray-100 rounded px-2">
-      <div className="dropdown dropdown-end  flex items-center gap-x-4 ">
+    <div className="profile-block border-2 border-gray-100 rounded px-2 shadow-sm bg-primary/5">
+      <div className="dropdown dropdown-end flex items-center gap-x-4">
         <div className="w-24 truncate">
           <div className="text-xl">{userName || "empty"}</div>
-          <div className="text-slate-300">do not look there</div>
+          <div className="text-slate-300">DO NOT LOOK THERE</div>
         </div>
         <label
           tabIndex={0}
@@ -57,7 +57,7 @@ export default function ProfileMenu() {
           className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
         >
           <li>
-            <a>Profile</a>
+            <a>Update Profile</a>
           </li>
           <li>
             <span>
@@ -70,7 +70,7 @@ export default function ProfileMenu() {
                 <></>
               )}
             </span>
-            <ul className=" !right-full !left-auto bg-base-100">
+            <ul className=" !right-full !left-auto bg-base-100 absolute truncate">
               {unreadChats?.map((chat) => (
                 <li key={chat._id} onClick={() => handleUnReadClick(chat)}>
                   <a>

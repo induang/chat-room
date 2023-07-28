@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux";
 import arrowIcon from "@/assets/arrow.png";
+import groupChatMenuIcon from "@/assets/menu.png";
 import { getAllMessage, sendMessage } from "../../../services/message";
 import { useEffect, useRef, useState } from "react";
 import MessagesShower from "@/components/chats/MessagesShower";
@@ -16,6 +17,7 @@ import {
 } from "@/redux/slices/chatSlice";
 import { useNavigate } from "react-router-dom";
 import SocketConnect from "@/services/socket";
+import clsx from "clsx";
 
 const ENDPOINT = import.meta.env.VITE_WS_CONN_URL;
 let selectedChatCompare: IChat | null;
@@ -106,26 +108,30 @@ export default function ChatBox() {
 
         {/* 名字 */}
         <div className="chat-name text-xl sm:text-3xl py-2 truncate ml-2 text-primary font-light block text-center">
-          <span className="sm:hidden" onClick={handleReturnArrowClick}>
-            <img src={arrowIcon} className="w-6 inline float-left" />
-          </span>
-          {selectedChat.isGroupChat
-            ? selectedChat.chatName
-            : exceptMeBetween2(selectedChat.users)[0].name}
-        </div>
-        {/* 菜单按钮 */}
-        {/* <div className="chat-details ml-4">
-          <label
-            className="chat-detail-btn"
-            htmlFor={
-              selectedChat.isGroupChat
-                ? "update-group-modal"
-                : "talker-details-modal"
-            }
-          >
-            <img src={menuIcon} className="w-8" />
+          <img
+            src={arrowIcon}
+            className="sm:hidden w-6 inline float-left"
+            onClick={handleReturnArrowClick}
+          />
+          <label htmlFor="update-group-modal">
+            <span className="cursor-pointer">
+              {selectedChat.isGroupChat
+                ? selectedChat.chatName
+                : exceptMeBetween2(selectedChat.users)[0].name}
+            </span>
           </label>
-        </div> */}
+
+          {/* 菜单按钮 */}
+          <label htmlFor="update-group-modal">
+            <img
+              src={groupChatMenuIcon}
+              className={clsx(
+                !selectedChat.isGroupChat && "hidden",
+                "w-5 h-5 inline cursor-pointer",
+              )}
+            ></img>
+          </label>
+        </div>
       </div>
       <div className="chat-box-messages bg-slate-100 flex-grow bg-base-100/80 rounded p-2 overflow-y-scroll">
         {!isLoading && messages?.length ? (
@@ -135,19 +141,6 @@ export default function ChatBox() {
         )}
       </div>
       <div className="chat-box-message-sender bg-slate-100 p-2">
-        {/* <div className="join">
-          <input
-            
-            className="input input-bordered input-primary w-fit bg-transparent join-item"
-            
-          />
-          <button
-            className="btn btn-primary rounded-r-full join-item"
-            onClick={handleSendClick}
-          >
-            SEND
-          </button>
-        </div> */}
         <div className="join w-full">
           <input
             type="text"
@@ -157,7 +150,10 @@ export default function ChatBox() {
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyDown={handleEnterDown}
           />
-          <button className="w-1/5 btn btn-primary join-item rounded-r-full shadow-md">
+          <button
+            className="w-1/5 btn btn-primary join-item rounded-r-full shadow-md"
+            onClick={handleSendClick}
+          >
             Send
           </button>
         </div>
