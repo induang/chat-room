@@ -15,6 +15,8 @@
 如果你是面试官, 想要体验这个小demo, 需要联系我开后台服务器;
 否则只能看到登录界面;
 
+另外后端代码在: https://github.com/induang/chat-room-service/
+
 #### 比较有意思的功能点：
 
 适配了web端和移动端
