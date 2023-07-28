@@ -38,12 +38,11 @@ web端:
 
 移动端:
 
-<div style="overflow-x: scroll">
-  <img src="https://github.com/induang/chat-room/assets/50736248/39366edd-1dc6-4932-a58b-87818193ee10" width="300">
-<img src="https://github.com/induang/chat-room/assets/50736248/18aa0ba1-4623-4c7f-91fc-0f5280e841ab" width="300">
+<img src="https://github.com/induang/chat-room/assets/50736248/39366edd-1dc6-4932-a58b-87818193ee10" width="300">
+<img src="https://github.com/induang/chat-room/assets/50736248/11ef9eb7-d69b-4f36-9fd5-1ce8ad7666ef" width="300">  
 <img src="https://github.com/induang/chat-room/assets/50736248/40c6f3b1-4502-4411-8bc5-7101079d02df" width="300">
 <img src="https://github.com/induang/chat-room/assets/50736248/f78cc6ea-f98b-49df-abe9-32327fd51933" width="300">
-</div>
+
 
 
 
