@@ -1,81 +1,18 @@
-#### 查看效果:
-
-https://induang.github.io/chat-room/
-
-后端部在 glitch 上, 要用 VPN
-
 #### 技术栈:
 
 使用 React 的基本特性 做一个聊天室
 
-使用 Vite 作为框架
+使用 Vite 作为脚手架
 
 样式方案: tailwindCSS daisyUI 样式库 clsx 计算样式
 
-使用 axios 进行网络请求
-
 使用 socket.io 实现实时聊天网络请求
-
-#### 一点面试备注:
-
-如果你是面试官, 想要体验这个小 demo, 需要联系我开后台服务器;
-否则只能看到登录界面;
-
-另外后端代码在: https://github.com/induang/chat-room-service/
 
 #### 比较有意思的功能点：
 
 适配了 web 端和移动端
 
 加盐密文传输数据
-
-#### 最终效果:
-
-web 端:
-
-![image](https://github.com/induang/chat-room/assets/50736248/00047492-5bee-4298-98ac-99cd42bc7375)
-![image](https://github.com/induang/chat-room/assets/50736248/edfc866a-08fd-47d6-908a-bcc8dfcc967e)
-![image](https://github.com/induang/chat-room/assets/50736248/4fbda6e3-1794-4602-8c83-a054623fab03)
-
-移动端:
-
-[TODO] 状态函数更新器: 组件 VerifyCodeSendBTN
-
-[TODO] react-toastify: 通知在跳转间保留 导入 css 文件才生效
-
-[TODO] vite 实现 hmr 组件 export 的格式要求：
-https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
-https://github.com/ArnaudBarre/eslint-plugin-react-refresh
-
-[TODO] 请求头属性大小写敏感 utils/httpRequest.ts
-
-[TODO] 请求体里的数组的 JSON.stringfy: chat service createGroupChat
-
-[TODO] 应用 redux 进行状态管理正确地更新状态的方式，在组件里另定义状态来承接 store 里的状态，使代码整洁，想法很美好，但是实现不了
-因为状态初始化只在组件第一次渲染的时候跑一次，不是每次组件渲染就执行一次的
-
-[TODO] 刷新页面 不会导致 noti 丢失 navigate(0)
-
-[TODO] 聊天框默认滚动到最底部
-https://bobbyhadz.com/blog/react-scroll-to-bottom
-且 css 属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
-https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
-
-[TODO] JS 单例模式
-https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-express-js-5ebb
-
-[TODO] Cannot read properties of undefined (reading 'getFieldProps')
-导入错了，应该导入使用 formik 包围的组件
-
-##### 存在的问题
-
-[TODO] 可能是模式问题： 群聊修改 modal 框总是预先加载被搜索的用户，按想法应该是不加载的
-
-[TODO] createChatModal 移除用户 闪退
-
-[TODO] socket.io 文档 优化 chatbox
-
-##### 待加强的功能
 
 [TODO] updateModal 最好只在需要的需要挂载
 
@@ -89,36 +26,38 @@ https://dev.to/talr98/singleton-design-pattern-use-case-with-node-js-typescript-
 
 [TODO] 接受消息的逻辑提取到全局上
 
+[TODO] 移动端浏览器刷新会把本地缓存都丢掉
+
 ##### 完成
 
-[COMP][TODO] 字体 work sans
+[COMP] 字体 work sans
 
-[COMP][TODO] 密码眼睛 tabindex 改为-1,方便用户使用 tab
+[COMP] 密码眼睛 tabindex 改为-1,方便用户使用 tab
 
-[COMP][TODO] 聊天框的时间 与当前时间超过一天则显示日期+时间，超过五分钟重新打时间标签
+[COMP] 聊天框的时间 与当前时间超过一天则显示日期+时间，超过五分钟重新打时间标签
 
-[COMP][TODO] daisyUI: drawer 不能占据全屏拉出来
+[COMP] daisyUI: drawer 不能占据全屏拉出来
 按照官网的结构套好，页面内容在 drawer-content 下
 
-[COMP][TODO] 更加响应式,适配了移动端
+[COMP] 更加响应式,适配了移动端
 
-[COMP][TODO] loading 防止慢的网络请求和用户的错误点击导致的数据异常， 尤其是群聊修改框
+[COMP] loading 防止慢的网络请求和用户的错误点击导致的数据异常， 尤其是群聊修改框
 
-[COMP][TODO] 聊天框默认滚动到最底部 且 css 属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
+[COMP] 聊天框默认滚动到最底部 且 css 属性实现新消息出现滚动到最底， 但是用户滚上去查看历史消息时，新消息不会影响用户体验
 https://css-tricks.com/books/greatest-css-tricks/pin-scrolling-to-bottom/
 
-[COMP][TODO] 发新消息 my chats 不及时更新 把 chats 放进状态管理了
+[COMP] 发新消息 my chats 不及时更新 把 chats 放进状态管理了
 
-[COMP][TODO] 移动端 聊天框回退不应该是刷新式的
+[COMP] 移动端 聊天框回退不应该是刷新式的
 
-[COMP][TODO] 渲染逻辑有问题，发一条消息会有多个提醒 及时注销 message received 的监听，避免重复注册 但是应该提取出来称为全局的，事件就不会因为组件的重新渲染而重新反复注册 且群聊的消息接受和个人的消息接受应该分开 namespace
+[COMP] 渲染逻辑有问题，发一条消息会有多个提醒 及时注销 message received 的监听，避免重复注册 但是应该提取出来称为全局的，事件就不会因为组件的重新渲染而重新反复注册 且群聊的消息接受和个人的消息接受应该分开 namespace
 
-[COMP][TODO] 消息提醒
+[COMP] 消息提醒
 
-[COMP][TODO] drawer 里的关闭不是相对于屏幕固定的 样式库的问题，最终的解决办法是把关闭按钮放到搜索框左侧
+[COMP] drawer 里的关闭不是相对于屏幕固定的 样式库的问题，最终的解决办法是把关闭按钮放到搜索框左侧
 
-[COMP][TODO] 关键词搜索出来的用户为空应该有提醒
+[COMP] 关键词搜索出来的用户为空应该有提醒
 
-[UNCOMP][TODO] daisyUI countdown failed 不管这个了，用不到
+[UNCOMP] daisyUI countdown failed 不管这个了，用不到
 
-[UNCOMP][TODO] 选择用户防抖 还是应该服务端来控制，前端防抖节流里遇到网络慢还是异常
+[UNCOMP] 选择用户防抖 还是应该服务端来控制，前端防抖节流里遇到网络慢还是异常
