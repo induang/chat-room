@@ -23,8 +23,16 @@
 
 #### 最终效果:
 
+
+web端:
 ![image](https://github.com/induang/chat-room/assets/50736248/00047492-5bee-4298-98ac-99cd42bc7375)
 ![image](https://github.com/induang/chat-room/assets/50736248/edfc866a-08fd-47d6-908a-bcc8dfcc967e)
 ![image](https://github.com/induang/chat-room/assets/50736248/4fbda6e3-1794-4602-8c83-a054623fab03)
+移动端:
+![image](https://github.com/induang/chat-room/assets/50736248/39366edd-1dc6-4932-a58b-87818193ee10)
+![image](https://github.com/induang/chat-room/assets/50736248/18aa0ba1-4623-4c7f-91fc-0f5280e841ab)
+![image](https://github.com/induang/chat-room/assets/50736248/40c6f3b1-4502-4411-8bc5-7101079d02df)
+![image](https://github.com/induang/chat-room/assets/50736248/f78cc6ea-f98b-49df-abe9-32327fd51933)
+
 
 
