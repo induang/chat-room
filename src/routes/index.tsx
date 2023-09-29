@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import ChatPage from "../pages/chat";
 import HomePage from "../pages/home";
-import Interview from "@/pages/interview";
 
 const router = createBrowserRouter(
   [
@@ -20,10 +19,10 @@ const router = createBrowserRouter(
         },
       ],
     },
-  ],
-  {
-    basename: "/chat-room",
-  },
+  ]
+  // {
+  //   basename: "/chat-room",
+  // },
 );
 
 export default router;
