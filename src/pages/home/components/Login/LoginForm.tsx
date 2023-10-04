@@ -8,12 +8,18 @@ import InputField from "@/components/common/InputField";
 import PasswordField from "@/components/common/PasswordField";
 import { saltPassowrd } from "@/utils/tools";
 
+export interface ILoginFormFields {
+  email: string;
+  password: string;
+  disabled: boolean;
+}
 export interface ILoginFormProps {
   show: boolean;
+  values: ILoginFormFields;
 }
 
 export default function LoginForm(
-  props: FormikFormProps & FormikValues & ILoginFormProps,
+  props: FormikFormProps & FormikValues & ILoginFormProps
 ) {
   const { show, values, isValid } = props;
   const navigate = useNavigate();
@@ -55,7 +61,7 @@ export default function LoginForm(
       <button
         className={clsx(
           "btn btn-block btn-primary mt-10",
-          !disabled || "btn-disabled",
+          !disabled || "btn-disabled"
         )}
         type="submit"
         onClick={handleLoginClick}

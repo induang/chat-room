@@ -3,10 +3,23 @@ import { useState } from "react";
 import LoginForm from "./components/Login";
 import RegistrationForm from "./components/Registration";
 import { APP_NAME } from "../../consts";
+import GuestWelcomeModal from "@/components/modals/GuestWelcomeModal";
+import { ILoginFormFields } from "./components/Login/LoginForm";
 
 export default function HomePage() {
   const [loginShow, setLoginShow] = useState(true);
   const [registerShow, setRegisterShow] = useState(false);
+  const [loginValues, setLoginValues] = useState<ILoginFormFields>(
+    {} as ILoginFormFields
+  );
+
+  const handleFillClick = () => {
+    setLoginValues({
+      email: "yingduan_ge@epam.com",
+      password: "password",
+      disabled: false,
+    });
+  };
 
   return (
     <div className="home-page">
@@ -20,7 +33,7 @@ export default function HomePage() {
               className={clsx(
                 "login-tab-btn",
                 "tab w-1/2 text-xl",
-                loginShow ? "tab-active" : "",
+                loginShow ? "tab-active" : ""
               )}
               onClick={() => {
                 setRegisterShow(false);
@@ -33,7 +46,7 @@ export default function HomePage() {
               className={clsx(
                 "register-tab-btn",
                 "tab w-1/2 text-xl",
-                registerShow ? "tab-active" : "",
+                registerShow ? "tab-active" : ""
               )}
               onClick={() => {
                 setLoginShow(false);
@@ -44,11 +57,12 @@ export default function HomePage() {
             </a>
           </div>
           <div className="tabs-panel">
-            <LoginForm show={loginShow} />
+            <LoginForm show={loginShow} values={loginValues} />
             <RegistrationForm show={registerShow} />
           </div>
         </div>
       </div>
+      <GuestWelcomeModal handleFillClick={handleFillClick} />
     </div>
   );
 }

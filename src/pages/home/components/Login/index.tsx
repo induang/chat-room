@@ -9,6 +9,11 @@ interface ILoginFormDetails {
 }
 
 export default withFormik<ILoginFormProps, ILoginFormDetails>({
+  mapPropsToValues: (props) => ({
+    email: props.values.email,
+    password: props.values.password,
+    disabled: props.values.disabled,
+  }),
   enableReinitialize: true,
   validationSchema: validator,
   handleSubmit: () => {},
