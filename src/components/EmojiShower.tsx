@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
 
 export default function EmojiShower({
   left,
@@ -19,7 +18,7 @@ export default function EmojiShower({
     <span
       className={clsx(
         visible ? "absolute" : "hidden",
-        "text-2xl animate-bounce"
+        "text-2xl animate-bounce cursor-default"
       )}
       style={{ left: left - 20, top: top - 20 }}
     >

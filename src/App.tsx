@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import "./App.css";
 import { useEffect, useRef, useState } from "react";
-import EmojiShower from "./utils/EmojiShower";
+import EmojiShower from "./components/EmojiShower";
 
 function App() {
   const [left, setLeft] = useState(0);

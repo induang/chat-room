@@ -25,7 +25,7 @@ export default function ChatPage() {
   const userId = window.localStorage.getItem("userId") ?? "";
   const dispatch = useDispatch();
   const selectedChat = useSelector(
-    (state: RootState) => state.chat.selectedChat,
+    (state: RootState) => state.chat.selectedChat
   );
   const { _id: chatId } = selectedChat;
   const socket = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
@@ -45,7 +45,7 @@ export default function ChatPage() {
         updateLastestMessage({
           id: newMessageReceived?.chat._id,
           newLastestMessage: newMessageReceived,
-        }),
+        })
       );
       dispatch(addReceivedNewMessagesChats(newMessageReceived.chat));
     });
@@ -65,7 +65,7 @@ export default function ChatPage() {
           <div
             className={clsx(
               "side-panel w-screen sm:basis-32 sm:shrink-0",
-              chatId ? "hidden sm:block" : "",
+              chatId ? "hidden sm:block" : ""
             )}
           >
             <MyChats />
@@ -74,7 +74,7 @@ export default function ChatPage() {
             className={clsx(
               "chat-box grow",
               chatId ? "" : "hidden sm:block",
-              "sm:basis-96 shrink-0",
+              "sm:basis-96 shrink-0"
             )}
           >
             {chatId ? <ChatBox /> : <EmptyChatBox />}
