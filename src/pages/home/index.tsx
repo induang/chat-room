@@ -6,7 +6,7 @@ import { APP_NAME } from "../../consts";
 
 export default function HomePage() {
   const [loginShow, setLoginShow] = useState(true);
-  const [registerShow, setRegisterShow] = useState(false);
+  // const [registerShow, setRegisterShow] = useState(false);
 
   return (
     <div className="home-page">
@@ -20,10 +20,9 @@ export default function HomePage() {
               className={clsx(
                 "login-tab-btn",
                 "tab w-1/2 text-xl",
-                loginShow ? "tab-active" : "",
+                loginShow ? "tab-active" : ""
               )}
               onClick={() => {
-                setRegisterShow(false);
                 setLoginShow(true);
               }}
             >
@@ -33,11 +32,10 @@ export default function HomePage() {
               className={clsx(
                 "register-tab-btn",
                 "tab w-1/2 text-xl",
-                registerShow ? "tab-active" : "",
+                loginShow ? "" : "tab-active"
               )}
               onClick={() => {
                 setLoginShow(false);
-                setRegisterShow(true);
               }}
             >
               Sign up
@@ -45,7 +43,7 @@ export default function HomePage() {
           </div>
           <div className="tabs-panel">
             <LoginForm show={loginShow} />
-            <RegistrationForm show={registerShow} />
+            <RegistrationForm show={!loginShow} />
           </div>
         </div>
       </div>
