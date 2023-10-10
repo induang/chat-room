@@ -3,6 +3,7 @@ import App from "../App";
 import ChatPage from "../pages/chat";
 import HomePage from "../pages/home";
 import Interview from "@/pages/interview";
+import Sudoku from "@/pages/sudoku";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         path: "chat",
         element: <ChatPage />,
       },
+      { path: "sudoku", element: <Sudoku /> },
       { path: "interview", element: <Interview /> },
     ],
   },
