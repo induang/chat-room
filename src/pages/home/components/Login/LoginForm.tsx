@@ -11,7 +11,6 @@ import { saltPassowrd } from "@/utils/tools";
 export interface ILoginFormFields {
   email: string;
   password: string;
-  disabled: boolean;
 }
 export interface ILoginFormProps {
   show: boolean;
@@ -21,8 +20,8 @@ export interface ILoginFormProps {
 export default function LoginForm(
   props: FormikFormProps & FormikValues & ILoginFormProps
 ) {
-  const { show, values, isValid } = props;
   const navigate = useNavigate();
+  const { show, values, isValid } = props;
   const [disabled, setDisabled] = useState(false);
 
   const handleLoginClick = async () => {

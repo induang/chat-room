@@ -3,11 +3,9 @@ import { RootState } from "@/redux";
 import arrowIcon from "@/assets/arrow.png";
 import groupChatMenuIcon from "@/assets/menu.png";
 import { getAllMessage, sendMessage } from "../../../services/message";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import MessagesShower from "@/components/chats/MessagesShower";
 import { IMessage } from "@/services/message.type";
-import { Socket } from "socket.io-client";
-import { DefaultEventsMap } from "@socket.io/component-emitter";
 import { IChat } from "@/services/chat.type";
 import { exceptMeBetween2 } from "@/utils/tools";
 import {
@@ -15,24 +13,20 @@ import {
   setSelectedChat,
   updateLastestMessage,
 } from "@/redux/slices/chatSlice";
-import { useNavigate } from "react-router-dom";
 import SocketConnect from "@/services/socket";
 import clsx from "clsx";
 
-const ENDPOINT = import.meta.env.VITE_WS_CONN_URL;
 let selectedChatCompare: IChat | null;
+
 export default function ChatBox() {
   const userId = window.localStorage.getItem("userId") || "";
   const selectedChat = useSelector(
-    (state: RootState) => state.chat.selectedChat,
+    (state: RootState) => state.chat.selectedChat
   );
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [newMessage, setNewMessage] = useState<string>("");
   const [messages, setMessages] = useState<Array<IMessage>>([]);
-  const [socketConnect, setSocketConnect] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const socket = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
 
   const handleSendClick = () => {
     if (!newMessage) return;
@@ -44,7 +38,7 @@ export default function ChatBox() {
         updateLastestMessage({
           id: selectedChat._id,
           newLastestMessage: newMessage,
-        }),
+        })
       );
     });
   };
@@ -53,7 +47,7 @@ export default function ChatBox() {
     dispatch(
       setSelectedChat({
         _id: "",
-      } as IChat),
+      } as IChat)
     );
   };
 
@@ -85,7 +79,7 @@ export default function ChatBox() {
         updateLastestMessage({
           id: newMessageReceived?.chat._id,
           newLastestMessage: newMessageReceived,
-        }),
+        })
       );
       if (
         !selectedChatCompare ||
@@ -99,13 +93,11 @@ export default function ChatBox() {
     return () => {
       SocketConnect.clearListenerOfMessages();
     };
-  });
+  }, []);
 
   return (
     <div className="h-full flex flex-col  rounded">
       <div className="chat-box-headerp-4 basis-4">
-        {/* 返回按钮 */}
-
         {/* 名字 */}
         <div className="chat-name text-xl sm:text-3xl py-2 truncate ml-2 text-primary font-light block text-center">
           <img
@@ -127,7 +119,7 @@ export default function ChatBox() {
               src={groupChatMenuIcon}
               className={clsx(
                 !selectedChat.isGroupChat && "hidden",
-                "w-5 h-5 inline cursor-pointer",
+                "w-5 h-5 inline cursor-pointer"
               )}
             ></img>
           </label>

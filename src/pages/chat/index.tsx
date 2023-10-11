@@ -20,7 +20,6 @@ import {
   updateLastestMessage,
 } from "@/redux/slices/chatSlice";
 
-const ENDPOINT = import.meta.env.VITE_WS_CONN_URL;
 export default function ChatPage() {
   const userId = window.localStorage.getItem("userId") ?? "";
   const dispatch = useDispatch();
@@ -28,10 +27,10 @@ export default function ChatPage() {
     (state: RootState) => state.chat.selectedChat
   );
   const { _id: chatId } = selectedChat;
-  const socket = useRef<Socket<DefaultEventsMap, DefaultEventsMap>>();
 
+  // initial socket instance
   useEffect(() => {
-    socket.current = SocketConnect.getInstance(ENDPOINT);
+    SocketConnect.getInstance(import.meta.env.VITE_WS_CONN_URL);
     SocketConnect.connectToService(userId);
     SocketConnect.ListenOnConnectStatus();
     return () => {
@@ -39,6 +38,7 @@ export default function ChatPage() {
     };
   }, []);
 
+  // socket listener
   useEffect(() => {
     SocketConnect.ListenOnMessages((newMessageReceived: IMessage) => {
       dispatch(
@@ -52,10 +52,10 @@ export default function ChatPage() {
     return () => {
       SocketConnect.clearListenerOfMessages();
     };
-  });
+  }, []);
 
   return (
-    <div className="chat-page  h-screen">
+    <div className="chat-page h-screen">
       <DrawerToggle />
       <div className="chat-page-container flex flex-col bg-white rounded shadow-xl h-full sm:h-5/6 max-w-screen-md m-auto">
         <div className="chat-page-header basis-16">
@@ -77,7 +77,7 @@ export default function ChatPage() {
               "sm:basis-96 shrink-0"
             )}
           >
-            {chatId ? <ChatBox /> : <EmptyChatBox />}
+            {chatId ? <ChatBox key={chatId} /> : <EmptyChatBox />}
           </div>
         </div>
       </div>

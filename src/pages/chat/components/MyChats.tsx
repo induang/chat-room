@@ -7,12 +7,12 @@ import { getChats } from "../../../services/chat";
 import { IChat } from "../../../services/chat.type";
 import ChatItem from "../../../components/chats/ChatItem";
 import CreateGroupModal from "../../../components/modals/CreateGroupModal";
-import addChatIcon from "@/assets/plus-sign-button.png";
+import { ICON_PLUS_SIGN_BUTTON } from "@/utils/dataUrls";
 
 export default function MyChats() {
   const dispatch = useDispatch();
   const selectedChat = useSelector(
-    (state: RootState) => state.chat.selectedChat,
+    (state: RootState) => state.chat.selectedChat
   );
   const chats = useSelector((state: RootState) => state.chat.chats);
   const [selectId, setSelectId] = useState("");
@@ -20,7 +20,7 @@ export default function MyChats() {
 
   const handleSelectClick = (
     e: React.MouseEvent<HTMLLIElement, MouseEvent>,
-    selectedChat: IChat,
+    selectedChat: IChat
   ) => {
     setSelectId(selectedChat._id);
     dispatch(setSelectedChat(selectedChat));
@@ -40,11 +40,11 @@ export default function MyChats() {
       <ul className="menu h-full rounded overflow-y-scroll flex-nowrap px-2">
         <div className="side-panel-header flex p-3 items-center justify-between">
           <span className="title text-3xl">Messages</span>
-          <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="m-1">
+          <div className="w-8 h-8 dropdown dropdown-end">
+            <label tabIndex={0}>
               <img
-                src={addChatIcon}
-                className="w-8 h-8 mr-2 cursor-pointer"
+                src={ICON_PLUS_SIGN_BUTTON}
+                className="mr-2 cursor-pointer"
                 alt="add group chat"
               ></img>
             </label>
